@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>填寫我的健康資料 — 銀遊通</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root{--orange:#C2410C;--orange-dark:#9A3412;--orange-light:#FFF7ED;--orange-mid:#FED7AA;--blue:#1D4ED8;--green:#15803D;--text:#1C1917;--text2:#44403C;--bg:#FFFBF5;--card:#FFFFFF;--border:#D6D3D1;--radius:20px;--shadow:0 4px 24px rgba(0,0,0,.10)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;font-size:22px;line-height:1.8;color:var(--text);background:var(--bg);padding-bottom:96px}
+    a{color:inherit;text-decoration:none}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:64px;padding:14px 32px;font-size:22px;font-weight:700;border-radius:16px;border:none;cursor:pointer;transition:transform .15s,box-shadow .15s;text-decoration:none;line-height:1.3}
+    .btn:active{transform:scale(.97)}
+    .btn-primary{background:var(--orange);color:#fff} .btn-primary:hover{background:var(--orange-dark);box-shadow:0 6px 20px rgba(194,65,12,.35)}
+    .btn-sm{min-height:52px;font-size:19px;padding:10px 22px}
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow)}
+
+    header{background:#fff;border-bottom:3px solid var(--orange-mid);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    .header-inner{max-width:1100px;margin:auto;padding:0 20px;height:72px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:12px} .logo-icon{font-size:40px} .logo-name{font-size:26px;font-weight:900;color:var(--orange)} .logo-sub{font-size:14px;color:var(--text2)}
+    .header-nav{display:flex;gap:8px;align-items:center}
+    .header-nav a{font-size:18px;font-weight:700;color:var(--text2);padding:10px 16px;border-radius:12px;transition:background .15s}
+    .header-nav a:hover,.header-nav a.active{background:var(--orange-light);color:var(--orange-dark)}
+
+    /* Page banner */
+    .page-banner{background:linear-gradient(135deg,#DCFCE7,#D1FAE5);padding:48px 20px;border-bottom:3px solid #A7F3D0}
+    .page-banner h1{font-size:40px;font-weight:900;color:#064E3B;margin-bottom:10px}
+    .page-banner p{font-size:22px;color:#065F46}
+
+    /* Progress */
+    .progress-bar{background:#fff;padding:24px 20px;border-bottom:2px solid var(--border);position:sticky;top:72px;z-index:90}
+    .progress-inner{max-width:760px;margin:auto;display:flex;align-items:center;gap:0}
+    .prog-step{display:flex;flex-direction:column;align-items:center;flex:1}
+    .prog-circle{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;border:3px solid var(--border);background:#fff;color:var(--text2);transition:all .2s}
+    .prog-circle.done{background:var(--green);color:#fff;border-color:var(--green)}
+    .prog-circle.active{background:var(--orange);color:#fff;border-color:var(--orange)}
+    .prog-label{font-size:15px;font-weight:700;margin-top:6px;color:var(--text2);text-align:center}
+    .prog-label.active{color:var(--orange-dark)}
+    .prog-line{flex:1;height:4px;background:var(--border);border-radius:999px;margin:0 -4px;position:relative;top:-20px}
+    .prog-line.done{background:var(--green)}
+
+    /* Form */
+    .form-wrap{max-width:760px;margin:40px auto;padding:0 20px}
+    .form-section{margin-bottom:40px}
+    .form-section-title{font-size:26px;font-weight:900;color:var(--text);margin-bottom:20px;padding:16px 20px;background:var(--orange-light);border-radius:14px;border-left:6px solid var(--orange);display:flex;align-items:center;gap:12px}
+    .form-group{margin-bottom:28px}
+    .form-label{font-size:22px;font-weight:700;color:var(--text);display:block;margin-bottom:10px}
+    .form-label .required{color:var(--orange);margin-left:4px;font-size:20px}
+    .form-hint{font-size:17px;color:var(--text2);margin-top:6px;display:flex;align-items:center;gap:6px}
+
+    /* Input styles */
+    .form-input,.form-select,.form-textarea{
+      width:100%;border:3px solid var(--border);border-radius:14px;
+      padding:16px 20px;font-size:22px;color:var(--text);background:#fff;
+      min-height:64px;outline:none;font-family:inherit;transition:border-color .15s;
+    }
+    .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(194,65,12,.12)}
+    .form-textarea{min-height:120px;resize:vertical}
+
+    /* Big radio/checkbox cards */
+    .option-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .option-grid-2{grid-template-columns:repeat(2,1fr)}
+    .option-card{
+      border:3px solid var(--border);border-radius:16px;padding:20px 16px;
+      cursor:pointer;transition:all .2s;display:flex;flex-direction:column;
+      align-items:center;gap:10px;text-align:center;background:#fff;
+      font-size:20px;font-weight:700;color:var(--text2);
+    }
+    .option-card:hover{border-color:var(--orange-mid);background:var(--orange-light)}
+    .option-card.selected,.option-card input:checked ~ .option-card{border-color:var(--orange);background:var(--orange-light);color:var(--orange-dark)}
+    .option-card input[type=radio],.option-card input[type=checkbox]{position:absolute;opacity:0;pointer-events:none}
+    .option-icon{font-size:40px;line-height:1}
+
+    /* Disease checkboxes */
+    .disease-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .disease-item{
+      display:flex;align-items:center;gap:14px;padding:14px 18px;
+      border:3px solid var(--border);border-radius:14px;cursor:pointer;
+      font-size:20px;font-weight:700;color:var(--text2);background:#fff;transition:all .2s;
+    }
+    .disease-item:hover{border-color:var(--orange-mid);background:var(--orange-light)}
+    .disease-item input[type=checkbox]{width:28px;height:28px;accent-color:var(--orange);cursor:pointer;flex-shrink:0}
+
+    /* Submit area */
+    .submit-area{background:#fff;border-top:3px solid var(--orange-mid);padding:24px 20px;text-align:center}
+    .submit-inner{max-width:760px;margin:auto;display:flex;flex-direction:column;align-items:center;gap:16px}
+
+    /* Privacy note */
+    .privacy-note{background:#F0FDF4;border:2px solid #BBF7D0;border-radius:14px;padding:20px 24px;font-size:18px;color:#064E3B;line-height:1.8;margin-bottom:24px}
+
+    /* Bottom nav & FAB */
+    .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid var(--border);display:flex;justify-content:space-around;align-items:stretch;padding:8px 4px env(safe-area-inset-bottom);z-index:200;box-shadow:0 -4px 16px rgba(0,0,0,.1)}
+    .nav-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex:1;min-height:64px;padding:6px 4px;font-size:13px;font-weight:700;color:#78716C;text-decoration:none;border-radius:12px;transition:background .15s}
+    .nav-btn.active{color:var(--orange)} .nav-icon{font-size:28px;line-height:1}
+    .fab{position:fixed;right:20px;bottom:84px;width:72px;height:72px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 6px 24px rgba(194,65,12,.5);z-index:300;text-decoration:none;transition:transform .15s}
+    .fab:hover{transform:scale(1.1)}
+
+    @media(max-width:900px){.option-grid{grid-template-columns:repeat(2,1fr)}.header-nav a:not([class]){display:none}}
+    @media(max-width:600px){.page-banner h1{font-size:32px}.option-grid,.disease-grid{grid-template-columns:1fr}.prog-label{font-size:13px}.prog-circle{width:44px;height:44px;font-size:17px}}
+  </style>
+</head>
+<body>
+
+<header role="banner">
+  <div class="header-inner">
+    <a href="銀遊通首頁.html" class="logo" aria-label="銀遊通首頁">
+      <span class="logo-icon" aria-hidden="true">🌸</span>
+      <div><div class="logo-name">銀遊通</div><div class="logo-sub">銀髮族安心旅遊平台</div></div>
+    </a>
+    <nav class="header-nav" aria-label="主要導覽">
+      <a href="銀遊通首頁.html">首頁</a>
+      <a href="找旅遊.html">找行程</a>
+      <a href="找旅伴.html">揪朋友</a>
+      <a href="家人專區.html">家人專區</a>
+      <a href="tel:0800-888-888" class="btn btn-primary btn-sm" style="border-radius:12px;"><span aria-hidden="true">📞</span> 撥打客服</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-banner" aria-labelledby="page-title">
+  <div style="max-width:760px;margin:auto;">
+    <h1 id="page-title">❤️ 填寫我的健康資料</h1>
+    <p>只需 3 分鐘，讓我們為您找到最合適的銀髮行程</p>
+  </div>
+</section>
+
+<!-- 進度條 -->
+<div class="progress-bar" aria-label="填寫進度">
+  <div class="progress-inner" role="list">
+    <div class="prog-step" role="listitem">
+      <div class="prog-circle active" aria-label="步驟一：基本資料，目前進行中">1</div>
+      <div class="prog-label active">基本資料</div>
+    </div>
+    <div class="prog-line" aria-hidden="true"></div>
+    <div class="prog-step" role="listitem">
+      <div class="prog-circle" aria-label="步驟二：健康狀況">2</div>
+      <div class="prog-label">健康狀況</div>
+    </div>
+    <div class="prog-line" aria-hidden="true"></div>
+    <div class="prog-step" role="listitem">
+      <div class="prog-circle" aria-label="步驟三：行動能力">3</div>
+      <div class="prog-label">行動能力</div>
+    </div>
+    <div class="prog-line" aria-hidden="true"></div>
+    <div class="prog-step" role="listitem">
+      <div class="prog-circle" aria-label="步驟四：完成配對">4</div>
+      <div class="prog-label">完成配對</div>
+    </div>
+  </div>
+</div>
+
+<form class="form-wrap" id="health-form" aria-label="健康評估問卷" novalidate>
+
+  <!-- 隱私說明 -->
+  <div class="privacy-note" role="note">
+    🔒 <strong>您的健康資料受到嚴格保護</strong><br>
+    所有資料僅用於為您推薦合適的行程，絕不外洩，符合《個人資料保護法》規範。
+  </div>
+
+  <!-- 區塊一：基本資料 -->
+  <div class="form-section" aria-labelledby="section1-title">
+    <div class="form-section-title" id="section1-title"><span aria-hidden="true">👤</span> 基本資料</div>
+
+    <div class="form-group">
+      <label class="form-label" for="name">您的姓名 <span class="required" aria-label="必填">*</span></label>
+      <input id="name" class="form-input" type="text" placeholder="請輸入您的姓名" required autocomplete="name" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="age">您的年齡 <span class="required" aria-label="必填">*</span></label>
+      <select id="age" class="form-select" required aria-describedby="age-hint">
+        <option value="">請選擇您的年齡範圍</option>
+        <option>55–60 歲</option>
+        <option>61–65 歲</option>
+        <option>66–70 歲</option>
+        <option>71–75 歲</option>
+        <option>76–80 歲</option>
+        <option>81 歲以上</option>
+      </select>
+      <div class="form-hint" id="age-hint">ℹ️ 本平台服務 55 歲以上銀髮旅人</div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="phone">聯絡電話 <span class="required" aria-label="必填">*</span></label>
+      <input id="phone" class="form-input" type="tel" placeholder="例：0912-345-678" required autocomplete="tel" />
+    </div>
+  </div>
+
+  <!-- 區塊二：健康狀況 -->
+  <div class="form-section" aria-labelledby="section2-title">
+    <div class="form-section-title" id="section2-title"><span aria-hidden="true">🏥</span> 健康狀況</div>
+
+    <div class="form-group">
+      <fieldset>
+        <legend class="form-label">請問您目前有以下哪些健康狀況？（可複選）</legend>
+        <div class="disease-grid" role="group" aria-label="健康狀況選項">
+          <label class="disease-item">
+            <input type="checkbox" name="disease" value="hypertension" aria-label="高血壓" />
+            💊 高血壓
+          </label>
+          <label class="disease-item">
+            <input type="checkbox" name="disease" value="diabetes" aria-label="糖尿病" />
+            💉 糖尿病
+          </label>
+          <label class="disease-item">
+            <input type="checkbox" name="disease" value="heart" aria-label="心臟病" />
+            ❤️ 心臟病
+          </label>
+          <label class="disease-item">
+            <input type="checkbox" name="disease" value="knee" aria-label="膝蓋問題" />
+            🦵 膝蓋問題
+          </label>
+          <label class="disease-item">
+            <input type="checkbox" name="disease" value="osteoporosis" aria-label="骨質疏鬆" />
+            🦴 骨質疏鬆
+          </label>
+          <label class="disease-item">
+            <input type="checkbox" name="disease" value="lung" aria-label="肺部疾病" />
+            🫁 肺部疾病
+          </label>
+          <label class="disease-item">
+            <input type="checkbox" name="disease" value="dementia" aria-label="輕度失智" />
+            🧠 輕度失智
+          </label>
+          <label class="disease-item">
+            <input type="checkbox" name="disease" value="none" aria-label="無特殊疾病" />
+            ✅ 目前無特殊疾病
+          </label>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="medicine">目前長期服用的藥物（選填）</label>
+      <textarea id="medicine" class="form-textarea" placeholder="例：降血壓藥、降血糖藥、血液稀釋劑…（可不填）" aria-describedby="medicine-hint"></textarea>
+      <div class="form-hint" id="medicine-hint">ℹ️ 此資訊幫助隨團護理師更妥善照顧您</div>
+    </div>
+  </div>
+
+  <!-- 區塊三：行動能力 -->
+  <div class="form-section" aria-labelledby="section3-title">
+    <div class="form-section-title" id="section3-title"><span aria-hidden="true">🚶</span> 行動能力評估</div>
+
+    <div class="form-group">
+      <fieldset>
+        <legend class="form-label">您通常一天可以步行多遠？ <span class="required" aria-label="必填">*</span></legend>
+        <div class="option-grid option-grid-2" role="radiogroup" aria-label="步行距離選項">
+          <label class="option-card" onclick="this.classList.toggle('selected')">
+            <input type="radio" name="walking" value="1" required aria-label="2 公里以下" />
+            <span class="option-icon" aria-hidden="true">🐢</span>
+            <span>2 公里以下</span>
+            <span style="font-size:16px;color:var(--text2);font-weight:400;">（輕鬆漫步）</span>
+          </label>
+          <label class="option-card" onclick="this.classList.toggle('selected')">
+            <input type="radio" name="walking" value="2" aria-label="2-4 公里" />
+            <span class="option-icon" aria-hidden="true">🚶</span>
+            <span>2–4 公里</span>
+            <span style="font-size:16px;color:var(--text2);font-weight:400;">（一般行走）</span>
+          </label>
+          <label class="option-card" onclick="this.classList.toggle('selected')">
+            <input type="radio" name="walking" value="3" aria-label="4-6 公里" />
+            <span class="option-icon" aria-hidden="true">🏃</span>
+            <span>4–6 公里</span>
+            <span style="font-size:16px;color:var(--text2);font-weight:400;">（體力不錯）</span>
+          </label>
+          <label class="option-card" onclick="this.classList.toggle('selected')">
+            <input type="radio" name="walking" value="4" aria-label="6 公里以上" />
+            <span class="option-icon" aria-hidden="true">💪</span>
+            <span>6 公里以上</span>
+            <span style="font-size:16px;color:var(--text2);font-weight:400;">（活力充沛）</span>
+          </label>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="form-group">
+      <fieldset>
+        <legend class="form-label">您是否使用行動輔具？ <span class="required" aria-label="必填">*</span></legend>
+        <div class="option-grid" role="radiogroup" aria-label="行動輔具選項">
+          <label class="option-card" onclick="this.classList.toggle('selected')">
+            <input type="radio" name="aid" value="none" required aria-label="不需要" />
+            <span class="option-icon" aria-hidden="true">🙆</span>
+            <span>不需要</span>
+          </label>
+          <label class="option-card" onclick="this.classList.toggle('selected')">
+            <input type="radio" name="aid" value="cane" aria-label="使用手杖" />
+            <span class="option-icon" aria-hidden="true">🦯</span>
+            <span>使用手杖</span>
+          </label>
+          <label class="option-card" onclick="this.classList.toggle('selected')">
+            <input type="radio" name="aid" value="walker" aria-label="使用助行器" />
+            <span class="option-icon" aria-hidden="true">🚶</span>
+            <span>使用助行器</span>
+          </label>
+          <label class="option-card" onclick="this.classList.toggle('selected')">
+            <input type="radio" name="aid" value="wheelchair" aria-label="使用輪椅" />
+            <span class="option-icon" aria-hidden="true">♿</span>
+            <span>使用輪椅</span>
+          </label>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="form-group">
+      <fieldset>
+        <legend class="form-label">您偏好什麼類型的行程？ <span class="required" aria-label="必填">*</span></legend>
+        <div class="option-grid" role="group" aria-label="行程偏好選項">
+          <label class="option-card" onclick="this.classList.toggle('selected')">
+            <input type="checkbox" name="prefer" value="culture" aria-label="文化古蹟" />
+            <span class="option-icon" aria-hidden="true">🏛️</span>
+            <span>文化古蹟</span>
+          </label>
+          <label class="option-card" onclick="this.classList.toggle('selected')">
+            <input type="checkbox" name="prefer" value="nature" aria-label="自然風景" />
+            <span class="option-icon" aria-hidden="true">🌿</span>
+            <span>自然風景</span>
+          </label>
+          <label class="option-card" onclick="this.classList.toggle('selected')">
+            <input type="checkbox" name="prefer" value="hot-spring" aria-label="溫泉療癒" />
+            <span class="option-icon" aria-hidden="true">♨️</span>
+            <span>溫泉療癒</span>
+          </label>
+          <label class="option-card" onclick="this.classList.toggle('selected')">
+            <input type="checkbox" name="prefer" value="food" aria-label="美食饗宴" />
+            <span class="option-icon" aria-hidden="true">🍜</span>
+            <span>美食饗宴</span>
+          </label>
+          <label class="option-card" onclick="this.classList.toggle('selected')">
+            <input type="checkbox" name="prefer" value="coast" aria-label="海景療癒" />
+            <span class="option-icon" aria-hidden="true">🌊</span>
+            <span>海景療癒</span>
+          </label>
+          <label class="option-card" onclick="this.classList.toggle('selected')">
+            <input type="checkbox" name="prefer" value="religion" aria-label="宗教朝聖" />
+            <span class="option-icon" aria-hidden="true">⛩️</span>
+            <span>宗教朝聖</span>
+          </label>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+  <!-- 提交 -->
+  <div class="submit-area">
+    <div class="submit-inner">
+      <div style="font-size:20px;color:var(--text2);margin-bottom:8px;">填完後按下方按鈕，為您立即配對最合適的行程 👇</div>
+      <button type="submit" class="btn btn-primary" style="min-width:320px;font-size:24px;min-height:72px;">
+        ❤️ 完成填寫，幫我配對行程
+      </button>
+      <p style="font-size:17px;color:var(--text2);">或致電 <strong>0800-888-888</strong> 由客服人員協助填寫</p>
+    </div>
+  </div>
+
+</form>
+
+<nav class="bottom-nav" aria-label="底部主選單">
+  <a href="銀遊通首頁.html" class="nav-btn" aria-label="首頁"><span class="nav-icon" aria-hidden="true">🏠</span>首頁</a>
+  <a href="找旅遊.html" class="nav-btn" aria-label="找行程"><span class="nav-icon" aria-hidden="true">🔍</span>找行程</a>
+  <a href="健康評估.html" class="nav-btn active" aria-current="page" aria-label="健康問卷"><span class="nav-icon" aria-hidden="true">❤️</span>健康問卷</a>
+  <a href="找旅伴.html" class="nav-btn" aria-label="揪朋友"><span class="nav-icon" aria-hidden="true">👥</span>揪朋友</a>
+  <a href="家人專區.html" class="nav-btn" aria-label="家人專區"><span class="nav-icon" aria-hidden="true">👨‍👩‍👧</span>家人</a>
+</nav>
+<a href="tel:0800-888-888" class="fab" aria-label="撥打免費客服電話"><span aria-hidden="true">📞</span></a>
+
+<script>
+  // 點擊 option-card 時切換 selected 狀態（radio 只能單選）
+  document.querySelectorAll('.option-card input[type=radio]').forEach(function(radio){
+    radio.addEventListener('change', function(){
+      var name = this.name;
+      document.querySelectorAll('input[name="'+name+'"]').forEach(function(r){
+        r.closest('.option-card').classList.remove('selected');
+      });
+      this.closest('.option-card').classList.add('selected');
+    });
+  });
+  // checkbox option-card
+  document.querySelectorAll('.option-card input[type=checkbox]').forEach(function(cb){
+    cb.addEventListener('change', function(){
+      if(this.checked) this.closest('.option-card').classList.add('selected');
+      else this.closest('.option-card').classList.remove('selected');
+    });
+  });
+</script>
+</body>
+</html>

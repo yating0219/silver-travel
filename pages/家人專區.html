@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>家人關心專區 — 銀遊通</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root{--orange:#C2410C;--orange-dark:#9A3412;--orange-light:#FFF7ED;--orange-mid:#FED7AA;--blue:#1D4ED8;--green:#15803D;--teal:#0D9488;--text:#1C1917;--text2:#44403C;--bg:#FFFBF5;--card:#FFFFFF;--border:#D6D3D1;--radius:20px;--shadow:0 4px 24px rgba(0,0,0,.10)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;font-size:22px;line-height:1.8;color:var(--text);background:var(--bg);padding-bottom:96px}
+    a{color:inherit;text-decoration:none}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:60px;padding:12px 28px;font-size:20px;font-weight:700;border-radius:14px;border:none;cursor:pointer;transition:transform .15s,box-shadow .15s;text-decoration:none;line-height:1.3}
+    .btn:active{transform:scale(.97)}
+    .btn-primary{background:var(--orange);color:#fff} .btn-primary:hover{background:var(--orange-dark);box-shadow:0 6px 20px rgba(194,65,12,.35)}
+    .btn-teal{background:var(--teal);color:#fff} .btn-teal:hover{background:#0F766E}
+    .btn-secondary{background:#fff;color:var(--orange);border:3px solid var(--orange)} .btn-secondary:hover{background:var(--orange-light)}
+    .btn-sm{min-height:52px;font-size:19px;padding:10px 22px} .btn-lg{min-height:72px;font-size:24px;padding:18px 40px}
+    .badge{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;border-radius:999px;font-size:16px;font-weight:700}
+    .badge-green{background:#DCFCE7;color:var(--green)} .badge-blue{background:#DBEAFE;color:var(--blue)} .badge-orange{background:var(--orange-light);color:var(--orange-dark)} .badge-teal{background:#CCFBF1;color:var(--teal)}
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow)}
+
+    header{background:#fff;border-bottom:3px solid var(--orange-mid);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    .header-inner{max-width:1100px;margin:auto;padding:0 20px;height:72px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:12px} .logo-icon{font-size:40px} .logo-name{font-size:26px;font-weight:900;color:var(--orange)} .logo-sub{font-size:14px;color:var(--text2)}
+    .header-nav{display:flex;gap:8px;align-items:center}
+    .header-nav a{font-size:18px;font-weight:700;color:var(--text2);padding:10px 16px;border-radius:12px;transition:background .15s}
+    .header-nav a:hover,.header-nav a.active{background:var(--orange-light);color:var(--orange-dark)}
+
+    .page-banner{background:linear-gradient(135deg,#CCFBF1,#A7F3D0);padding:48px 20px;border-bottom:3px solid #6EE7B7}
+    .page-banner h1{font-size:40px;font-weight:900;color:#064E3B;margin-bottom:10px}
+    .page-banner p{font-size:22px;color:#065F46}
+
+    .main-wrap{max-width:1100px;margin:40px auto;padding:0 20px}
+    .section-title{font-size:30px;font-weight:900;color:var(--text);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+
+    /* Feature cards */
+    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px}
+    .feature-card{padding:32px 28px;text-align:center;border:2px solid transparent;transition:border-color .2s}
+    .feature-card:hover{border-color:var(--orange-mid)}
+    .feature-icon{font-size:60px;margin-bottom:16px}
+    .feature-card h3{font-size:24px;font-weight:800;margin-bottom:12px}
+    .feature-card p{font-size:19px;color:var(--text2);line-height:1.8}
+
+    /* Tracking card */
+    .tracking-card{padding:32px;margin-bottom:32px;border:3px solid #6EE7B7}
+    .track-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:16px}
+    .track-title{font-size:26px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:10px}
+    .track-status{display:inline-flex;align-items:center;gap:8px;background:#DCFCE7;color:var(--green);padding:8px 18px;border-radius:999px;font-size:18px;font-weight:700}
+    .track-dot{width:12px;height:12px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    .track-info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:24px}
+    .track-info-item{background:#F0FDF9;border-radius:14px;padding:18px 20px;border:2px solid #6EE7B7}
+    .track-info-label{font-size:16px;color:var(--teal);font-weight:700;margin-bottom:6px}
+    .track-info-value{font-size:22px;font-weight:800;color:var(--text)}
+    .timeline{border-left:4px solid var(--teal);padding-left:24px;margin-left:12px}
+    .timeline-item{position:relative;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+    .timeline-item:last-child{border-bottom:none;margin-bottom:0}
+    .timeline-dot{position:absolute;left:-36px;top:4px;width:20px;height:20px;border-radius:50%;background:var(--teal);border:3px solid #fff;box-shadow:0 0 0 2px var(--teal)}
+    .timeline-dot.active{background:var(--orange);box-shadow:0 0 0 2px var(--orange)}
+    .timeline-time{font-size:16px;color:var(--text2);margin-bottom:4px}
+    .timeline-text{font-size:20px;font-weight:700;color:var(--text)}
+    .timeline-detail{font-size:17px;color:var(--text2)}
+
+    /* Emergency contacts */
+    .emergency-card{padding:28px;background:#FFF1F2;border:3px solid #FCA5A5;margin-bottom:32px}
+    .emergency-title{font-size:24px;font-weight:800;color:#B91C1C;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+    .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .contact-item{background:#fff;border-radius:16px;padding:20px;text-align:center;border:2px solid #FCA5A5}
+    .contact-icon{font-size:40px;margin-bottom:10px}
+    .contact-name{font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px}
+    .contact-role{font-size:15px;color:var(--text2)}
+    .contact-phone{font-size:20px;font-weight:900;color:#B91C1C;margin-top:8px}
+
+    /* Notification settings */
+    .notif-card{padding:28px;margin-bottom:32px}
+    .notif-item{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:2px solid var(--border)}
+    .notif-item:last-child{border-bottom:none}
+    .notif-label{font-size:20px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:10px}
+    .notif-desc{font-size:16px;color:var(--text2);margin-top:4px}
+    .toggle{position:relative;width:64px;height:36px;flex-shrink:0}
+    .toggle input{opacity:0;width:0;height:0}
+    .toggle-track{position:absolute;inset:0;background:var(--border);border-radius:999px;transition:.3s;cursor:pointer}
+    .toggle input:checked + .toggle-track{background:var(--green)}
+    .toggle-thumb{position:absolute;left:4px;top:4px;width:28px;height:28px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.2);transition:.3s;pointer-events:none}
+    .toggle input:checked ~ .toggle-thumb{left:32px}
+
+    /* Bottom nav & FAB */
+    .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid var(--border);display:flex;justify-content:space-around;align-items:stretch;padding:8px 4px env(safe-area-inset-bottom);z-index:200;box-shadow:0 -4px 16px rgba(0,0,0,.1)}
+    .nav-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex:1;min-height:64px;padding:6px 4px;font-size:13px;font-weight:700;color:#78716C;text-decoration:none;border-radius:12px;transition:background .15s}
+    .nav-btn.active{color:var(--orange)} .nav-icon{font-size:28px;line-height:1}
+    .fab{position:fixed;right:20px;bottom:84px;width:72px;height:72px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 6px 24px rgba(194,65,12,.5);z-index:300;text-decoration:none;transition:transform .15s}
+    .fab:hover{transform:scale(1.1)}
+
+    @media(max-width:900px){.features-grid{grid-template-columns:1fr 1fr}.contact-grid{grid-template-columns:1fr 1fr}.track-info-grid{grid-template-columns:1fr}.header-nav a:not([class]){display:none}}
+    @media(max-width:600px){.features-grid{grid-template-columns:1fr}.page-banner h1{font-size:32px}.contact-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<header role="banner">
+  <div class="header-inner">
+    <a href="銀遊通首頁.html" class="logo" aria-label="銀遊通首頁">
+      <span class="logo-icon" aria-hidden="true">🌸</span>
+      <div><div class="logo-name">銀遊通</div><div class="logo-sub">銀髮族安心旅遊平台</div></div>
+    </a>
+    <nav class="header-nav" aria-label="主要導覽">
+      <a href="銀遊通首頁.html">首頁</a>
+      <a href="找旅遊.html">找行程</a>
+      <a href="找旅伴.html">揪朋友</a>
+      <a href="家人專區.html" class="active">家人專區</a>
+      <a href="tel:0800-888-888" class="btn btn-primary btn-sm" style="border-radius:12px;"><span aria-hidden="true">📞</span> 撥打客服</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-banner" aria-labelledby="page-title">
+  <div style="max-width:1100px;margin:auto;">
+    <h1 id="page-title">👨‍👩‍👧 家人關心專區</h1>
+    <p>讓家人隨時掌握長輩的旅程動態，出門更安心！</p>
+  </div>
+</section>
+
+<div class="main-wrap">
+
+  <!-- 功能介紹 -->
+  <h2 class="section-title"><span aria-hidden="true">✨</span> 家人可以做什麼？</h2>
+  <div class="features-grid" role="list" aria-label="家人服務功能列表">
+    <div class="card feature-card" role="listitem">
+      <div class="feature-icon" aria-hidden="true">📍</div>
+      <h3>即時行程追蹤</h3>
+      <p>即時查看長輩目前所在地點，每日行程動態自動更新，旅途全程透明。</p>
+    </div>
+    <div class="card feature-card" role="listitem" style="border-color:var(--orange-mid);">
+      <div class="feature-icon" aria-hidden="true">🛒</div>
+      <h3>代為訂購行程</h3>
+      <p>子女可代長輩挑選、預訂行程，線上填寫資料，一鍵完成報名，簡單方便。</p>
+    </div>
+    <div class="card feature-card" role="listitem">
+      <div class="feature-icon" aria-hidden="true">🔔</div>
+      <h3>重要通知推播</h3>
+      <p>出發提醒、抵達通知、緊急狀況警報即時推播，家人不用擔心聯繫不到。</p>
+    </div>
+    <div class="card feature-card" role="listitem">
+      <div class="feature-icon" aria-hidden="true">❤️</div>
+      <h3>健康記錄共享</h3>
+      <p>健康評估結果可與家人共享，讓子女掌握長輩需求，挑選最合適的行程。</p>
+    </div>
+    <div class="card feature-card" role="listitem">
+      <div class="feature-icon" aria-hidden="true">💬</div>
+      <h3>與導遊直接溝通</h3>
+      <p>家人可透過平台直接留言給隨行導遊，溝通特殊需求或關心事項。</p>
+    </div>
+    <div class="card feature-card" role="listitem">
+      <div class="feature-icon" aria-hidden="true">📸</div>
+      <h3>旅程照片分享</h3>
+      <p>隨行人員定期上傳旅途照片，讓留在家中的家人也能分享長輩的快樂時光。</p>
+    </div>
+  </div>
+
+  <!-- 即時追蹤展示 -->
+  <h2 class="section-title"><span aria-hidden="true">📍</span> 即時行程追蹤（示範）</h2>
+  <div class="card tracking-card" aria-label="目前追蹤中的行程">
+    <div class="track-header">
+      <div>
+        <div class="track-title">🌸 日本京都賞櫻溫泉 5天4夜</div>
+        <div style="font-size:18px;color:var(--text2);margin-top:6px;">旅人：王阿姨・出發日：2026年 4月 15日</div>
+      </div>
+      <div class="track-status" aria-label="目前狀態：旅途中">
+        <span class="track-dot" aria-hidden="true"></span> 旅途進行中
+      </div>
+    </div>
+
+    <div class="track-info-grid" aria-label="行程資訊">
+      <div class="track-info-item">
+        <div class="track-info-label">📍 目前位置</div>
+        <div class="track-info-value">日本・京都 嵐山溫泉飯店</div>
+      </div>
+      <div class="track-info-item">
+        <div class="track-info-label">📅 今日行程</div>
+        <div class="track-info-value">Day 2：嵐山・金閣寺賞櫻</div>
+      </div>
+      <div class="track-info-item">
+        <div class="track-info-label">🏥 健康狀態</div>
+        <div class="track-info-value" style="color:var(--green);">✅ 一切正常</div>
+      </div>
+      <div class="track-info-item">
+        <div class="track-info-label">🌡️ 當地天氣</div>
+        <div class="track-info-value">18°C・晴天 ⛅</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:22px;font-weight:800;margin-bottom:16px;color:var(--text);">最新動態</h3>
+    <div class="timeline" aria-label="旅程動態時間軸" role="list">
+      <div class="timeline-item" role="listitem">
+        <div class="timeline-dot active" aria-hidden="true"></div>
+        <div class="timeline-time">今天 14:30</div>
+        <div class="timeline-text">抵達金閣寺</div>
+        <div class="timeline-detail">正在欣賞金閣寺美景，天氣晴朗，心情很好！導遊拍了很多美照 📸</div>
+      </div>
+      <div class="timeline-item" role="listitem">
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-time">今天 11:00</div>
+        <div class="timeline-text">嵐山竹林漫步</div>
+        <div class="timeline-detail">步行 1.5 公里，輪椅全程可通行，長輩腳程很好！</div>
+      </div>
+      <div class="timeline-item" role="listitem">
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-time">今天 08:00</div>
+        <div class="timeline-text">早餐後出發</div>
+        <div class="timeline-detail">銀髮特製早餐，所有旅人健康狀態良好。</div>
+      </div>
+      <div class="timeline-item" role="listitem">
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-time">昨天 20:00</div>
+        <div class="timeline-text">平安抵達京都飯店</div>
+        <div class="timeline-detail">順利辦理入住，享受溫泉放鬆，大家都很開心！</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:24px;">
+      <button class="btn btn-teal" onclick="alert('通話功能即將開放！目前請撥打 0800-888-888 聯絡導遊。')">
+        💬 傳訊給導遊
+      </button>
+      <button class="btn btn-secondary" onclick="alert('照片分享功能即將開放！')">
+        📸 查看旅途照片
+      </button>
+    </div>
+  </div>
+
+  <!-- 緊急聯絡 -->
+  <h2 class="section-title"><span aria-hidden="true">🆘</span> 緊急聯絡方式</h2>
+  <div class="card emergency-card" aria-label="緊急聯絡資訊">
+    <div class="emergency-title"><span aria-hidden="true">🚨</span> 緊急狀況，請立即聯絡</div>
+    <div class="contact-grid" role="list">
+      <div class="contact-item" role="listitem">
+        <div class="contact-icon" aria-hidden="true">👮</div>
+        <div class="contact-name">銀遊通緊急熱線</div>
+        <div class="contact-role">24 小時真人服務</div>
+        <div class="contact-phone">
+          <a href="tel:0800-888-888" style="color:#B91C1C;">0800-888-888</a>
+        </div>
+      </div>
+      <div class="contact-item" role="listitem">
+        <div class="contact-icon" aria-hidden="true">🏥</div>
+        <div class="contact-name">隨團護理師</div>
+        <div class="contact-role">目前隨行：林護理師</div>
+        <div class="contact-phone">
+          <a href="tel:+886-912-345-678" style="color:#B91C1C;">0912-345-678</a>
+        </div>
+      </div>
+      <div class="contact-item" role="listitem">
+        <div class="contact-icon" aria-hidden="true">🗺️</div>
+        <div class="contact-name">當地導遊</div>
+        <div class="contact-role">帶隊導遊：田中先生</div>
+        <div class="contact-phone">
+          <a href="tel:+81-80-1234-5678" style="color:#B91C1C;">+81-80-1234-5678</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 通知設定 -->
+  <h2 class="section-title"><span aria-hidden="true">🔔</span> 通知設定</h2>
+  <div class="card notif-card" aria-label="通知設定">
+    <div class="notif-item">
+      <div>
+        <div class="notif-label"><span aria-hidden="true">✈️</span> 出發與抵達通知</div>
+        <div class="notif-desc">每次出發和到達時自動通知</div>
+      </div>
+      <label class="toggle" aria-label="出發與抵達通知，目前已開啟">
+        <input type="checkbox" checked aria-checked="true" />
+        <span class="toggle-track"></span>
+        <span class="toggle-thumb"></span>
+      </label>
+    </div>
+    <div class="notif-item">
+      <div>
+        <div class="notif-label"><span aria-hidden="true">📍</span> 每日位置更新</div>
+        <div class="notif-desc">每天傍晚推播今日行程摘要</div>
+      </div>
+      <label class="toggle" aria-label="每日位置更新，目前已開啟">
+        <input type="checkbox" checked aria-checked="true" />
+        <span class="toggle-track"></span>
+        <span class="toggle-thumb"></span>
+      </label>
+    </div>
+    <div class="notif-item">
+      <div>
+        <div class="notif-label"><span aria-hidden="true">🏥</span> 健康異常警報</div>
+        <div class="notif-desc">護理師回報任何異常狀況時即時通知</div>
+      </div>
+      <label class="toggle" aria-label="健康異常警報，目前已開啟">
+        <input type="checkbox" checked aria-checked="true" />
+        <span class="toggle-track"></span>
+        <span class="toggle-thumb"></span>
+      </label>
+    </div>
+    <div class="notif-item">
+      <div>
+        <div class="notif-label"><span aria-hidden="true">📸</span> 旅途照片更新</div>
+        <div class="notif-desc">有新照片上傳時通知</div>
+      </div>
+      <label class="toggle" aria-label="旅途照片更新，目前已關閉">
+        <input type="checkbox" aria-checked="false" />
+        <span class="toggle-track"></span>
+        <span class="toggle-thumb"></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- 代為訂購 -->
+  <div style="background:linear-gradient(135deg,var(--orange-light),var(--orange-mid));border-radius:var(--radius);padding:40px 32px;text-align:center;border:3px solid var(--orange-mid);">
+    <div style="font-size:56px;margin-bottom:16px;" aria-hidden="true">🛒</div>
+    <h2 style="font-size:30px;font-weight:900;margin-bottom:14px;color:var(--orange-dark);">代長輩預訂行程</h2>
+    <p style="font-size:20px;color:var(--text2);margin-bottom:24px;">子女可直接幫長輩選行程、填資料、完成訂購，一切都由我們打理！</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="找旅遊.html" class="btn btn-primary btn-lg">🔍 幫長輩找行程</a>
+      <a href="tel:0800-888-888" class="btn btn-secondary btn-lg">📞 電話訂購</a>
+    </div>
+  </div>
+
+</div>
+
+<nav class="bottom-nav" aria-label="底部主選單">
+  <a href="銀遊通首頁.html" class="nav-btn" aria-label="首頁"><span class="nav-icon" aria-hidden="true">🏠</span>首頁</a>
+  <a href="找旅遊.html" class="nav-btn" aria-label="找行程"><span class="nav-icon" aria-hidden="true">🔍</span>找行程</a>
+  <a href="健康評估.html" class="nav-btn" aria-label="健康問卷"><span class="nav-icon" aria-hidden="true">❤️</span>健康問卷</a>
+  <a href="找旅伴.html" class="nav-btn" aria-label="揪朋友"><span class="nav-icon" aria-hidden="true">👥</span>揪朋友</a>
+  <a href="家人專區.html" class="nav-btn active" aria-current="page" aria-label="家人專區"><span class="nav-icon" aria-hidden="true">👨‍👩‍👧</span>家人</a>
+</nav>
+<a href="tel:0800-888-888" class="fab" aria-label="撥打免費客服電話"><span aria-hidden="true">📞</span></a>
+</body>
+</html>

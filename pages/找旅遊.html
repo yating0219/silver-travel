@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>幫我找旅遊 — 銀遊通</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --orange:#C2410C; --orange-dark:#9A3412; --orange-light:#FFF7ED; --orange-mid:#FED7AA;
+      --blue:#1D4ED8; --green:#15803D; --text:#1C1917; --text2:#44403C;
+      --bg:#FFFBF5; --card:#FFFFFF; --border:#D6D3D1; --radius:20px; --shadow:0 4px 24px rgba(0,0,0,.10);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;font-size:22px;line-height:1.8;color:var(--text);background:var(--bg);padding-bottom:96px}
+    a{color:inherit;text-decoration:none}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:60px;padding:12px 28px;font-size:20px;font-weight:700;border-radius:14px;border:none;cursor:pointer;transition:transform .15s,box-shadow .15s;text-decoration:none;line-height:1.3}
+    .btn:active{transform:scale(.97)}
+    .btn-primary{background:var(--orange);color:#fff}
+    .btn-primary:hover{background:var(--orange-dark);box-shadow:0 6px 20px rgba(194,65,12,.35)}
+    .btn-sm{min-height:52px;font-size:19px;padding:10px 22px}
+    .badge{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:999px;font-size:15px;font-weight:700}
+    .badge-green{background:#DCFCE7;color:var(--green)} .badge-blue{background:#DBEAFE;color:var(--blue)} .badge-orange{background:var(--orange-light);color:var(--orange-dark)}
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow)}
+
+    header{background:#fff;border-bottom:3px solid var(--orange-mid);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    .header-inner{max-width:1100px;margin:auto;padding:0 20px;height:72px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:12px} .logo-icon{font-size:40px} .logo-name{font-size:26px;font-weight:900;color:var(--orange)} .logo-sub{font-size:14px;color:var(--text2)}
+    .header-nav{display:flex;gap:8px;align-items:center}
+    .header-nav a{font-size:18px;font-weight:700;color:var(--text2);padding:10px 16px;border-radius:12px;transition:background .15s}
+    .header-nav a:hover,.header-nav a.active{background:var(--orange-light);color:var(--orange-dark)}
+
+    .page-banner{background:linear-gradient(135deg,var(--orange-light),var(--orange-mid));padding:48px 20px}
+    .page-banner h1{font-size:40px;font-weight:900;color:var(--text);margin-bottom:10px}
+    .page-banner p{font-size:22px;color:var(--text2)}
+
+    .filter-bar{background:#fff;border-bottom:2px solid var(--border);padding:20px;position:sticky;top:72px;z-index:90}
+    .filter-inner{max-width:1100px;margin:auto;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+    .filter-label{font-size:20px;font-weight:700;color:var(--text);white-space:nowrap}
+    .chip{padding:10px 20px;border-radius:999px;font-size:18px;font-weight:700;border:2px solid var(--border);background:#fff;color:var(--text2);cursor:pointer;transition:all .15s;min-height:48px;display:inline-flex;align-items:center;gap:6px}
+    .chip:hover,.chip.active{background:var(--orange);color:#fff;border-color:var(--orange)}
+    .search-wrap{display:flex;gap:12px;max-width:600px;width:100%}
+    .search-input{flex:1;border:3px solid var(--border);border-radius:14px;padding:0 20px;font-size:20px;color:var(--text);min-height:60px;outline:none;background:#fff;font-family:inherit}
+    .search-input:focus{border-color:var(--orange)}
+    .search-btn{min-height:60px;padding:0 28px;border-radius:14px;background:var(--orange);color:#fff;border:none;font-size:20px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px}
+
+    .main-layout{max-width:1100px;margin:40px auto;padding:0 20px;display:grid;grid-template-columns:280px 1fr;gap:32px;align-items:start}
+    .sidebar{position:sticky;top:160px}
+    .sidebar-card{padding:28px;margin-bottom:20px}
+    .sidebar-title{font-size:22px;font-weight:800;margin-bottom:16px;color:var(--text);border-bottom:3px solid var(--orange-mid);padding-bottom:10px}
+    .sidebar-group{margin-bottom:20px}
+    .sidebar-group-label{font-size:18px;font-weight:700;color:var(--text2);margin-bottom:10px}
+    .check-item{display:flex;align-items:center;gap:12px;padding:10px 0;cursor:pointer;font-size:19px;border-bottom:1px solid #F5F5F4}
+    .check-item input[type=checkbox]{width:24px;height:24px;accent-color:var(--orange);cursor:pointer;flex-shrink:0}
+    .check-item:last-child{border-bottom:none}
+
+    .tours-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+    .tours-count{font-size:20px;color:var(--text2);font-weight:500}
+    .sort-select{border:2px solid var(--border);border-radius:12px;padding:10px 16px;font-size:18px;color:var(--text);background:#fff;min-height:52px;cursor:pointer;font-family:inherit}
+    .tours-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .tour-card{transition:transform .2s,box-shadow .2s}
+    .tour-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,.15)}
+    .tour-thumb{height:180px;display:flex;align-items:center;justify-content:center;font-size:80px;border-radius:20px 20px 0 0;position:relative}
+    .tour-thumb-badge{position:absolute;top:14px;right:14px;font-size:15px;font-weight:700;padding:5px 14px;border-radius:999px}
+    .tour-body{padding:22px}
+    .tour-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+    .tour-title{font-size:21px;font-weight:800;color:var(--text);margin-bottom:8px;line-height:1.4}
+    .tour-meta{font-size:17px;color:var(--text2);line-height:1.7;margin-bottom:16px}
+    .tour-footer{display:flex;align-items:center;justify-content:space-between}
+    .tour-price-label{font-size:14px;color:var(--text2)}
+    .tour-price{font-size:26px;font-weight:900;color:var(--orange)}
+
+    .pagination{display:flex;gap:10px;justify-content:center;margin-top:40px;flex-wrap:wrap}
+    .page-btn{width:56px;height:56px;border-radius:12px;border:2px solid var(--border);background:#fff;font-size:20px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:all .15s}
+    .page-btn:hover,.page-btn.active{background:var(--orange);color:#fff;border-color:var(--orange)}
+
+    .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid var(--border);display:flex;justify-content:space-around;align-items:stretch;padding:8px 4px env(safe-area-inset-bottom);z-index:200;box-shadow:0 -4px 16px rgba(0,0,0,.1)}
+    .nav-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex:1;min-height:64px;padding:6px 4px;font-size:13px;font-weight:700;color:#78716C;text-decoration:none;border-radius:12px;transition:background .15s}
+    .nav-btn.active{color:var(--orange)} .nav-icon{font-size:28px;line-height:1}
+    .fab{position:fixed;right:20px;bottom:84px;width:72px;height:72px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 6px 24px rgba(194,65,12,.5);z-index:300;text-decoration:none;transition:transform .15s}
+    .fab:hover{transform:scale(1.1)}
+
+    @media(max-width:900px){.main-layout{grid-template-columns:1fr}.sidebar{position:static}.tours-grid{grid-template-columns:1fr}.header-nav a:not([class]){display:none}}
+    @media(max-width:600px){.page-banner h1{font-size:32px}.filter-label{display:none}}
+  </style>
+</head>
+<body>
+
+<header role="banner">
+  <div class="header-inner">
+    <a href="銀遊通首頁.html" class="logo" aria-label="銀遊通首頁">
+      <span class="logo-icon" aria-hidden="true">🌸</span>
+      <div><div class="logo-name">銀遊通</div><div class="logo-sub">銀髮族安心旅遊平台</div></div>
+    </a>
+    <nav class="header-nav" aria-label="主要導覽">
+      <a href="銀遊通首頁.html">首頁</a>
+      <a href="找旅遊.html" class="active">找行程</a>
+      <a href="找旅伴.html">揪朋友</a>
+      <a href="家人專區.html">家人專區</a>
+      <a href="tel:0800-888-888" class="btn btn-primary btn-sm" style="border-radius:12px;"><span aria-hidden="true">📞</span> 撥打客服</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-banner" aria-labelledby="page-title">
+  <div style="max-width:1100px;margin:auto;">
+    <h1 id="page-title">🔍 幫我找旅遊</h1>
+    <p>依您的健康狀況自動篩選，每條行程都適合銀髮旅人</p>
+  </div>
+</section>
+
+<div class="filter-bar" role="search" aria-label="行程搜尋與篩選">
+  <div class="filter-inner">
+    <div class="search-wrap">
+      <label for="search-input" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">搜尋行程</label>
+      <input id="search-input" class="search-input" type="search" placeholder="輸入地點或行程名稱…" aria-label="搜尋行程關鍵字" />
+      <button class="search-btn" type="button" aria-label="開始搜尋">🔍 搜尋</button>
+    </div>
+    <span class="filter-label">快速篩選：</span>
+    <div class="filter-chips" role="group" aria-label="快速篩選">
+      <button class="chip active" type="button">全部</button>
+      <button class="chip" type="button">🏔️ 國外</button>
+      <button class="chip" type="button">🏡 國內</button>
+      <button class="chip" type="button">♿ 無障礙</button>
+      <button class="chip" type="button">🚶 輕鬆步行</button>
+      <button class="chip" type="button">🏥 醫療保障</button>
+    </div>
+  </div>
+</div>
+
+<div class="main-layout">
+  <aside class="sidebar" aria-label="詳細篩選條件">
+    <div class="card sidebar-card">
+      <div class="sidebar-title">詳細條件篩選</div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">旅遊天數</div>
+        <label class="check-item"><input type="checkbox" /> 3 天以內（輕鬆短途）</label>
+        <label class="check-item"><input type="checkbox" checked /> 4–7 天（最受歡迎）</label>
+        <label class="check-item"><input type="checkbox" /> 8 天以上（深度遊）</label>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">每日步行距離</div>
+        <label class="check-item"><input type="checkbox" checked /> 2 公里以下（最輕鬆）</label>
+        <label class="check-item"><input type="checkbox" /> 2–4 公里（適中）</label>
+        <label class="check-item"><input type="checkbox" /> 4 公里以上（活力型）</label>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">銀髮友善標章</div>
+        <label class="check-item"><input type="checkbox" checked /> ♿ 無障礙設施</label>
+        <label class="check-item"><input type="checkbox" /> 🏥 醫療保障</label>
+        <label class="check-item"><input type="checkbox" /> 🍚 銀髮餐飲</label>
+        <label class="check-item"><input type="checkbox" /> 🛒 零強迫購物</label>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">費用範圍</div>
+        <label class="check-item"><input type="checkbox" /> NT$10,000 以下</label>
+        <label class="check-item"><input type="checkbox" /> NT$10,000–30,000</label>
+        <label class="check-item"><input type="checkbox" checked /> NT$30,000–60,000</label>
+        <label class="check-item"><input type="checkbox" /> NT$60,000 以上</label>
+      </div>
+      <button class="btn btn-primary" style="width:100%;margin-top:8px;" type="button">套用篩選條件</button>
+    </div>
+    <div class="card sidebar-card" style="background:var(--orange-light);border:2px solid var(--orange-mid);">
+      <div style="font-size:22px;font-weight:800;margin-bottom:12px;color:var(--orange-dark);">需要幫助嗎？</div>
+      <p style="font-size:18px;color:var(--text2);margin-bottom:16px;line-height:1.7;">不知如何選擇？致電真人客服，幫您找最適合行程！</p>
+      <a href="tel:0800-888-888" class="btn btn-primary" style="width:100%;">📞 0800-888-888</a>
+      <p style="font-size:16px;color:var(--text2);text-align:center;margin-top:10px;">每日 09:00–21:00</p>
+    </div>
+  </aside>
+
+  <main aria-label="行程列表">
+    <div class="tours-header">
+      <div class="tours-count" aria-live="polite">找到 <strong>24 條</strong> 適合您的行程</div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <label for="sort-select" style="font-size:18px;font-weight:700;">排序：</label>
+        <select id="sort-select" class="sort-select">
+          <option>推薦度（最高）</option><option>費用（低→高）</option>
+          <option>費用（高→低）</option><option>天數（少→多）</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="tours-grid" role="list">
+      <article class="card tour-card" role="listitem">
+        <div class="tour-thumb" style="background:linear-gradient(135deg,#fbbf24,#f97316);">🌸<span class="tour-thumb-badge badge-green">朋友推薦</span></div>
+        <div class="tour-body">
+          <div class="tour-tags"><span class="badge badge-green">♿ 無障礙</span><span class="badge badge-green">🚶 緩步行</span></div>
+          <h3 class="tour-title">日本京都賞櫻溫泉 5天4夜</h3>
+          <div class="tour-meta">📍 日本關西・小團 10 人<br>🛒 無強迫購物・步行 &lt; 3 公里/天</div>
+          <div class="tour-footer">
+            <div><div class="tour-price-label">全含費用</div><div class="tour-price">NT$48,800</div></div>
+            <a href="旅遊內容.html" class="btn btn-primary btn-sm">查看詳情</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card tour-card" role="listitem">
+        <div class="tour-thumb" style="background:linear-gradient(135deg,#34d399,#0891b2);">🏯<span class="tour-thumb-badge" style="background:#FEE2E2;color:#B91C1C;font-size:15px;font-weight:700;padding:5px 14px;border-radius:999px;">熱門</span></div>
+        <div class="tour-body">
+          <div class="tour-tags"><span class="badge badge-blue">🏥 醫療保障</span><span class="badge badge-green">🍚 銀髮餐</span></div>
+          <h3 class="tour-title">台灣環島文化遊 8天7夜</h3>
+          <div class="tour-meta">📍 台灣全島・小團 15 人<br>🛒 購物 1 次・步行 &lt; 4 公里/天</div>
+          <div class="tour-footer">
+            <div><div class="tour-price-label">全含費用</div><div class="tour-price">NT$29,800</div></div>
+            <a href="旅遊內容.html" class="btn btn-primary btn-sm">查看詳情</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card tour-card" role="listitem">
+        <div class="tour-thumb" style="background:linear-gradient(135deg,#a78bfa,#ec4899);">🌿</div>
+        <div class="tour-body">
+          <div class="tour-tags"><span class="badge badge-green">♿ 無障礙</span><span class="badge badge-green">🍚 銀髮餐</span><span class="badge badge-green">🚶 緩步行</span></div>
+          <h3 class="tour-title">北海道養生溫泉療癒 6天5夜</h3>
+          <div class="tour-meta">📍 日本北海道・小團 8 人<br>🛒 無強迫購物・步行 &lt; 2 公里/天</div>
+          <div class="tour-footer">
+            <div><div class="tour-price-label">全含費用</div><div class="tour-price">NT$56,800</div></div>
+            <a href="旅遊內容.html" class="btn btn-primary btn-sm">查看詳情</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card tour-card" role="listitem">
+        <div class="tour-thumb" style="background:linear-gradient(135deg,#60a5fa,#a78bfa);">🏛️</div>
+        <div class="tour-body">
+          <div class="tour-tags"><span class="badge badge-blue">🏥 醫療保障</span><span class="badge badge-orange">🚌 全程專車</span></div>
+          <h3 class="tour-title">歐洲三國慢遊 12天11夜</h3>
+          <div class="tour-meta">📍 法國・義大利・瑞士・小團 12 人<br>🛒 購物 2 次・步行 &lt; 3 公里/天</div>
+          <div class="tour-footer">
+            <div><div class="tour-price-label">全含費用</div><div class="tour-price">NT$128,000</div></div>
+            <a href="旅遊內容.html" class="btn btn-primary btn-sm">查看詳情</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card tour-card" role="listitem">
+        <div class="tour-thumb" style="background:linear-gradient(135deg,#4ade80,#facc15);">🌺</div>
+        <div class="tour-body">
+          <div class="tour-tags"><span class="badge badge-green">♿ 無障礙</span><span class="badge badge-green">🌊 海景療癒</span></div>
+          <h3 class="tour-title">峇里島悠閒海景療癒 5天4夜</h3>
+          <div class="tour-meta">📍 印尼峇里島・小團 10 人<br>🛒 購物 1 次・全程接送服務</div>
+          <div class="tour-footer">
+            <div><div class="tour-price-label">全含費用</div><div class="tour-price">NT$38,800</div></div>
+            <a href="旅遊內容.html" class="btn btn-primary btn-sm">查看詳情</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card tour-card" role="listitem">
+        <div class="tour-thumb" style="background:linear-gradient(135deg,#fb7185,#f472b6);">🏔️</div>
+        <div class="tour-body">
+          <div class="tour-tags"><span class="badge badge-blue">🏥 醫療保障</span><span class="badge badge-green">🍚 銀髮餐</span></div>
+          <h3 class="tour-title">九州溫泉文化探索 6天5夜</h3>
+          <div class="tour-meta">📍 日本九州・小團 12 人<br>🛒 購物 1 次・步行 &lt; 3 公里/天</div>
+          <div class="tour-footer">
+            <div><div class="tour-price-label">全含費用</div><div class="tour-price">NT$52,000</div></div>
+            <a href="旅遊內容.html" class="btn btn-primary btn-sm">查看詳情</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <nav class="pagination" aria-label="翻頁導覽">
+      <button class="page-btn active" aria-current="page">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <button class="page-btn">4</button>
+      <button class="page-btn">▶</button>
+    </nav>
+  </main>
+</div>
+
+<nav class="bottom-nav" aria-label="底部主選單">
+  <a href="銀遊通首頁.html" class="nav-btn" aria-label="首頁"><span class="nav-icon" aria-hidden="true">🏠</span>首頁</a>
+  <a href="找旅遊.html" class="nav-btn active" aria-current="page" aria-label="找行程"><span class="nav-icon" aria-hidden="true">🔍</span>找行程</a>
+  <a href="健康評估.html" class="nav-btn" aria-label="健康問卷"><span class="nav-icon" aria-hidden="true">❤️</span>健康問卷</a>
+  <a href="找旅伴.html" class="nav-btn" aria-label="揪朋友"><span class="nav-icon" aria-hidden="true">👥</span>揪朋友</a>
+  <a href="家人專區.html" class="nav-btn" aria-label="家人專區"><span class="nav-icon" aria-hidden="true">👨‍👩‍👧</span>家人</a>
+</nav>
+<a href="tel:0800-888-888" class="fab" aria-label="撥打免費客服電話"><span aria-hidden="true">📞</span></a>
+</body>
+</html>

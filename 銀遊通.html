@@ -740,6 +740,47 @@
     }
     .expert-fchip:hover, .expert-fchip.active { background: var(--green); color: #fff; border-color: var(--green); }
     .expert-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+
+    /* ── 達人即時動態 Expert Live Activity Status ── */
+    .expert-status-bar {
+      background: linear-gradient(135deg,#f0fdf4,#ecfdf5);
+      border: 1.5px solid #bbf7d0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+    }
+    .expert-status-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .expert-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: inline-block;
+    }
+    .dot-green  { background: #10b981; }
+    .dot-orange { background: #f97316; background: linear-gradient(135deg,#f97316,#f59e0b); }
+    .dot-travel {
+      background: #3b82f6;
+      animation: expertPulse 1.4s ease-in-out infinite;
+    }
+    @keyframes expertPulse {
+      0%,100% { opacity:1; transform:scale(1); box-shadow:0 0 0 0 rgba(59,130,246,.5); }
+      50%     { opacity:.7; transform:scale(1.3); box-shadow:0 0 0 5px rgba(59,130,246,0); }
+    }
+    .expert-status-travel { background:linear-gradient(135deg,#eff6ff,#dbeafe); border-color:#93c5fd; }
+    .expert-status-upcoming { background:linear-gradient(135deg,#fff7ed,#ffedd5); border-color:#fed7aa; }
+    .expert-next-trip {
+      font-size: 13px;
+      color: var(--text2);
+      padding-left: 18px;
+      margin-top: 4px;
+    }
     .expert-card {
       background: #fff; border-radius: var(--r-lg); box-shadow: var(--shadow-sm);
       overflow: hidden; transition: transform .2s, box-shadow .2s;
@@ -6761,6 +6802,7 @@ function setLang(lang) {
   }
   showToast(lang === 'en' ? '🌐 Switched to English' : lang === 'ja' ? '🌐 日本語に切り替えました' : '🌐 已切換為中文');
   if (typeof buildTours === 'function') buildTours();
+  setTimeout(renderExpertStatus, 80);
 }
 
 // ══════════════════════════════════════════════════════
@@ -7304,6 +7346,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('DOMContentLoaded', function() {
     syncSvcStatus();
     setInterval(syncSvcStatus, 60000);
+    setTimeout(renderExpertStatus, 100);
   });
 
 
@@ -7453,6 +7496,104 @@ document.addEventListener('DOMContentLoaded', function() {
       ]
     }
   };
+
+
+  /* ════ 達人即時動態資料 Expert Live Status Data ════ */
+  const _EXPERT_STATUS = {
+    wangmeizhu: {
+      dot: 'green', barClass: '',
+      zh: '🟢 剛從京都回來・3天前',
+      en: '🟢 Back from Kyoto · 3 days ago',
+      ja: '🟢 京都から帰国・3日前',
+      next: {
+        zh: '✈️ 6/15 即將出發北海道',
+        en: '✈️ Jun 15 — Hokkaido next!',
+        ja: '✈️ 6/15 次は北海道へ出発'
+      }
+    },
+    linquodong: {
+      dot: 'orange', barClass: 'expert-status-upcoming',
+      zh: '🟡 5/3 台灣環島即將出發・還有 13 天',
+      en: '🟡 May 3 Taiwan tour — departing in 13 days',
+      ja: '🟡 5/3 台湾一周出発まであと13日',
+      next: null
+    },
+    chensufen: {
+      dot: 'green', barClass: '',
+      zh: '🟢 剛從歐洲回來・1週前',
+      en: '🟢 Back from Europe · 1 week ago',
+      ja: '🟢 ヨーロッパから帰国・1週間前',
+      next: {
+        zh: '📝 剛剛分享了新旅遊故事',
+        en: '📝 Just shared a new travel story',
+        ja: '📝 旅行記を投稿しました'
+      }
+    },
+    zhangwenxiong: {
+      dot: 'travel', barClass: 'expert-status-travel',
+      zh: '✈️ 旅行中！目前在峇里島 🏖️',
+      en: '✈️ On tour now! Currently in Bali 🏖️',
+      ja: '✈️ 旅行中！現在バリ島に滞在 🏖️',
+      next: {
+        zh: '🏖️ 4/24 預計返台',
+        en: '🏖️ Returning Apr 24',
+        ja: '🏖️ 4/24 帰国予定'
+      }
+    },
+    wucuilian: {
+      dot: 'green', barClass: '',
+      zh: '🟢 剛從北海道回來・5天前',
+      en: '🟢 Back from Hokkaido · 5 days ago',
+      ja: '🟢 北海道から帰国・5日前',
+      next: {
+        zh: '✈️ 7/8 即將出發沖繩療癒之旅',
+        en: '✈️ Jul 8 — Okinawa wellness trip next!',
+        ja: '✈️ 7/8 次は沖縄へ'
+      }
+    },
+    huangwenbin: {
+      dot: 'travel', barClass: 'expert-status-travel',
+      zh: '✈️ 旅行中！目前在九州 ⛩️',
+      en: '✈️ On tour now! Currently in Kyushu ⛩️',
+      ja: '✈️ 旅行中！現在九州に滞在 ⛩️',
+      next: {
+        zh: '⛩️ 4/24 預計返台',
+        en: '⛩️ Returning Apr 24',
+        ja: '⛩️ 4/24 帰国予定'
+      }
+    }
+  };
+
+  function renderExpertStatus() {
+    const lang = window._lang || 'zh';
+    document.querySelectorAll('#expert-grid .expert-story-btn').forEach(function(btn) {
+      const m = btn.getAttribute('onclick').match(/openExpertModal\('(\w+)'/);
+      if (!m) return;
+      const key = m[1];
+      const s = _EXPERT_STATUS[key];
+      if (!s) return;
+      const card = btn.closest('.expert-card');
+      if (!card) return;
+      // Remove old bar if exists
+      const old = card.querySelector('.expert-status-bar');
+      if (old) old.remove();
+      // Find .expert-rec insertion point
+      const rec = card.querySelector('.expert-rec');
+      if (!rec) return;
+      const statusText = s[lang] || s.zh;
+      const nextText   = s.next ? (s.next[lang] || s.next.zh) : '';
+      const bar = document.createElement('div');
+      bar.className = 'expert-status-bar' + (s.barClass ? ' ' + s.barClass : '');
+      bar.innerHTML =
+        '<div class="expert-status-row">' +
+          '<span class="expert-dot ' + s.dot + '"' +
+            (s.dot === 'travel' ? ' style="background:#3b82f6;"' : '') + '></span>' +
+          '<span>' + statusText + '</span>' +
+        '</div>' +
+        (nextText ? '<div class="expert-next-trip">' + nextText + '</div>' : '');
+      rec.parentNode.insertBefore(bar, rec);
+    });
+  }
 
 </script>
 

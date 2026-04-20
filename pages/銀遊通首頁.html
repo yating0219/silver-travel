@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>銀遊通首頁 — 銀髮族安心出遊平台</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== 設計系統：銀髮族無障礙版 ===== */
+    :root {
+      --orange:       #C2410C;   /* 高對比主色 contrast 6.8:1 on white */
+      --orange-dark:  #9A3412;   /* 9.2:1 AAA */
+      --orange-light: #FFF7ED;
+      --orange-mid:   #FED7AA;
+      --blue:         #1D4ED8;   /* 8.6:1 AAA */
+      --green:        #15803D;   /* 7.2:1 AAA */
+      --text:         #1C1917;   /* 16.8:1 AAA */
+      --text2:        #44403C;   /* 7.2:1 AAA */
+      --bg:           #FFFBF5;
+      --card:         #FFFFFF;
+      --border:       #D6D3D1;
+      --radius:       20px;
+      --shadow:       0 4px 24px rgba(0,0,0,.10);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+      font-size: 22px;
+      line-height: 1.8;
+      color: var(--text);
+      background: var(--bg);
+      padding-bottom: 96px;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ===== 元件 ===== */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 64px; padding: 14px 32px;
+      font-size: 22px; font-weight: 700; border-radius: 16px;
+      border: none; cursor: pointer; transition: transform .15s, box-shadow .15s;
+      text-decoration: none; line-height: 1.3;
+    }
+    .btn:active { transform: scale(.97); }
+    .btn-primary   { background: var(--orange); color: #fff; }
+    .btn-primary:hover { background: var(--orange-dark); box-shadow: 0 6px 20px rgba(194,65,12,.35); }
+    .btn-secondary { background: #fff; color: var(--orange); border: 3px solid var(--orange); }
+    .btn-secondary:hover { background: var(--orange-light); }
+    .btn-white     { background: #fff; color: var(--orange-dark); }
+    .btn-white:hover { background: var(--orange-light); }
+    .btn-lg { min-height: 72px; font-size: 24px; padding: 18px 40px; }
+    .btn-sm { min-height: 52px; font-size: 19px; padding: 10px 24px; }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 6px 14px; border-radius: 999px;
+      font-size: 16px; font-weight: 700;
+    }
+    .badge-green  { background: #DCFCE7; color: var(--green); }
+    .badge-blue   { background: #DBEAFE; color: var(--blue); }
+    .badge-orange { background: var(--orange-light); color: var(--orange-dark); }
+    .badge-red    { background: #FEE2E2; color: #B91C1C; }
+
+    .section { padding: 64px 20px; }
+    .container { max-width: 1100px; margin: auto; }
+    .section-title { font-size: 34px; font-weight: 900; color: var(--text); line-height: 1.3; }
+    .section-sub   { font-size: 20px; color: var(--text2); margin-top: 10px; }
+
+    /* ===== 頁首 ===== */
+    header {
+      background: #fff;
+      border-bottom: 3px solid var(--orange-mid);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    .header-inner {
+      max-width: 1100px; margin: auto; padding: 0 20px;
+      height: 72px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo-icon { font-size: 40px; line-height: 1; }
+    .logo-name { font-size: 26px; font-weight: 900; color: var(--orange); }
+    .logo-sub  { font-size: 14px; color: var(--text2); font-weight: 500; }
+    .header-nav { display: flex; gap: 8px; align-items: center; }
+    .header-nav a {
+      font-size: 18px; font-weight: 700; color: var(--text2);
+      padding: 10px 16px; border-radius: 12px; transition: background .15s;
+    }
+    .header-nav a:hover, .header-nav a.active { background: var(--orange-light); color: var(--orange-dark); }
+
+    /* ===== 英雄區 ===== */
+    .hero {
+      background: linear-gradient(135deg, #FFF7ED 0%, #FED7AA 60%, #FFE4C4 100%);
+      padding: 72px 20px 80px;
+    }
+    .hero-inner {
+      max-width: 1100px; margin: auto;
+      display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #fff; border: 2px solid var(--orange-mid);
+      border-radius: 999px; padding: 8px 20px; margin-bottom: 24px;
+      font-size: 18px; color: var(--orange-dark); font-weight: 700;
+    }
+    .hero h1 { font-size: 52px; font-weight: 900; color: var(--text); line-height: 1.2; margin-bottom: 20px; }
+    .hero h1 span { color: var(--orange); }
+    .hero p  { font-size: 22px; color: var(--text2); line-height: 1.9; margin-bottom: 36px; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
+    .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+    .stat { text-align: center; }
+    .stat-num { font-size: 32px; font-weight: 900; color: var(--orange); }
+    .stat-label { font-size: 16px; color: var(--text2); font-weight: 500; }
+    .hero-divider { width: 1px; background: var(--border); }
+
+    /* ===== 特色卡片區 ===== */
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .feature-card { padding: 36px 28px; text-align: center; border: 2px solid transparent; transition: border-color .2s; }
+    .feature-card:hover { border-color: var(--orange-mid); }
+    .feature-card.highlight { border-color: var(--orange-mid); }
+    .feature-icon { font-size: 56px; margin-bottom: 16px; line-height: 1; }
+    .feature-card h3 { font-size: 24px; font-weight: 800; margin-bottom: 12px; color: var(--text); }
+    .feature-card p  { font-size: 19px; color: var(--text2); line-height: 1.8; }
+
+    /* ===== 步驟區 ===== */
+    .steps { background: var(--orange-light); }
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; position: relative; }
+    .steps-line {
+      position: absolute; top: 52px;
+      left: calc(16.7% + 20px); right: calc(16.7% + 20px);
+      height: 4px; background: linear-gradient(90deg, var(--orange), var(--orange-mid), var(--orange));
+      border-radius: 999px;
+    }
+    .step { text-align: center; }
+    .step-circle {
+      width: 104px; height: 104px;
+      background: var(--orange); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px; margin: 0 auto 24px;
+      position: relative; z-index: 1;
+      box-shadow: 0 4px 16px rgba(194,65,12,.3);
+    }
+    .step h3 { font-size: 22px; font-weight: 800; margin-bottom: 10px; }
+    .step p  { font-size: 18px; color: var(--text2); line-height: 1.75; }
+    .step a  { display: inline-block; margin-top: 14px; color: var(--orange); font-weight: 700; font-size: 18px; }
+
+    /* ===== 行程卡 ===== */
+    .tours-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .tour-card { transition: transform .2s, box-shadow .2s; }
+    .tour-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,.15); }
+    .tour-thumb {
+      height: 180px; display: flex; align-items: center; justify-content: center;
+      font-size: 80px; border-radius: 20px 20px 0 0; position: relative;
+    }
+    .tour-thumb-badge {
+      position: absolute; top: 14px; right: 14px;
+      font-size: 15px; font-weight: 700; padding: 5px 14px; border-radius: 999px;
+    }
+    .tour-body { padding: 22px; }
+    .tour-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+    .tour-title { font-size: 21px; font-weight: 800; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
+    .tour-meta  { font-size: 17px; color: var(--text2); line-height: 1.7; margin-bottom: 16px; }
+    .tour-footer { display: flex; align-items: center; justify-content: space-between; }
+    .tour-price-label { font-size: 14px; color: var(--text2); }
+    .tour-price { font-size: 26px; font-weight: 900; color: var(--orange); }
+
+    /* ===== 評價 ===== */
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .review-card { padding: 28px; }
+    .stars { font-size: 24px; color: #D97706; margin-bottom: 14px; letter-spacing: 2px; }
+    .review-text { font-size: 19px; color: var(--text2); line-height: 1.8; margin-bottom: 20px; font-style: italic; }
+    .reviewer { display: flex; align-items: center; gap: 14px; }
+    .reviewer-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--orange-mid); display: flex; align-items: center; justify-content: center; font-size: 30px; }
+    .reviewer-name  { font-size: 20px; font-weight: 700; }
+    .reviewer-info  { font-size: 16px; color: var(--text2); }
+
+    /* ===== CTA ===== */
+    .cta { background: linear-gradient(135deg, var(--orange), var(--orange-dark)); text-align: center; }
+    .cta h2 { font-size: 40px; font-weight: 900; color: #fff; margin-bottom: 14px; }
+    .cta p  { font-size: 22px; color: var(--orange-mid); margin-bottom: 36px; }
+    .cta-actions { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+    .btn-outline-white {
+      background: rgba(255,255,255,.15); color: #fff;
+      border: 3px solid #fff;
+      min-height: 72px; font-size: 22px; font-weight: 700;
+      padding: 16px 36px; border-radius: 16px;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: background .15s;
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,.25); }
+
+    /* ===== 頁尾 ===== */
+    footer { background: #1C1917; color: #A8A29E; padding: 48px 20px 32px; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 36px; }
+    .footer-brand { font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 12px; }
+    .footer-desc  { font-size: 17px; line-height: 1.8; }
+    .footer-head  { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 14px; }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 17px; color: #A8A29E; transition: color .15s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid #44403C; padding-top: 24px; text-align: center; font-size: 16px; }
+
+    /* ===== 底部導覽列（行動裝置） ===== */
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #fff; border-top: 2px solid var(--border);
+      display: flex; justify-content: space-around; align-items: stretch;
+      padding: 8px 4px env(safe-area-inset-bottom);
+      z-index: 200; box-shadow: 0 -4px 16px rgba(0,0,0,.1);
+    }
+    .nav-btn {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 4px; flex: 1; min-height: 64px; padding: 6px 4px;
+      font-size: 13px; font-weight: 700; color: #78716C;
+      text-decoration: none; border-radius: 12px; transition: background .15s;
+    }
+    .nav-btn:active { background: var(--orange-light); }
+    .nav-btn.active { color: var(--orange); }
+    .nav-btn svg, .nav-btn .nav-icon { font-size: 28px; line-height: 1; }
+
+    /* ===== 浮動客服鈕 ===== */
+    .fab {
+      position: fixed; right: 20px; bottom: 84px;
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--orange); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; box-shadow: 0 6px 24px rgba(194,65,12,.5);
+      z-index: 300; text-decoration: none; transition: transform .15s;
+    }
+    .fab:hover, .fab:active { transform: scale(1.1); }
+
+    /* ===== RWD ===== */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-card-side { display: none; }
+      .feature-grid, .steps-grid, .tours-grid, .reviews-grid { grid-template-columns: 1fr; gap: 20px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .header-nav a:not(.btn) { display: none; }
+      .hero h1 { font-size: 38px; }
+      .hero p  { font-size: 20px; }
+    }
+    @media (max-width: 600px) {
+      body { font-size: 20px; }
+      .hero h1 { font-size: 32px; }
+      .section-title { font-size: 28px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .btn-lg { font-size: 22px; padding: 16px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== 頁首 ===== -->
+<header role="banner">
+  <div class="header-inner">
+    <a href="銀遊通首頁.html" class="logo" aria-label="銀遊通首頁">
+      <span class="logo-icon" aria-hidden="true">🌸</span>
+      <div>
+        <div class="logo-name">銀遊通</div>
+        <div class="logo-sub">銀髮族安心旅遊平台</div>
+      </div>
+    </a>
+    <nav class="header-nav" aria-label="主要導覽">
+      <a href="銀遊通首頁.html" class="active">首頁</a>
+      <a href="找旅遊.html">找行程</a>
+      <a href="找旅伴.html">揪朋友</a>
+      <a href="家人專區.html">家人專區</a>
+      <a href="tel:0800-888-888" class="btn btn-primary btn-sm" style="border-radius:12px;">
+        <span aria-hidden="true">📞</span> 撥打客服
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== 英雄區 ===== -->
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge" aria-label="專為 55 歲以上設計">
+        <span aria-hidden="true">✨</span> 專為 55 歲以上設計
+      </div>
+      <h1 id="hero-heading">安心出遊<br><span>快樂歸來</span></h1>
+      <p>銀遊通專為銀髮旅人設計，每條行程都有<strong>健康適配篩選</strong>、<strong>費用完全透明</strong>，還有 24 小時真人客服陪伴您安心出發。</p>
+      <div class="hero-actions">
+        <a href="健康評估.html" class="btn btn-primary btn-lg">
+          <span aria-hidden="true">❤️</span> 填健康問卷
+        </a>
+        <a href="找旅遊.html" class="btn btn-secondary btn-lg">
+          <span aria-hidden="true">🔍</span> 找適合行程
+        </a>
+      </div>
+      <div class="hero-stats" role="list" aria-label="服務統計數據">
+        <div class="stat" role="listitem">
+          <div class="stat-num">5 萬+</div>
+          <div class="stat-label">快樂旅人</div>
+        </div>
+        <div class="hero-divider" aria-hidden="true"></div>
+        <div class="stat" role="listitem">
+          <div class="stat-num">98%</div>
+          <div class="stat-label">旅後滿意</div>
+        </div>
+        <div class="hero-divider" aria-hidden="true"></div>
+        <div class="stat" role="listitem">
+          <div class="stat-num">24 小時</div>
+          <div class="stat-label">真人客服</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 示範行程卡 -->
+    <div class="hero-card-side" aria-hidden="true">
+      <div class="card" style="overflow:hidden; border: 3px solid var(--orange-mid);">
+        <div style="background:linear-gradient(135deg,#0891B2,#15803D); height:180px; display:flex; align-items:center; justify-content:center; font-size:90px;">🗻</div>
+        <div style="padding:24px;">
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;">
+            <span class="badge badge-green">♿ 無障礙</span>
+            <span class="badge badge-blue">🏥 醫療保障</span>
+          </div>
+          <div style="font-size:22px; font-weight:800; color:var(--text); margin-bottom:6px;">日本京都文化深度遊 5天</div>
+          <div style="font-size:17px; color:var(--text2); margin-bottom:18px;">步行 &lt; 3公里・小團 12人・無購物</div>
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <div>
+              <div style="font-size:15px; color:var(--text2);">全含費用</div>
+              <div style="font-size:28px; font-weight:900; color:var(--orange);">NT$48,800</div>
+            </div>
+            <a href="旅遊內容.html" class="btn btn-primary btn-sm">查看詳情</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 為什麼選擇我們 ===== -->
+<section class="section" style="background:#fff;" aria-labelledby="why-heading">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:52px;">
+      <h2 id="why-heading" class="section-title">為什麼選擇銀遊通？</h2>
+      <p class="section-sub">我們懂您的需求，也懂您的擔憂</p>
+    </div>
+    <div class="feature-grid" role="list">
+      <div class="card feature-card" role="listitem">
+        <div class="feature-icon" aria-hidden="true">🛡️</div>
+        <h3>安全第一</h3>
+        <p>每條行程通過銀髮友善認證，醫療緊急應變 SOP，旅遊保險強制投保，出門無後顧之憂。</p>
+      </div>
+      <div class="card feature-card highlight" role="listitem">
+        <div class="feature-icon" aria-hidden="true">💰</div>
+        <h3>費用完全透明</h3>
+        <p>含稅含服務費，自費項目清楚列明，購物次數顯著標示，數位承諾書，絕無隱藏費用。</p>
+      </div>
+      <div class="card feature-card" role="listitem">
+        <div class="feature-icon" aria-hidden="true">🤝</div>
+        <h3>真人陪伴服務</h3>
+        <p>09:00–21:00 真人客服，三分鐘內接通，語音訂購，視訊操作教學，隨時都有人幫忙。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 三步驟 ===== -->
+<section class="section steps" aria-labelledby="steps-heading">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:52px;">
+      <h2 id="steps-heading" class="section-title">三步驟，找到最適合您的行程</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="steps-line" aria-hidden="true"></div>
+      <div class="step">
+        <div class="step-circle" aria-hidden="true">📝</div>
+        <h3>步驟一：填健康問卷</h3>
+        <p>只需 3 分鐘，告訴我們您的行動能力與健康狀況</p>
+        <a href="健康評估.html" aria-label="前往填寫健康問卷">開始填寫 →</a>
+      </div>
+      <div class="step">
+        <div class="step-circle" aria-hidden="true">🔍</div>
+        <h3>步驟二：找到適合行程</h3>
+        <p>系統自動篩選適合您體能的行程，顯示銀髮友善標章</p>
+        <a href="找旅遊.html" aria-label="前往找行程">找行程 →</a>
+      </div>
+      <div class="step">
+        <div class="step-circle" aria-hidden="true">✈️</div>
+        <h3>步驟三：安心出發</h3>
+        <p>費用透明確認，家人同步行程，真人客服隨行，快樂歸來</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 精選行程 ===== -->
+<section class="section" style="background:#F5F5F4;" aria-labelledby="tours-heading">
+  <div class="container">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:36px; flex-wrap:wrap; gap:16px;">
+      <h2 id="tours-heading" class="section-title">本週銀髮精選行程</h2>
+      <a href="找旅遊.html" style="color:var(--orange); font-weight:700; font-size:20px;">查看全部行程 →</a>
+    </div>
+    <div class="tours-grid">
+
+      <article class="card tour-card">
+        <div class="tour-thumb" style="background:linear-gradient(135deg,#fbbf24,#f97316);">
+          🌸
+          <span class="tour-thumb-badge badge-green">朋友推薦</span>
+        </div>
+        <div class="tour-body">
+          <div class="tour-tags">
+            <span class="badge badge-green">♿ 無障礙</span>
+            <span class="badge badge-green">🚶 緩步行</span>
+          </div>
+          <h3 class="tour-title">日本京都賞櫻溫泉 5天4夜</h3>
+          <div class="tour-meta">
+            📍 日本關西・小團 10 人<br>
+            🛒 無強迫購物・步行 &lt; 3 公里/天
+          </div>
+          <div class="tour-footer">
+            <div>
+              <div class="tour-price-label">全含費用</div>
+              <div class="tour-price">NT$48,800</div>
+            </div>
+            <a href="旅遊內容.html" class="btn btn-primary btn-sm" aria-label="查看日本京都賞櫻溫泉 5天4夜詳情">查看</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card tour-card">
+        <div class="tour-thumb" style="background:linear-gradient(135deg,#34d399,#0891b2);">
+          🏯
+          <span class="tour-thumb-badge badge-red" style="background:#FEE2E2; color:#B91C1C;">熱門</span>
+        </div>
+        <div class="tour-body">
+          <div class="tour-tags">
+            <span class="badge badge-blue">🏥 醫療保障</span>
+            <span class="badge badge-green">🍚 銀髮餐</span>
+          </div>
+          <h3 class="tour-title">台灣環島文化遊 8天7夜</h3>
+          <div class="tour-meta">
+            📍 台灣全島・小團 15 人<br>
+            🛒 購物 1 次・步行 &lt; 4 公里/天
+          </div>
+          <div class="tour-footer">
+            <div>
+              <div class="tour-price-label">全含費用</div>
+              <div class="tour-price">NT$29,800</div>
+            </div>
+            <a href="旅遊內容.html" class="btn btn-primary btn-sm" aria-label="查看台灣環島文化遊 8天7夜詳情">查看</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card tour-card">
+        <div class="tour-thumb" style="background:linear-gradient(135deg,#a78bfa,#ec4899);">
+          🌿
+        </div>
+        <div class="tour-body">
+          <div class="tour-tags">
+            <span class="badge badge-green">♿ 無障礙</span>
+            <span class="badge badge-green">🍚 銀髮餐</span>
+            <span class="badge badge-green">🚶 緩步行</span>
+          </div>
+          <h3 class="tour-title">北海道養生溫泉療癒 6天5夜</h3>
+          <div class="tour-meta">
+            📍 日本北海道・小團 8 人<br>
+            🛒 無強迫購物・步行 &lt; 2 公里/天
+          </div>
+          <div class="tour-footer">
+            <div>
+              <div class="tour-price-label">全含費用</div>
+              <div class="tour-price">NT$56,800</div>
+            </div>
+            <a href="旅遊內容.html" class="btn btn-primary btn-sm" aria-label="查看北海道養生溫泉療癒詳情">查看</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== 旅人評價 ===== -->
+<section class="section" style="background:#fff;" aria-labelledby="reviews-heading">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:52px;">
+      <h2 id="reviews-heading" class="section-title">旅人真實心聲</h2>
+      <p class="section-sub">來自 5 萬位快樂旅人的真實評價</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="card review-card">
+        <div class="stars" aria-label="五顆星評價">★★★★★</div>
+        <p class="review-text">「費用清清楚楚，沒有任何意外支出，行程節奏剛剛好，導遊非常有耐心！」</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar" aria-hidden="true">👵</div>
+          <div>
+            <div class="reviewer-name">王阿姨</div>
+            <div class="reviewer-info">68歲・退休教師</div>
+          </div>
+        </div>
+      </div>
+      <div class="card review-card" style="border: 3px solid var(--orange-mid);">
+        <div class="stars" aria-label="五顆星評價">★★★★★</div>
+        <p class="review-text">「我有糖尿病，平台幫我找到有餐飲控制的行程，沿途照顧非常周到。」</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar" aria-hidden="true">👴</div>
+          <div>
+            <div class="reviewer-name">林伯伯</div>
+            <div class="reviewer-info">72歲・糖尿病旅客</div>
+          </div>
+        </div>
+      </div>
+      <div class="card review-card">
+        <div class="stars" aria-label="五顆星評價">★★★★★</div>
+        <p class="review-text">「子女幫我代訂，旅途中家人可以看到我的位置，大家都非常放心！」</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar" aria-hidden="true">👵</div>
+          <div>
+            <div class="reviewer-name">陳奶奶</div>
+            <div class="reviewer-info">75歲・行動輔具使用者</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="section cta" aria-labelledby="cta-heading">
+  <div class="container" style="text-align:center; max-width:800px;">
+    <h2 id="cta-heading">準備好出發了嗎？</h2>
+    <p>填寫健康問卷，讓我們為您找到最適合的行程</p>
+    <div class="cta-actions">
+      <a href="健康評估.html" class="btn btn-white btn-lg">
+        <span aria-hidden="true">📝</span> 免費填寫問卷
+      </a>
+      <a href="tel:0800-888-888" class="btn-outline-white">
+        <span aria-hidden="true">📞</span> 0800-888-888
+      </a>
+    </div>
+    <p style="color:var(--orange-mid); margin-top:20px; font-size:19px;">客服時間：週一至週日 09:00–21:00（含假日）</p>
+  </div>
+</section>
+
+<!-- ===== 頁尾 ===== -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">🌸 銀遊通</div>
+        <p class="footer-desc">專為銀髮族設計的智慧旅遊平台，安心、舒適、有溫度。</p>
+      </div>
+      <div>
+        <div class="footer-head">旅遊服務</div>
+        <nav class="footer-links" aria-label="旅遊服務連結">
+          <a href="找旅遊.html">找行程</a>
+          <a href="找旅伴.html">揪朋友一起去</a>
+          <a href="健康評估.html">健康評估問卷</a>
+        </nav>
+      </div>
+      <div>
+        <div class="footer-head">會員服務</div>
+        <nav class="footer-links" aria-label="會員服務連結">
+          <a href="家人專區.html">家人關心專區</a>
+          <a href="#">旅遊保險</a>
+          <a href="#">訂單查詢</a>
+        </nav>
+      </div>
+      <div>
+        <div class="footer-head">聯絡我們</div>
+        <div class="footer-desc">
+          <div>📞 0800-888-888</div>
+          <div>每日 09:00–21:00</div>
+          <div style="margin-top:8px;">✉️ help@silvertravel.tw</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 銀遊通 SilverTravel・符合《個人資料保護法》・旅遊業執照 1234567
+    </div>
+  </div>
+</footer>
+
+<!-- ===== 底部導覽列 ===== -->
+<nav class="bottom-nav" aria-label="底部主選單">
+  <a href="銀遊通首頁.html" class="nav-btn active" aria-current="page" aria-label="首頁">
+    <span class="nav-icon" aria-hidden="true">🏠</span>
+    首頁
+  </a>
+  <a href="找旅遊.html" class="nav-btn" aria-label="找行程">
+    <span class="nav-icon" aria-hidden="true">🔍</span>
+    找行程
+  </a>
+  <a href="健康評估.html" class="nav-btn" aria-label="健康問卷">
+    <span class="nav-icon" aria-hidden="true">❤️</span>
+    健康問卷
+  </a>
+  <a href="找旅伴.html" class="nav-btn" aria-label="揪朋友">
+    <span class="nav-icon" aria-hidden="true">👥</span>
+    揪朋友
+  </a>
+  <a href="家人專區.html" class="nav-btn" aria-label="家人專區">
+    <span class="nav-icon" aria-hidden="true">👨‍👩‍👧</span>
+    家人
+  </a>
+</nav>
+
+<!-- ===== 浮動客服鈕 ===== -->
+<a href="tel:0800-888-888" class="fab" aria-label="撥打免費客服電話 0800-888-888" title="撥打客服">
+  <span aria-hidden="true">📞</span>
+</a>
+
+</body>
+</html>

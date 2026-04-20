@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>揪朋友一起去 — 銀遊通</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root{--orange:#C2410C;--orange-dark:#9A3412;--orange-light:#FFF7ED;--orange-mid:#FED7AA;--blue:#1D4ED8;--green:#15803D;--purple:#7C3AED;--text:#1C1917;--text2:#44403C;--bg:#FFFBF5;--card:#FFFFFF;--border:#D6D3D1;--radius:20px;--shadow:0 4px 24px rgba(0,0,0,.10)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;font-size:22px;line-height:1.8;color:var(--text);background:var(--bg);padding-bottom:96px}
+    a{color:inherit;text-decoration:none}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:60px;padding:12px 28px;font-size:20px;font-weight:700;border-radius:14px;border:none;cursor:pointer;transition:transform .15s,box-shadow .15s;text-decoration:none;line-height:1.3}
+    .btn:active{transform:scale(.97)}
+    .btn-primary{background:var(--orange);color:#fff} .btn-primary:hover{background:var(--orange-dark);box-shadow:0 6px 20px rgba(194,65,12,.35)}
+    .btn-secondary{background:#fff;color:var(--orange);border:3px solid var(--orange)} .btn-secondary:hover{background:var(--orange-light)}
+    .btn-sm{min-height:52px;font-size:19px;padding:10px 22px} .btn-lg{min-height:72px;font-size:24px;padding:18px 40px}
+    .badge{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;border-radius:999px;font-size:16px;font-weight:700}
+    .badge-green{background:#DCFCE7;color:var(--green)} .badge-blue{background:#DBEAFE;color:var(--blue)} .badge-orange{background:var(--orange-light);color:var(--orange-dark)} .badge-purple{background:#EDE9FE;color:var(--purple)}
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow)}
+
+    header{background:#fff;border-bottom:3px solid var(--orange-mid);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    .header-inner{max-width:1100px;margin:auto;padding:0 20px;height:72px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:12px} .logo-icon{font-size:40px} .logo-name{font-size:26px;font-weight:900;color:var(--orange)} .logo-sub{font-size:14px;color:var(--text2)}
+    .header-nav{display:flex;gap:8px;align-items:center}
+    .header-nav a{font-size:18px;font-weight:700;color:var(--text2);padding:10px 16px;border-radius:12px;transition:background .15s}
+    .header-nav a:hover,.header-nav a.active{background:var(--orange-light);color:var(--orange-dark)}
+
+    .page-banner{background:linear-gradient(135deg,#EDE9FE,#DDD6FE);padding:48px 20px;border-bottom:3px solid #C4B5FD}
+    .page-banner h1{font-size:40px;font-weight:900;color:#3B0764;margin-bottom:10px}
+    .page-banner p{font-size:22px;color:#4C1D95}
+
+    /* Tab bar */
+    .tab-bar{background:#fff;border-bottom:2px solid var(--border);padding:0 20px;position:sticky;top:72px;z-index:90}
+    .tab-inner{max-width:1100px;margin:auto;display:flex;gap:0}
+    .tab-btn{min-height:64px;padding:0 28px;font-size:20px;font-weight:700;color:var(--text2);border:none;background:none;cursor:pointer;border-bottom:4px solid transparent;transition:all .15s;display:flex;align-items:center;gap:8px}
+    .tab-btn:hover{color:var(--orange)}
+    .tab-btn.active{color:var(--orange);border-bottom-color:var(--orange)}
+
+    .main-wrap{max-width:1100px;margin:40px auto;padding:0 20px}
+
+    /* Group cards grid */
+    .groups-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:40px}
+    .group-card{padding:0;overflow:hidden;transition:transform .2s,box-shadow .2s}
+    .group-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,.15)}
+    .group-header{padding:20px 22px;display:flex;align-items:center;gap:14px}
+    .group-avatar{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;flex-shrink:0}
+    .group-name{font-size:22px;font-weight:800;color:var(--text);line-height:1.3}
+    .group-host{font-size:16px;color:var(--text2)}
+    .group-body{padding:4px 22px 20px}
+    .group-tour{font-size:20px;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+    .group-meta{font-size:17px;color:var(--text2);line-height:1.7;margin-bottom:14px}
+    .group-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+    .group-footer{padding:0 22px 22px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:16px}
+    .slots-bar{display:flex;gap:6px;align-items:center;font-size:17px;color:var(--text2)}
+    .slot-dot{width:16px;height:16px;border-radius:50%;flex-shrink:0}
+    .slot-filled{background:var(--orange)}
+    .slot-empty{background:var(--border)}
+
+    /* Create group CTA */
+    .create-cta{background:linear-gradient(135deg,var(--orange-light),var(--orange-mid));border-radius:var(--radius);padding:40px 32px;text-align:center;margin-bottom:40px;border:3px solid var(--orange-mid)}
+    .create-cta h2{font-size:30px;font-weight:900;margin-bottom:14px;color:var(--orange-dark)}
+    .create-cta p{font-size:20px;color:var(--text2);margin-bottom:24px}
+
+    /* Stats banner */
+    .stats-banner{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:40px}
+    .stat-box{background:#fff;border-radius:16px;padding:24px;text-align:center;box-shadow:var(--shadow)}
+    .stat-num{font-size:32px;font-weight:900;color:var(--orange)}
+    .stat-label{font-size:17px;color:var(--text2);margin-top:4px}
+
+    /* Bottom nav & FAB */
+    .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid var(--border);display:flex;justify-content:space-around;align-items:stretch;padding:8px 4px env(safe-area-inset-bottom);z-index:200;box-shadow:0 -4px 16px rgba(0,0,0,.1)}
+    .nav-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex:1;min-height:64px;padding:6px 4px;font-size:13px;font-weight:700;color:#78716C;text-decoration:none;border-radius:12px;transition:background .15s}
+    .nav-btn.active{color:var(--orange)} .nav-icon{font-size:28px;line-height:1}
+    .fab{position:fixed;right:20px;bottom:84px;width:72px;height:72px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 6px 24px rgba(194,65,12,.5);z-index:300;text-decoration:none;transition:transform .15s}
+    .fab:hover{transform:scale(1.1)}
+
+    @media(max-width:900px){.groups-grid{grid-template-columns:repeat(2,1fr)}.stats-banner{grid-template-columns:repeat(2,1fr)}.header-nav a:not([class]){display:none}}
+    @media(max-width:600px){.groups-grid{grid-template-columns:1fr}.page-banner h1{font-size:32px}.stats-banner{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+
+<header role="banner">
+  <div class="header-inner">
+    <a href="銀遊通首頁.html" class="logo" aria-label="銀遊通首頁">
+      <span class="logo-icon" aria-hidden="true">🌸</span>
+      <div><div class="logo-name">銀遊通</div><div class="logo-sub">銀髮族安心旅遊平台</div></div>
+    </a>
+    <nav class="header-nav" aria-label="主要導覽">
+      <a href="銀遊通首頁.html">首頁</a>
+      <a href="找旅遊.html">找行程</a>
+      <a href="找旅伴.html" class="active">揪朋友</a>
+      <a href="家人專區.html">家人專區</a>
+      <a href="tel:0800-888-888" class="btn btn-primary btn-sm" style="border-radius:12px;"><span aria-hidden="true">📞</span> 撥打客服</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-banner" aria-labelledby="page-title">
+  <div style="max-width:1100px;margin:auto;">
+    <h1 id="page-title">👥 揪朋友一起去</h1>
+    <p>找志同道合的銀髮好友，一起出發更安心、更快樂！</p>
+  </div>
+</section>
+
+<!-- Tab Bar -->
+<div class="tab-bar" role="tablist" aria-label="揪團分類">
+  <div class="tab-inner">
+    <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-all">全部團體</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-japan">日本</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-taiwan">台灣</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-europe">歐洲</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-my-group">我的揪團</button>
+  </div>
+</div>
+
+<div class="main-wrap">
+
+  <!-- Stats -->
+  <div class="stats-banner" role="list" aria-label="揪團統計">
+    <div class="stat-box" role="listitem">
+      <div class="stat-num">86</div><div class="stat-label">目前開放的揪團</div>
+    </div>
+    <div class="stat-box" role="listitem">
+      <div class="stat-num">1,240</div><div class="stat-label">快樂旅伴</div>
+    </div>
+    <div class="stat-box" role="listitem">
+      <div class="stat-num">98%</div><div class="stat-label">揪團滿意度</div>
+    </div>
+    <div class="stat-box" role="listitem">
+      <div class="stat-num">24hr</div><div class="stat-label">安全陪同服務</div>
+    </div>
+  </div>
+
+  <!-- Create CTA -->
+  <div class="create-cta" role="complementary" aria-label="發起揪團">
+    <h2>想自己揪團出發？</h2>
+    <p>設定您的行程偏好，銀遊通幫您召集志同道合的旅伴，一起安心出遊！</p>
+    <button class="btn btn-primary btn-lg" type="button" onclick="alert('揪團功能即將開放，請致電 0800-888-888 洽詢！')">
+      ✨ 我要發起揪團
+    </button>
+  </div>
+
+  <!-- Groups -->
+  <h2 style="font-size:28px;font-weight:900;margin-bottom:24px;">正在招募中的揪團</h2>
+  <div class="groups-grid" id="tab-all" role="list" aria-label="揪團列表">
+
+    <article class="card group-card" role="listitem">
+      <div class="group-header">
+        <div class="group-avatar" style="background:#DCFCE7;" aria-hidden="true">👵</div>
+        <div>
+          <div class="group-name">京都賞櫻樂齡團</div>
+          <div class="group-host">發起人：王阿姨・68歲</div>
+        </div>
+      </div>
+      <div class="group-body">
+        <div class="group-tour">🌸 日本京都賞櫻溫泉 5天</div>
+        <div class="group-meta">📅 2026年 4月 15日出發<br>💰 NT$48,800（全含）</div>
+        <div class="group-tags">
+          <span class="badge badge-green">♿ 無障礙</span>
+          <span class="badge badge-green">🚶 緩步行</span>
+          <span class="badge badge-orange">歡迎獨行旅人</span>
+        </div>
+        <p style="font-size:18px;color:var(--text2);line-height:1.7;">"希望找到喜歡日本文化的朋友一起，有護理師隨行，非常安心！"</p>
+      </div>
+      <div class="group-footer">
+        <div class="slots-bar" aria-label="名額：已有 6 人，還有 4 個空位">
+          <span>名額：</span>
+          <span class="slot-dot slot-filled" aria-hidden="true"></span>
+          <span class="slot-dot slot-filled" aria-hidden="true"></span>
+          <span class="slot-dot slot-filled" aria-hidden="true"></span>
+          <span class="slot-dot slot-filled" aria-hidden="true"></span>
+          <span class="slot-dot slot-filled" aria-hidden="true"></span>
+          <span class="slot-dot slot-filled" aria-hidden="true"></span>
+          <span class="slot-dot slot-empty" aria-hidden="true"></span>
+          <span class="slot-dot slot-empty" aria-hidden="true"></span>
+          <span class="slot-dot slot-empty" aria-hidden="true"></span>
+          <span class="slot-dot slot-empty" aria-hidden="true"></span>
+          <span style="font-size:17px;">還有 4 名額</span>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="alert('申請加入成功！客服將在 24 小時內聯絡您。')">申請加入</button>
+      </div>
+    </article>
+
+    <article class="card group-card" role="listitem">
+      <div class="group-header">
+        <div class="group-avatar" style="background:#DBEAFE;" aria-hidden="true">👴</div>
+        <div>
+          <div class="group-name">台灣環島文化探索團</div>
+          <div class="group-host">發起人：林伯伯・72歲</div>
+        </div>
+      </div>
+      <div class="group-body">
+        <div class="group-tour">🏯 台灣環島文化遊 8天</div>
+        <div class="group-meta">📅 2026年 5月 3日出發<br>💰 NT$29,800（全含）</div>
+        <div class="group-tags">
+          <span class="badge badge-blue">🏥 醫療保障</span>
+          <span class="badge badge-green">🍚 銀髮餐</span>
+          <span class="badge badge-purple">夫妻同行 OK</span>
+        </div>
+        <p style="font-size:18px;color:var(--text2);line-height:1.7;">"歡迎帶另一半一起參加，熟悉台灣文化之旅，輕鬆愉快！"</p>
+      </div>
+      <div class="group-footer">
+        <div class="slots-bar" aria-label="名額：已有 12 人，還有 3 個空位">
+          <span style="font-size:17px;">已滿 12/15 人，還有 3 名額</span>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="alert('申請加入成功！客服將在 24 小時內聯絡您。')">申請加入</button>
+      </div>
+    </article>
+
+    <article class="card group-card" role="listitem">
+      <div class="group-header">
+        <div class="group-avatar" style="background:#FEF3C7;" aria-hidden="true">👵</div>
+        <div>
+          <div class="group-name">北海道溫泉銀髮團</div>
+          <div class="group-host">發起人：陳奶奶・75歲</div>
+        </div>
+      </div>
+      <div class="group-body">
+        <div class="group-tour">🌿 北海道養生溫泉 6天</div>
+        <div class="group-meta">📅 2026年 5月 20日出發<br>💰 NT$56,800（全含）</div>
+        <div class="group-tags">
+          <span class="badge badge-green">♿ 無障礙</span>
+          <span class="badge badge-green">🚶 輕鬆步行</span>
+        </div>
+        <p style="font-size:18px;color:var(--text2);line-height:1.7;">"我使用輪椅，這條行程全無障礙，邀請同樣需要輔具的朋友一起！"</p>
+      </div>
+      <div class="group-footer">
+        <div class="slots-bar" aria-label="名額：已有 4 人，還有 4 個空位">
+          <span style="font-size:17px;">已有 4/8 人，還有 4 名額</span>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="alert('申請加入成功！客服將在 24 小時內聯絡您。')">申請加入</button>
+      </div>
+    </article>
+
+    <article class="card group-card" role="listitem">
+      <div class="group-header">
+        <div class="group-avatar" style="background:#EDE9FE;" aria-hidden="true">👨</div>
+        <div>
+          <div class="group-name">歐洲文化慢遊團</div>
+          <div class="group-host">發起人：張先生・65歲</div>
+        </div>
+      </div>
+      <div class="group-body">
+        <div class="group-tour">🏛️ 歐洲三國慢遊 12天</div>
+        <div class="group-meta">📅 2026年 6月 10日出發<br>💰 NT$128,000（全含）</div>
+        <div class="group-tags">
+          <span class="badge badge-blue">🏥 醫療保障</span>
+          <span class="badge badge-orange">🚌 全程專車</span>
+        </div>
+        <p style="font-size:18px;color:var(--text2);line-height:1.7;">"歐洲之夢！精心安排慢步調，走訪法義瑞，圓您的歐遊夢！"</p>
+      </div>
+      <div class="group-footer">
+        <div class="slots-bar" aria-label="名額：已有 7 人，還有 5 個空位">
+          <span style="font-size:17px;">已有 7/12 人，還有 5 名額</span>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="alert('申請加入成功！客服將在 24 小時內聯絡您。')">申請加入</button>
+      </div>
+    </article>
+
+    <article class="card group-card" role="listitem">
+      <div class="group-header">
+        <div class="group-avatar" style="background:#FDE8E8;" aria-hidden="true">👵</div>
+        <div>
+          <div class="group-name">峇里島海景療癒團</div>
+          <div class="group-host">發起人：吳阿姨・70歲</div>
+        </div>
+      </div>
+      <div class="group-body">
+        <div class="group-tour">🌺 峇里島悠閒海景 5天</div>
+        <div class="group-meta">📅 2026年 7月 5日出發<br>💰 NT$38,800（全含）</div>
+        <div class="group-tags">
+          <span class="badge badge-green">♿ 無障礙</span>
+          <span class="badge badge-green">🌊 海景療癒</span>
+        </div>
+        <p style="font-size:18px;color:var(--text2);line-height:1.7;">"炎炎夏日，一起去峇里島吹海風、享受 Spa，輕鬆愜意！"</p>
+      </div>
+      <div class="group-footer">
+        <div class="slots-bar">
+          <span style="font-size:17px;">剛開團，首位報名！</span>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="alert('申請加入成功！客服將在 24 小時內聯絡您。')">申請加入</button>
+      </div>
+    </article>
+
+    <article class="card group-card" role="listitem" style="background:var(--orange-light);border:3px dashed var(--orange-mid);">
+      <div style="padding:48px 32px;text-align:center;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+        <div style="font-size:64px;" aria-hidden="true">✨</div>
+        <div style="font-size:24px;font-weight:800;color:var(--orange-dark);">發起屬於您的揪團！</div>
+        <p style="font-size:18px;color:var(--text2);">有夢想的行程？自己揪，銀遊通幫您找旅伴！</p>
+        <button class="btn btn-primary" onclick="alert('請致電 0800-888-888，客服人員協助您發起揪團！')">
+          📞 聯絡我們揪團
+        </button>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+<nav class="bottom-nav" aria-label="底部主選單">
+  <a href="銀遊通首頁.html" class="nav-btn" aria-label="首頁"><span class="nav-icon" aria-hidden="true">🏠</span>首頁</a>
+  <a href="找旅遊.html" class="nav-btn" aria-label="找行程"><span class="nav-icon" aria-hidden="true">🔍</span>找行程</a>
+  <a href="健康評估.html" class="nav-btn" aria-label="健康問卷"><span class="nav-icon" aria-hidden="true">❤️</span>健康問卷</a>
+  <a href="找旅伴.html" class="nav-btn active" aria-current="page" aria-label="揪朋友"><span class="nav-icon" aria-hidden="true">👥</span>揪朋友</a>
+  <a href="家人專區.html" class="nav-btn" aria-label="家人專區"><span class="nav-icon" aria-hidden="true">👨‍👩‍👧</span>家人</a>
+</nav>
+<a href="tel:0800-888-888" class="fab" aria-label="撥打免費客服電話"><span aria-hidden="true">📞</span></a>
+</body>
+</html>
