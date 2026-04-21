@@ -741,6 +741,46 @@
     .expert-fchip:hover, .expert-fchip.active { background: var(--green); color: #fff; border-color: var(--green); }
     .expert-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
 
+    /* ── 快速前往「達人推薦」下拉預覽 ── */
+    .qbtn-expert-wrap { position: relative; display: inline-block; }
+    .expert-qdrop {
+      display: none; position: absolute; top: calc(100% + 10px); left: 50%;
+      transform: translateX(-50%); background: #fff; border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.18); border: 2px solid #bbf7d0;
+      min-width: 280px; z-index: 2000; padding: 0; overflow: hidden;
+      animation: eqDropIn .2s cubic-bezier(.22,1,.36,1);
+    }
+    @keyframes eqDropIn { from{opacity:0;transform:translateX(-50%) translateY(-8px);}to{opacity:1;transform:translateX(-50%) translateY(0);} }
+    .qbtn-expert-wrap:hover .expert-qdrop { display: block; }
+    .expert-qdrop:hover { display: block; }
+    .eqdrop-hdr {
+      background: linear-gradient(135deg,#dcfce7,#bbf7d0);
+      padding: 10px 16px; font-size: 13px; font-weight: 800;
+      color: var(--green); border-bottom: 1px solid #bbf7d0;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .eqdrop-item {
+      display: flex; align-items: center; gap: 10px; padding: 9px 16px;
+      cursor: pointer; transition: background .12s; border-bottom: 1px solid #f3f4f6;
+    }
+    .eqdrop-item:last-of-type { border-bottom: none; }
+    .eqdrop-item:hover { background: #f0fdf4; }
+    .eqdrop-avi { font-size: 22px; flex-shrink: 0; }
+    .eqdrop-info { flex: 1; min-width: 0; }
+    .eqdrop-name { font-size: 14px; font-weight: 800; color: var(--text); }
+    .eqdrop-spec { font-size: 12px; color: var(--text2); margin-top: 1px; }
+    .eqdrop-status { font-size: 11px; margin-top: 2px; font-weight: 700; }
+    .eqdrop-foot {
+      padding: 10px 14px; background: #f9fafb; border-top: 1px solid #e5e7eb;
+      display: flex; gap: 8px;
+    }
+    .eqdrop-foot button {
+      flex: 1; padding: 8px 0; border-radius: 8px; border: none;
+      font-size: 13px; font-weight: 800; cursor: pointer; font-family: inherit;
+    }
+    .eqdrop-btn-all { background: var(--green); color: #fff; }
+    .eqdrop-btn-all:hover { background: #166534; }
+
     /* ── 達人即時動態 Expert Live Activity Status ── */
     .expert-status-bar {
       background: linear-gradient(135deg,#f0fdf4,#ecfdf5);
@@ -1685,7 +1725,63 @@
       <button class="qbtn" onclick="goToHealth()" data-i18n="qbtn-health">❤️ 健康問卷</button>
       <button class="qbtn" onclick="openMatchModal()"  data-i18n="qbtn-group">👥 揪朋友</button>
       <button class="qbtn" onclick="openFamilyModal()" data-i18n="qbtn-family">👨‍👩‍👧 家人專區</button>
-      <button class="qbtn" onclick="scrollTo('#expert-tips')" style="background:var(--green-l);color:var(--green);border-color:var(--green);" data-i18n="qbtn-expert">🧭 達人推薦</button>
+      <div class="qbtn-expert-wrap">
+        <button class="qbtn" onclick="scrollTo('#expert-tips')" style="background:var(--green-l);color:var(--green);border-color:var(--green);" data-i18n="qbtn-expert">🧭 達人推薦</button>
+        <div class="expert-qdrop" id="expert-qdrop">
+          <div class="eqdrop-hdr">🧭 6位銀髮達人・即時動態</div>
+          <div class="eqdrop-item" onclick="scrollToExpert('wangmeizhu')">
+            <span class="eqdrop-avi">👵</span>
+            <div class="eqdrop-info">
+              <div class="eqdrop-name">王美珠阿姨</div>
+              <div class="eqdrop-spec">♿ 無障礙旅遊・💊 高血壓管理</div>
+              <div class="eqdrop-status" style="color:#10b981;">🟢 剛從京都回來・3天前</div>
+            </div>
+          </div>
+          <div class="eqdrop-item" onclick="scrollToExpert('linquodong')">
+            <span class="eqdrop-avi">👴</span>
+            <div class="eqdrop-info">
+              <div class="eqdrop-name">林國棟伯伯</div>
+              <div class="eqdrop-spec">💊 糖尿病管理・💰 精打細算</div>
+              <div class="eqdrop-status" style="color:#f97316;">🟡 5/3 台灣環島・出發倒數13天</div>
+            </div>
+          </div>
+          <div class="eqdrop-item" onclick="scrollToExpert('chensufen')">
+            <span class="eqdrop-avi">👩</span>
+            <div class="eqdrop-info">
+              <div class="eqdrop-name">陳素芬女士</div>
+              <div class="eqdrop-spec">🏛️ 文化深度・🌿 自然生態</div>
+              <div class="eqdrop-status" style="color:#10b981;">🟢 剛從歐洲回來・1週前</div>
+            </div>
+          </div>
+          <div class="eqdrop-item" onclick="scrollToExpert('zhangwenxiong')">
+            <span class="eqdrop-avi">👨</span>
+            <div class="eqdrop-info">
+              <div class="eqdrop-name">張文雄先生</div>
+              <div class="eqdrop-spec">🏖️ 海島療癒・🌿 養生放鬆</div>
+              <div class="eqdrop-status" style="color:#3b82f6;">✈️ 旅行中！目前在峇里島</div>
+            </div>
+          </div>
+          <div class="eqdrop-item" onclick="scrollToExpert('wucuilian')">
+            <span class="eqdrop-avi">👩‍🦳</span>
+            <div class="eqdrop-info">
+              <div class="eqdrop-name">吳翠蓮姊</div>
+              <div class="eqdrop-spec">🧳 單獨出遊・💰 智慧省錢</div>
+              <div class="eqdrop-status" style="color:#10b981;">🟢 剛從北海道回來・5天前</div>
+            </div>
+          </div>
+          <div class="eqdrop-item" onclick="scrollToExpert('huangwenbin')">
+            <span class="eqdrop-avi">👨‍🦱</span>
+            <div class="eqdrop-info">
+              <div class="eqdrop-name">黃文斌大哥</div>
+              <div class="eqdrop-spec">🏯 文化歷史・⛩️ 日本深度</div>
+              <div class="eqdrop-status" style="color:#3b82f6;">✈️ 旅行中！目前在九州</div>
+            </div>
+          </div>
+          <div class="eqdrop-foot">
+            <button class="eqdrop-btn-all" onclick="scrollTo('#expert-tips')">🧭 查看所有達人故事</button>
+          </div>
+        </div>
+      </div>
       <button class="qbtn" onclick="scrollTo('#reviews')" data-i18n="qbtn-reviews">⭐ 旅人評價</button>
       <button class="qbtn-call-main" id="qbtn-call-main" onclick="openServiceModal()" aria-label="立即客服">
         <span class="qbtn-call-dot" id="qbtn-call-dot"></span>
@@ -3641,6 +3737,19 @@ function _buildFilterGrid() {
 function scrollTo(id) {
   const el = document.querySelector(id);
   if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+function scrollToExpert(key) {
+  scrollTo('#expert-tips');
+  setTimeout(function() {
+    const btn = document.querySelector('#expert-grid .expert-story-btn[onclick*="' + key + '"]');
+    if (!btn) return;
+    const card = btn.closest('.expert-card');
+    if (!card) return;
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    card.classList.add('highlight');
+    setTimeout(function() { card.classList.remove('highlight'); }, 2500);
+  }, 650);
 }
 
 // ── Go to Tours: scroll + focus search bar ──
