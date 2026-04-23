@@ -728,6 +728,60 @@
     .review-text { font-size: 18px; color: var(--text2); line-height: 1.8; font-style: italic; margin-bottom: 18px; }
     .reviewer { display: flex; align-items: center; gap: 12px; }
     .rev-avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--orange-m); display: flex; align-items: center; justify-content: center; font-size: 26px; }
+    .rev-name { font-size: 18px; font-weight: 800; color: var(--text); }
+    .rev-info { font-size: 14px; color: var(--text2); margin-top: 2px; }
+
+    /* ── Reviews Enhanced ── */
+    .rv-stats-bar { display:flex; align-items:center; justify-content:center; background:#fff; border-radius:var(--r-lg); box-shadow:var(--shadow-sm); border:2px solid #fde68a; padding:20px 16px; margin-bottom:40px; flex-wrap:wrap; gap:0; }
+    .rv-stat { text-align:center; padding:0 24px; }
+    .rv-stat-num { display:block; font-size:34px; font-weight:900; color:var(--orange); line-height:1.1; }
+    .rv-stars-sm { display:block; color:#D97706; font-size:15px; margin:2px 0; }
+    .rv-stat-lbl { display:block; font-size:13px; color:var(--text2); font-weight:700; }
+    .rv-stat-sep { width:1px; height:56px; background:var(--border); flex-shrink:0; }
+    .review-card { cursor:pointer; transition:transform .2s, box-shadow .2s; }
+    .review-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); }
+    .rv-tags-row { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+    .rv-tag { background:var(--orange-l); color:#92400e; border-radius:999px; padding:3px 10px; font-size:12px; font-weight:700; }
+    .rv-read-more { font-size:13px; color:var(--green); font-weight:800; text-align:right; margin-top:14px; }
+
+    /* Review Modal */
+    .rv-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:1500; align-items:center; justify-content:center; padding:16px; backdrop-filter:blur(4px); }
+    .rv-overlay.open { display:flex; animation:fadeIn .2s ease; }
+    .rv-box { background:#fff; border-radius:var(--r-lg); max-width:640px; width:100%; max-height:90vh; overflow-y:auto; box-shadow:0 24px 80px rgba(0,0,0,.3); animation:modalIn .25s ease; }
+    .rv-mhdr { padding:20px 26px; background:linear-gradient(135deg,#fffbeb,#fef3c7); border-bottom:2px solid #fde68a; display:flex; justify-content:space-between; align-items:flex-start; }
+    .rv-mhdr-stars { font-size:28px; color:#D97706; letter-spacing:2px; }
+    .rv-mhdr-tour { font-size:14px; color:#92400e; font-weight:700; margin-top:4px; }
+    .rv-mclose { width:44px; height:44px; border-radius:50%; background:rgba(0,0,0,.08); border:none; font-size:20px; cursor:pointer; flex-shrink:0; }
+    .rv-mbody { padding:28px; }
+    .rv-mquote { font-size:18px; color:var(--text2); line-height:1.9; font-style:italic; border-left:4px solid var(--orange-m); padding-left:18px; margin-bottom:22px; }
+    .rv-mreviewer { display:flex; align-items:center; gap:14px; background:#f9fafb; border-radius:var(--r-md); padding:16px 18px; margin-bottom:20px; border:1.5px solid var(--border); }
+    .rv-mtags { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+    .rv-mhelpful { display:flex; align-items:center; gap:12px; padding-top:18px; border-top:1.5px solid var(--border); flex-wrap:wrap; }
+    .rv-mhelpful-btn { display:flex; align-items:center; gap:6px; background:var(--green-l); color:var(--green); border:1.5px solid #86efac; border-radius:10px; padding:8px 20px; font-size:15px; font-weight:800; cursor:pointer; font-family:inherit; transition:all .15s; }
+    .rv-mhelpful-btn:hover, .rv-mhelpful-btn.voted { background:var(--green); color:#fff; border-color:var(--green); }
+
+    /* Reviews Quick Bar Dropdown */
+    .qbtn-reviews-wrap { position:relative; display:inline-block; }
+    .reviews-qdrop { display:none; position:absolute; top:calc(100% + 10px); left:50%; transform:translateX(-50%); background:#fff; border-radius:16px; box-shadow:0 12px 40px rgba(0,0,0,.2); border:2px solid #fde68a; min-width:300px; z-index:2000; overflow:hidden; animation:eqDropIn .2s cubic-bezier(.22,1,.36,1); }
+    .qbtn-reviews-wrap:hover .reviews-qdrop { display:block; }
+    .reviews-qdrop:hover { display:block; }
+    .rvdrop-hdr { background:linear-gradient(135deg,#fffbeb,#fef3c7); padding:12px 16px; border-bottom:1.5px solid #fde68a; }
+    .rvdrop-hdr-title { font-size:13px; font-weight:800; color:#92400e; }
+    .rvdrop-score-row { display:flex; align-items:baseline; gap:6px; margin:4px 0 2px; }
+    .rvdrop-big-score { font-size:26px; font-weight:900; color:#D97706; }
+    .rvdrop-big-stars { color:#D97706; font-size:14px; }
+    .rvdrop-count-line { font-size:12px; color:#a16207; font-weight:700; }
+    .rvdrop-rv { display:flex; gap:10px; padding:10px 14px; border-bottom:1px solid #f3f4f6; cursor:pointer; transition:background .12s; }
+    .rvdrop-rv:hover { background:#fffbeb; }
+    .rvdrop-rv-avi { font-size:22px; flex-shrink:0; }
+    .rvdrop-rv-content { flex:1; min-width:0; }
+    .rvdrop-rv-stars { color:#D97706; font-size:11px; }
+    .rvdrop-rv-text { font-size:12px; color:var(--text2); font-style:italic; line-height:1.45; margin-top:2px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .rvdrop-rv-who { font-size:11px; color:var(--text2); font-weight:700; margin-top:3px; }
+    .rvdrop-foot { padding:10px 12px; background:#fafafa; }
+    .rvdrop-foot-btn { width:100%; padding:9px; border-radius:9px; border:none; background:var(--orange); color:#fff; font-size:13px; font-weight:800; cursor:pointer; font-family:inherit; transition:background .15s; }
+    .rvdrop-foot-btn:hover { background:var(--orange-d); }
+    @media(max-width:640px){ .rv-stat{padding:0 12px;} .rv-stat-num{font-size:26px;} .rv-stat-sep{height:40px;} }
 
     /* ── Traveler Expert Section ── */
     #expert-tips { background: linear-gradient(160deg, #FFF7ED 0%, #DCFCE7 100%); }
@@ -1782,7 +1836,43 @@
           </div>
         </div>
       </div>
-      <button class="qbtn" onclick="scrollTo('#reviews')" data-i18n="qbtn-reviews">⭐ 旅人評價</button>
+      <div class="qbtn-reviews-wrap">
+        <button class="qbtn" onclick="scrollTo('#reviews')" data-i18n="qbtn-reviews">⭐ 旅人評價</button>
+        <div class="reviews-qdrop">
+          <div class="rvdrop-hdr">
+            <div class="rvdrop-hdr-title" data-i18n="rv-qdrop-title">⭐ 旅人真實心聲</div>
+            <div class="rvdrop-score-row"><span class="rvdrop-big-score">4.9</span><span class="rvdrop-big-stars">★★★★★</span><span style="font-size:13px;color:#92400e;">/ 5.0</span></div>
+            <div class="rvdrop-count-line" data-i18n="rv-qdrop-count">50,000+ 旅人好評・98% 好評推薦率</div>
+          </div>
+          <div class="rvdrop-rv" onclick="scrollTo('#reviews');setTimeout(()=>openReviewModal('r1'),400)">
+            <span class="rvdrop-rv-avi">👵</span>
+            <div class="rvdrop-rv-content">
+              <div class="rvdrop-rv-stars">★★★★★</div>
+              <div class="rvdrop-rv-text" data-i18n="rv-q1">「費用清清楚楚，沒有任何意外支出，行程節奏剛剛好，導遊非常有耐心！」</div>
+              <div class="rvdrop-rv-who" data-i18n="rv-w1">王阿姨・68歲・退休教師</div>
+            </div>
+          </div>
+          <div class="rvdrop-rv" onclick="scrollTo('#reviews');setTimeout(()=>openReviewModal('r4'),400)">
+            <span class="rvdrop-rv-avi">👩</span>
+            <div class="rvdrop-rv-content">
+              <div class="rvdrop-rv-stars">★★★★★</div>
+              <div class="rvdrop-rv-text" data-i18n="rv-q2">「第一次坐輪椅出國，北海道景點幾乎都有無障礙通道，感動得哭了！」</div>
+              <div class="rvdrop-rv-who" data-i18n="rv-w2">張太太・70歲・退休護理師</div>
+            </div>
+          </div>
+          <div class="rvdrop-rv" onclick="scrollTo('#reviews');setTimeout(()=>openReviewModal('r5'),400)">
+            <span class="rvdrop-rv-avi">👨</span>
+            <div class="rvdrop-rv-content">
+              <div class="rvdrop-rv-stars">★★★★★</div>
+              <div class="rvdrop-rv-text" data-i18n="rv-q3">「作為退休醫生，24小時緊急醫療聯絡讓我完全放心享受歐洲旅程！」</div>
+              <div class="rvdrop-rv-who" data-i18n="rv-w3">吳大哥・65歲・退休醫生</div>
+            </div>
+          </div>
+          <div class="rvdrop-foot">
+            <button class="rvdrop-foot-btn" onclick="scrollTo('#reviews')" data-i18n="rv-qdrop-btn">⭐ 查看全部 50,000+ 旅人評價</button>
+          </div>
+        </div>
+      </div>
       <button class="qbtn-call-main" id="qbtn-call-main" onclick="openServiceModal()" aria-label="立即客服">
         <span class="qbtn-call-dot" id="qbtn-call-dot"></span>
         <span class="qcall-main-text">
@@ -3251,21 +3341,59 @@
       <h2 id="reviews-h" class="section-title" data-i18n="reviews-title">⭐ 旅人真實心聲</h2>
       <p class="section-sub" data-i18n="reviews-sub">來自 5 萬位快樂旅人的真實評價</p>
     </div>
+    <!-- 評價統計數字 -->
+    <div class="rv-stats-bar">
+      <div class="rv-stat"><span class="rv-stat-num">4.9</span><span class="rv-stars-sm">★★★★★</span><span class="rv-stat-lbl" data-i18n="rv-score">平均評分</span></div>
+      <div class="rv-stat-sep"></div>
+      <div class="rv-stat"><span class="rv-stat-num">50,000+</span><span class="rv-stat-lbl" data-i18n="rv-total">旅人好評</span></div>
+      <div class="rv-stat-sep"></div>
+      <div class="rv-stat"><span class="rv-stat-num">98%</span><span class="rv-stat-lbl" data-i18n="rv-sat">好評推薦率</span></div>
+      <div class="rv-stat-sep"></div>
+      <div class="rv-stat"><span class="rv-stat-num">12+</span><span class="rv-stat-lbl" data-i18n="rv-dest">旅遊國家</span></div>
+    </div>
+
     <div class="reviews-grid" id="reviews-grid">
-      <div class="card review-card">
+      <div class="card review-card" onclick="openReviewModal('r1')">
         <div class="stars" aria-label="五顆星">★★★★★</div>
+        <div class="rv-tags-row"><span class="rv-tag">♿ 無障礙</span><span class="rv-tag">🌸 日本賞花</span></div>
         <p class="review-text">「費用清清楚楚，沒有任何意外支出，行程節奏剛剛好，導遊非常有耐心！整個旅程都很放心。」</p>
-        <div class="reviewer"><div class="rev-avatar">👵</div><div><div class="rev-name">王阿姨</div><div class="rev-info">68歲・退休教師</div></div></div>
+        <div class="reviewer"><div class="rev-avatar">👵</div><div><div class="rev-name">王阿姨</div><div class="rev-info">68歲・退休教師・台北市</div></div></div>
+        <div class="rv-read-more">閱讀完整評價 →</div>
       </div>
-      <div class="card review-card" style="border:3px solid var(--orange-m);">
+      <div class="card review-card" style="border:3px solid var(--orange-m);" onclick="openReviewModal('r2')">
         <div class="stars" aria-label="五顆星">★★★★★</div>
+        <div class="rv-tags-row"><span class="rv-tag">💊 慢性病管理</span><span class="rv-tag">🏡 台灣</span></div>
         <p class="review-text">「我有糖尿病，平台幫我找到有餐飲控制的行程，護理師全程關心，沿途照顧非常周到！」</p>
-        <div class="reviewer"><div class="rev-avatar">👴</div><div><div class="rev-name">林伯伯</div><div class="rev-info">72歲・糖尿病旅客</div></div></div>
+        <div class="reviewer"><div class="rev-avatar">👴</div><div><div class="rev-name">林伯伯</div><div class="rev-info">72歲・退休工程師・高雄市</div></div></div>
+        <div class="rv-read-more">閱讀完整評價 →</div>
       </div>
-      <div class="card review-card">
+      <div class="card review-card" onclick="openReviewModal('r3')">
         <div class="stars" aria-label="五顆星">★★★★★</div>
+        <div class="rv-tags-row"><span class="rv-tag">👨‍👩‍👧 家人安心</span><span class="rv-tag">♨️ 溫泉</span></div>
         <p class="review-text">「子女幫我代訂，旅途中家人可以看到我的位置，我們都非常放心！下次還要再來！」</p>
-        <div class="reviewer"><div class="rev-avatar">👵</div><div><div class="rev-name">陳奶奶</div><div class="rev-info">75歲・行動輔具使用者</div></div></div>
+        <div class="reviewer"><div class="rev-avatar">👵</div><div><div class="rev-name">陳奶奶</div><div class="rev-info">75歲・家庭主婦・台中市</div></div></div>
+        <div class="rv-read-more">閱讀完整評價 →</div>
+      </div>
+      <div class="card review-card" onclick="openReviewModal('r4')">
+        <div class="stars" aria-label="五顆星">★★★★★</div>
+        <div class="rv-tags-row"><span class="rv-tag">♿ 輪椅友善</span><span class="rv-tag">❄️ 北海道</span></div>
+        <p class="review-text">「第一次坐輪椅出國，沒想到北海道景點幾乎都有無障礙通道，導遊的安排讓我感動得哭了！」</p>
+        <div class="reviewer"><div class="rev-avatar">👩</div><div><div class="rev-name">張太太</div><div class="rev-info">70歲・退休護理師・新北市</div></div></div>
+        <div class="rv-read-more">閱讀完整評價 →</div>
+      </div>
+      <div class="card review-card" onclick="openReviewModal('r5')">
+        <div class="stars" aria-label="五顆星">★★★★★</div>
+        <div class="rv-tags-row"><span class="rv-tag">🏥 醫療保障</span><span class="rv-tag">🌍 歐洲</span></div>
+        <p class="review-text">「作為退休醫生，我特別在意醫療保障。全程24小時緊急醫療聯絡，讓我放心享受旅程！」</p>
+        <div class="reviewer"><div class="rev-avatar">👨</div><div><div class="rev-name">吳大哥</div><div class="rev-info">65歲・退休醫生・台北市</div></div></div>
+        <div class="rv-read-more">閱讀完整評價 →</div>
+      </div>
+      <div class="card review-card" onclick="openReviewModal('r6')">
+        <div class="stars" aria-label="五顆星">★★★★★</div>
+        <div class="rv-tags-row"><span class="rv-tag">🌿 養生放鬆</span><span class="rv-tag">🏖️ 峇里島</span></div>
+        <p class="review-text">「膝蓋退化讓我擔心旅途，但每天步行量控制在2000步以內，還安排了水療SPA！」</p>
+        <div class="reviewer"><div class="rev-avatar">👩‍🦳</div><div><div class="rev-name">李阿姨</div><div class="rev-info">73歲・退休會計師・台南市</div></div></div>
+        <div class="rv-read-more">閱讀完整評價 →</div>
       </div>
     </div>
   </div>
@@ -6211,6 +6339,12 @@ const T = {
     'group-title':'👥 揪朋友一起去','group-sub':'找志同道合的銀髮好友，一起出發更安心、更快樂！',
     'family-title':'👨‍👩‍👧 家人關心專區','family-sub':'隨時掌握長輩旅途動態，出門更安心！',
     'reviews-title':'⭐ 旅人真實心聲','reviews-sub':'來自 5 萬位快樂旅人的真實評價',
+    'rv-score':'平均評分','rv-total':'旅人好評','rv-sat':'好評推薦率','rv-dest':'旅遊國家',
+    'rv-qdrop-title':'⭐ 旅人真實心聲','rv-qdrop-count':'50,000+ 旅人好評・98% 好評推薦率',
+    'rv-q1':'「費用清清楚楚，沒有任何意外支出，行程節奏剛剛好，導遊非常有耐心！」','rv-w1':'王阿姨・68歲・退休教師',
+    'rv-q2':'「第一次坐輪椅出國，北海道景點幾乎都有無障礙通道，感動得哭了！」','rv-w2':'張太太・70歲・退休護理師',
+    'rv-q3':'「作為退休醫生，24小時緊急醫療聯絡讓我完全放心享受歐洲旅程！」','rv-w3':'吳大哥・65歲・退休醫生',
+    'rv-qdrop-btn':'⭐ 查看全部 50,000+ 旅人評價',
     'cta-title':'準備好出發了嗎？','cta-sub':'填寫健康問卷，讓我們為您找到最適合的行程',
     'cta-btn1':'📝 免費填寫問卷','cta-hours':'客服時間：週一至週日 09:00–21:00（含假日）',
     'meals-back':'◀ 返回','meals-topbar-title':'🍱 銀髮專屬餐點',
@@ -6273,6 +6407,12 @@ const T = {
     'group-title':'👥 Find Travel Companions','group-sub':'Meet like-minded senior travelers and enjoy the journey together!',
     'family-title':'👨‍👩‍👧 Family Care Zone','family-sub':'Track your loved one\'s journey anytime — travel with complete peace of mind!',
     'reviews-title':'⭐ Real Stories from Our Travelers','reviews-sub':'Genuine reviews from 50,000+ happy senior travelers',
+    'rv-score':'Avg Rating','rv-total':'Happy Travelers','rv-sat':'Recommendation Rate','rv-dest':'Countries',
+    'rv-qdrop-title':'⭐ Real Traveler Reviews','rv-qdrop-count':'50,000+ happy travelers · 98% recommend us',
+    'rv-q1':'"All costs perfectly clear — no surprises. Pace just right, guide incredibly patient!"','rv-w1':'Mrs. Wang · 68 yrs · Retired Teacher',
+    'rv-q2':'"First time abroad in a wheelchair — Hokkaido was almost fully accessible. I cried with joy!"','rv-w2':'Mrs. Chang · 70 yrs · Retired Nurse',
+    'rv-q3':'"As a retired doctor, the 24-hour medical hotline let me truly enjoy Europe worry-free!"','rv-w3':'Mr. Wu · 65 yrs · Retired Doctor',
+    'rv-qdrop-btn':'⭐ See All 50,000+ Traveler Reviews',
     'cta-title':'Ready to Travel?','cta-sub':'Take the health quiz and let us find the perfect tour for you',
     'cta-btn1':'📝 Free Health Quiz','cta-hours':'Service hours: Mon–Sun 09:00–21:00 (incl. holidays)',
     'meals-back':'◀ Back','meals-topbar-title':'🍱 Silver Meals',
@@ -6336,6 +6476,12 @@ const T = {
     'group-title':'👥 一緒に旅する仲間を探す','group-sub':'気の合う旅仲間と出発すれば、もっと安心・もっと楽しい！',
     'family-title':'👨‍👩‍👧 ご家族サポートエリア','family-sub':'いつでもご旅行の状況を確認。安心してお見送りを！',
     'reviews-title':'⭐ 旅人のリアルな声','reviews-sub':'5万人以上の幸せな旅人からの本物の口コミ',
+    'rv-score':'平均評価','rv-total':'旅人の口コミ','rv-sat':'満足度','rv-dest':'渡航先',
+    'rv-qdrop-title':'⭐ 旅人のリアルな声','rv-qdrop-count':'50,000+の旅人が高評価・98%が推薦',
+    'rv-q1':'「料金が明確で予想外の費用ゼロ。ペースも丁度よく、ガイドさんも丁寧！」','rv-w1':'田中さん・68歳・元教員',
+    'rv-q2':'「初めて車椅子で海外へ。北海道はほぼバリアフリーで、感動で泣きました！」','rv-w2':'張さん・70歳・元看護師',
+    'rv-q3':'「元医師として24時間緊急医療対応があり、ヨーロッパを存分に楽しめました！」','rv-w3':'吳さん・65歳・元医師',
+    'rv-qdrop-btn':'⭐ 50,000+件の口コミをすべて見る',
     'cta-title':'旅に出る準備はできましたか？','cta-sub':'健康チェックを受けて、ぴったりのツアーを見つけましょう',
     'cta-btn1':'📝 無料健康チェック','cta-hours':'サービス時間：毎日 09:00–21:00（祝日含む）',
     'meals-back':'◀ 戻る','meals-topbar-title':'🍱 シルバー専用食',
@@ -6367,9 +6513,12 @@ const S = {
       <article class="card gcard" role="listitem"><div class="gcard-head"><div class="gcard-avatar" style="background:#DBEAFE;">👴</div><div><div class="gcard-name">台灣環島文化探索團</div><div class="gcard-host">林伯伯 72歲・發起</div></div></div><div class="gcard-body"><div class="gcard-tour">🏯 台灣環島文化遊 8天</div><div class="gcard-info">📅 2026年 5月 3日出發 ・ 💰 NT$29,800</div><div class="gcard-quote">「歡迎帶另一半同行，熟悉台灣文化之旅，輕鬆愉快！」</div><div style="display:flex;flex-wrap:wrap;gap:6px;"><span class="badge b-blue">🏥 醫療保障</span><span class="badge b-purple">夫妻同行 OK</span></div></div><div class="gcard-foot"><div class="slots">還有 <strong>3</strong> 個名額（12/15）</div><button class="btn btn-orange btn-sm" onclick="joinGroup('台灣環島文化探索團')">申請加入</button></div></article>
       <article class="card gcard" role="listitem"><div class="gcard-head"><div class="gcard-avatar" style="background:#FEF3C7;">👵</div><div><div class="gcard-name">北海道溫泉銀髮團</div><div class="gcard-host">陳奶奶 75歲・發起</div></div></div><div class="gcard-body"><div class="gcard-tour">🌿 北海道養生溫泉 6天</div><div class="gcard-info">📅 2026年 5月 20日出發 ・ 💰 NT$56,800</div><div class="gcard-quote">「我使用輪椅，全程無障礙，誠摯邀請需要輔具的朋友！」</div><div style="display:flex;flex-wrap:wrap;gap:6px;"><span class="badge b-green">♿ 全程無障礙</span><span class="badge b-green">🚶 最輕鬆</span></div></div><div class="gcard-foot"><div class="slots">還有 <strong>4</strong> 個名額（4/8）</div><button class="btn btn-orange btn-sm" onclick="joinGroup('北海道溫泉銀髮團')">申請加入</button></div></article>`,
     'reviews-grid': `
-      <div class="card review-card"><div class="stars" aria-label="五顆星">★★★★★</div><p class="review-text">「費用清清楚楚，沒有任何意外支出，行程節奏剛剛好，導遊非常有耐心！整個旅程都很放心。」</p><div class="reviewer"><div class="rev-avatar">👵</div><div><div class="rev-name">王阿姨</div><div class="rev-info">68歲・退休教師</div></div></div></div>
-      <div class="card review-card" style="border:3px solid var(--orange-m);"><div class="stars" aria-label="五顆星">★★★★★</div><p class="review-text">「我有糖尿病，平台幫我找到有餐飲控制的行程，護理師全程關心，沿途照顧非常周到！」</p><div class="reviewer"><div class="rev-avatar">👴</div><div><div class="rev-name">林伯伯</div><div class="rev-info">72歲・糖尿病旅客</div></div></div></div>
-      <div class="card review-card"><div class="stars" aria-label="五顆星">★★★★★</div><p class="review-text">「子女幫我代訂，旅途中家人可以看到我的位置，我們都非常放心！下次還要再來！」</p><div class="reviewer"><div class="rev-avatar">👵</div><div><div class="rev-name">陳奶奶</div><div class="rev-info">75歲・行動輔具使用者</div></div></div></div>`,
+      <div class="card review-card" onclick="openReviewModal('r1')"><div class="stars">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">♿ 無障礙</span><span class="rv-tag">🌸 日本賞花</span></div><p class="review-text">「費用清清楚楚，沒有任何意外支出，行程節奏剛剛好，導遊非常有耐心！整個旅程都很放心。」</p><div class="reviewer"><div class="rev-avatar">👵</div><div><div class="rev-name">王阿姨</div><div class="rev-info">68歲・退休教師・台北市</div></div></div><div class="rv-read-more">閱讀完整評價 →</div></div>
+      <div class="card review-card" style="border:3px solid var(--orange-m);" onclick="openReviewModal('r2')"><div class="stars">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">💊 慢性病管理</span><span class="rv-tag">🏡 台灣</span></div><p class="review-text">「我有糖尿病，平台幫我找到有餐飲控制的行程，護理師全程關心，沿途照顧非常周到！」</p><div class="reviewer"><div class="rev-avatar">👴</div><div><div class="rev-name">林伯伯</div><div class="rev-info">72歲・退休工程師・高雄市</div></div></div><div class="rv-read-more">閱讀完整評價 →</div></div>
+      <div class="card review-card" onclick="openReviewModal('r3')"><div class="stars">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">👨‍👩‍👧 家人安心</span><span class="rv-tag">♨️ 溫泉</span></div><p class="review-text">「子女幫我代訂，旅途中家人可以看到我的位置，我們都非常放心！下次還要再來！」</p><div class="reviewer"><div class="rev-avatar">👵</div><div><div class="rev-name">陳奶奶</div><div class="rev-info">75歲・家庭主婦・台中市</div></div></div><div class="rv-read-more">閱讀完整評價 →</div></div>
+      <div class="card review-card" onclick="openReviewModal('r4')"><div class="stars">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">♿ 輪椅友善</span><span class="rv-tag">❄️ 北海道</span></div><p class="review-text">「第一次坐輪椅出國，沒想到北海道景點幾乎都有無障礙通道，導遊的安排讓我感動得哭了！」</p><div class="reviewer"><div class="rev-avatar">👩</div><div><div class="rev-name">張太太</div><div class="rev-info">70歲・退休護理師・新北市</div></div></div><div class="rv-read-more">閱讀完整評價 →</div></div>
+      <div class="card review-card" onclick="openReviewModal('r5')"><div class="stars">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">🏥 醫療保障</span><span class="rv-tag">🌍 歐洲</span></div><p class="review-text">「作為退休醫生，我特別在意醫療保障。全程24小時緊急醫療聯絡，讓我放心享受旅程！」</p><div class="reviewer"><div class="rev-avatar">👨</div><div><div class="rev-name">吳大哥</div><div class="rev-info">65歲・退休醫生・台北市</div></div></div><div class="rv-read-more">閱讀完整評價 →</div></div>
+      <div class="card review-card" onclick="openReviewModal('r6')"><div class="stars">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">🌿 養生放鬆</span><span class="rv-tag">🏖️ 峇里島</span></div><p class="review-text">「膝蓋退化讓我擔心旅途，但每天步行量控制在2000步以內，還安排了水療SPA！」</p><div class="reviewer"><div class="rev-avatar">👩‍🦳</div><div><div class="rev-name">李阿姨</div><div class="rev-info">73歲・退休會計師・台南市</div></div></div><div class="rv-read-more">閱讀完整評價 →</div></div>`,
     'footer-grid': `<div><div class="foot-brand">🌸 悠旅趣</div><p class="foot-desc">為每位旅人打造的貼心旅遊平台，走得慢，玩得深，讓每一段旅程都有溫度、有故事。</p></div><div><div class="foot-head">快速連結</div><nav class="foot-links"><a href="#tours">找行程</a><a href="#health">健康問卷</a><a href="#group">揪朋友</a><a href="#family">家人專區</a></nav></div><div><div class="foot-head">服務項目</div><nav class="foot-links"><a href="#why">為何選擇我們</a><a href="#steps">三步驟說明</a><a href="#reviews">旅人評價</a></nav></div><div><div class="foot-head">聯絡我們</div><div class="foot-desc"><div>📞 <a href="tel:0800-888-888" style="color:var(--orange-m);">0800-888-888</a></div><div>每日 09:00–21:00</div><div style="margin-top:6px;">✉️ hello@youtrip.tw</div></div></div>`,
     'footer-bottom': '© 2026 悠旅趣 YouTrip ・ 符合《個人資料保護法》・ 旅遊業執照 1234567',
     'family-body': `<div class="family-grid"><div><div class="track-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:12px;"><div style="font-size:22px;font-weight:800;">🌸 即時行程追蹤（示範）</div><div class="live-badge"><span class="live-dot"></span>旅途進行中</div></div><div style="font-size:18px;color:var(--text2);margin-bottom:20px;">旅人：王阿姨・日本京都賞櫻溫泉 5天</div><div class="info-tiles"><div class="info-tile"><div class="info-tile-label">📍 目前位置</div><div class="info-tile-value" style="font-size:17px;">京都 嵐山溫泉飯店</div></div><div class="info-tile"><div class="info-tile-label">📅 今日行程</div><div class="info-tile-value" style="font-size:17px;">Day 2：嵐山賞櫻</div></div><div class="info-tile"><div class="info-tile-label">🏥 健康狀態</div><div class="info-tile-value" style="color:var(--green);font-size:17px;">✅ 一切正常</div></div><div class="info-tile"><div class="info-tile-label">🌡️ 當地天氣</div><div class="info-tile-value" style="font-size:17px;">18°C ⛅ 晴天</div></div></div><div style="font-size:20px;font-weight:800;margin-bottom:14px;">最新動態</div><div class="timeline"><div class="tl-item"><div class="tl-dot active"></div><div class="tl-time">今天 14:30</div><div class="tl-text">抵達金閣寺 📸</div><div class="tl-detail">天氣晴朗，導遊拍了很多美照！</div></div><div class="tl-item"><div class="tl-dot"></div><div class="tl-time">今天 11:00</div><div class="tl-text">嵐山竹林漫步</div><div class="tl-detail">步行 1.5 公里，長輩腳程很好！</div></div><div class="tl-item"><div class="tl-dot"></div><div class="tl-time">昨天 20:00</div><div class="tl-text">平安抵達京都飯店</div><div class="tl-detail">享受溫泉放鬆，大家都很開心！</div></div></div><div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;"><button class="btn btn-green btn-sm" onclick="alert('通話功能即將開放！目前請撥打 0800-888-888')">💬 傳訊給導遊</button><button class="btn btn-outline btn-sm" onclick="alert('照片分享即將開放！')">📸 查看旅途照片</button></div></div></div><div><div class="card card-p" style="margin-bottom:20px;"><div style="font-size:22px;font-weight:800;margin-bottom:18px;">🔔 通知設定</div><div class="notif-list"><div class="notif-item"><div><div class="notif-text">✈️ 出發與抵達通知</div><div class="notif-desc">每次出發和到達時自動通知</div></div><label class="toggle"><input type="checkbox" checked /><span class="tog-track"></span><span class="tog-thumb"></span></label></div><div class="notif-item"><div><div class="notif-text">📍 每日位置更新</div><div class="notif-desc">每天傍晚推播今日行程摘要</div></div><label class="toggle"><input type="checkbox" checked /><span class="tog-track"></span><span class="tog-thumb"></span></label></div><div class="notif-item"><div><div class="notif-text">🏥 健康異常警報</div><div class="notif-desc">護理師回報任何異常狀況</div></div><label class="toggle"><input type="checkbox" checked /><span class="tog-track"></span><span class="tog-thumb"></span></label></div><div class="notif-item"><div><div class="notif-text">📸 旅途照片更新</div><div class="notif-desc">有新照片上傳時通知</div></div><label class="toggle"><input type="checkbox" /><span class="tog-track"></span><span class="tog-thumb"></span></label></div></div></div><div class="card card-p" style="background:#FFF1F2;border:3px solid #FCA5A5;"><div style="font-size:20px;font-weight:800;color:#B91C1C;margin-bottom:16px;">🆘 緊急聯絡方式</div><div style="display:flex;flex-direction:column;gap:12px;"><a href="tel:0800-888-888" style="display:flex;align-items:center;gap:12px;padding:14px;background:#fff;border-radius:var(--r-sm);border:2px solid #FCA5A5;"><span style="font-size:32px;">👮</span><div><div style="font-size:18px;font-weight:700;">悠旅趣緊急熱線</div><div style="font-size:20px;font-weight:900;color:#B91C1C;">0800-888-888</div></div></a><a href="tel:+886-912-345-678" style="display:flex;align-items:center;gap:12px;padding:14px;background:#fff;border-radius:var(--r-sm);border:2px solid #FCA5A5;"><span style="font-size:32px;">🏥</span><div><div style="font-size:18px;font-weight:700;">隨團護理師（林護理師）</div><div style="font-size:20px;font-weight:900;color:#B91C1C;">0912-345-678</div></div></a></div></div></div></div><div class="family-features"><div class="ff-item"><div class="ff-icon">🛒</div><div class="ff-title">代為訂購行程</div><p class="ff-desc">子女可代長輩選行程、填資料、完成報名</p></div><div class="ff-item"><div class="ff-icon">❤️</div><div class="ff-title">健康記錄共享</div><p class="ff-desc">健康評估結果與家人共享，挑選最合適行程</p></div><div class="ff-item"><div class="ff-icon">💬</div><div class="ff-title">與導遊直接溝通</div><p class="ff-desc">家人可透過平台留言給隨行導遊</p></div></div>`
@@ -6382,9 +6531,12 @@ const S = {
       <article class="card gcard" role="listitem"><div class="gcard-head"><div class="gcard-avatar" style="background:#DBEAFE;">👴</div><div><div class="gcard-name">Taiwan Island Cultural Group</div><div class="gcard-host">Mr. Lin, 72 · Organizer</div></div></div><div class="gcard-body"><div class="gcard-tour">🏯 Taiwan Island Cultural Tour 8D</div><div class="gcard-info">📅 Departs May 3, 2026 · 💰 NT$29,800</div><div class="gcard-quote">"Couples welcome! A relaxed journey through Taiwan's rich culture."</div><div style="display:flex;flex-wrap:wrap;gap:6px;"><span class="badge b-blue">🏥 Medical Support</span><span class="badge b-purple">Couples OK</span></div></div><div class="gcard-foot"><div class="slots"><strong>3</strong> spots left (12/15)</div><button class="btn btn-orange btn-sm" onclick="joinGroup('Taiwan Island Cultural Group')">Join Group</button></div></article>
       <article class="card gcard" role="listitem"><div class="gcard-head"><div class="gcard-avatar" style="background:#FEF3C7;">👵</div><div><div class="gcard-name">Hokkaido Onsen Senior Group</div><div class="gcard-host">Mrs. Chen, 75 · Organizer</div></div></div><div class="gcard-body"><div class="gcard-tour">🌿 Hokkaido Wellness Onsen 6D</div><div class="gcard-info">📅 Departs May 20, 2026 · 💰 NT$56,800</div><div class="gcard-quote">"I use a wheelchair — fully accessible. Warmly inviting friends who need mobility aids!"</div><div style="display:flex;flex-wrap:wrap;gap:6px;"><span class="badge b-green">♿ Fully Accessible</span><span class="badge b-green">🚶 Easiest</span></div></div><div class="gcard-foot"><div class="slots"><strong>4</strong> spots left (4/8)</div><button class="btn btn-orange btn-sm" onclick="joinGroup('Hokkaido Onsen Senior Group')">Join Group</button></div></article>`,
     'reviews-grid': `
-      <div class="card review-card"><div class="stars" aria-label="5 stars">★★★★★</div><p class="review-text">"All costs were perfectly clear — no surprises at all. The pace was just right and the guide was incredibly patient. I felt completely at ease the whole trip."</p><div class="reviewer"><div class="rev-avatar">👵</div><div><div class="rev-name">Mrs. Wang</div><div class="rev-info">68 yrs · Retired Teacher</div></div></div></div>
-      <div class="card review-card" style="border:3px solid var(--orange-m);"><div class="stars" aria-label="5 stars">★★★★★</div><p class="review-text">"I have diabetes and they found me a tour with dietary support. The nurse cared for me throughout — the service was absolutely wonderful!"</p><div class="reviewer"><div class="rev-avatar">👴</div><div><div class="rev-name">Mr. Lin</div><div class="rev-info">72 yrs · Diabetic Traveler</div></div></div></div>
-      <div class="card review-card"><div class="stars" aria-label="5 stars">★★★★★</div><p class="review-text">"My kids booked it for me. They could see my location the whole time and we were all so relieved! Definitely coming back next time!"</p><div class="reviewer"><div class="rev-avatar">👵</div><div><div class="rev-name">Grandma Chen</div><div class="rev-info">75 yrs · Mobility Aid User</div></div></div></div>`,
+      <div class="card review-card" onclick="openReviewModal('r1')"><div class="stars">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">♿ Accessible</span><span class="rv-tag">🌸 Flower Tour</span></div><p class="review-text">"All costs perfectly clear — no surprises at all. The pace was just right and the guide was incredibly patient. I felt completely at ease!"</p><div class="reviewer"><div class="rev-avatar">👵</div><div><div class="rev-name">Mrs. Wang</div><div class="rev-info">68 yrs · Retired Teacher · Taipei</div></div></div><div class="rv-read-more">Read Full Review →</div></div>
+      <div class="card review-card" style="border:3px solid var(--orange-m);" onclick="openReviewModal('r2')"><div class="stars">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">💊 Diabetes Care</span><span class="rv-tag">🏡 Taiwan</span></div><p class="review-text">"I have diabetes and they found me a tour with full dietary support. The nurse cared for me throughout — absolutely wonderful!"</p><div class="reviewer"><div class="rev-avatar">👴</div><div><div class="rev-name">Mr. Lin</div><div class="rev-info">72 yrs · Retired Engineer · Kaohsiung</div></div></div><div class="rv-read-more">Read Full Review →</div></div>
+      <div class="card review-card" onclick="openReviewModal('r3')"><div class="stars">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">👨‍👩‍👧 Family Tracking</span><span class="rv-tag">♨️ Onsen</span></div><p class="review-text">"My kids booked it for me and tracked my location the whole time. Everyone felt so reassured! Definitely coming back!"</p><div class="reviewer"><div class="rev-avatar">👵</div><div><div class="rev-name">Grandma Chen</div><div class="rev-info">75 yrs · Homemaker · Taichung</div></div></div><div class="rv-read-more">Read Full Review →</div></div>
+      <div class="card review-card" onclick="openReviewModal('r4')"><div class="stars">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">♿ Wheelchair Friendly</span><span class="rv-tag">❄️ Hokkaido</span></div><p class="review-text">"First time abroad in a wheelchair — almost every Hokkaido attraction was accessible. The guide's care moved me to tears!"</p><div class="reviewer"><div class="rev-avatar">👩</div><div><div class="rev-name">Mrs. Chang</div><div class="rev-info">70 yrs · Retired Nurse · New Taipei</div></div></div><div class="rv-read-more">Read Full Review →</div></div>
+      <div class="card review-card" onclick="openReviewModal('r5')"><div class="stars">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">🏥 Medical Support</span><span class="rv-tag">🌍 Europe</span></div><p class="review-text">"As a retired doctor, medical safety was paramount. The 24-hour emergency hotline gave me complete peace of mind across Europe!"</p><div class="reviewer"><div class="rev-avatar">👨</div><div><div class="rev-name">Mr. Wu</div><div class="rev-info">65 yrs · Retired Doctor · Taipei</div></div></div><div class="rv-read-more">Read Full Review →</div></div>
+      <div class="card review-card" onclick="openReviewModal('r6')"><div class="stars">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">🌿 Wellness</span><span class="rv-tag">🏖️ Bali</span></div><p class="review-text">"Knee degeneration worried me, but steps were capped at 2,000/day with spa treatments each afternoon. My knees felt so much better!"</p><div class="reviewer"><div class="rev-avatar">👩‍🦳</div><div><div class="rev-name">Mrs. Lee</div><div class="rev-info">73 yrs · Retired Accountant · Tainan</div></div></div><div class="rv-read-more">Read Full Review →</div></div>`,
     'footer-grid': `<div><div class="foot-brand">🌸 YouTrip</div><p class="foot-desc">A smart travel platform designed for seniors — safe, comfortable, and warm-hearted. Helping every silver traveler explore the world with confidence and return home happy.</p></div><div><div class="foot-head">Quick Links</div><nav class="foot-links"><a href="#tours">Find Tours</a><a href="#health">Health Quiz</a><a href="#group">Find Companions</a><a href="#family">Family Zone</a></nav></div><div><div class="foot-head">Our Services</div><nav class="foot-links"><a href="#why">Why Choose Us</a><a href="#steps">3 Simple Steps</a><a href="#reviews">Traveler Reviews</a></nav></div><div><div class="foot-head">Contact Us</div><div class="foot-desc"><div>📞 <a href="tel:0800-888-888" style="color:var(--orange-m);">0800-888-888</a></div><div>Daily 09:00–21:00</div><div style="margin-top:6px;">✉️ hello@youtrip.tw</div></div></div>`,
 
     'interest-picker-card': `<div class="interest-picker-hdr"><div class="interest-picker-icon">🔍</div><div><div class="interest-picker-title">Find Companions by Interest</div><div class="interest-picker-sub">Select your travel style and find like-minded senior travelers!</div></div></div><div class="interest-chips-row" id="interest-filter-row"><button class="ichip active" onclick="filterInterest('all',this)">🌏 All</button><button class="ichip" onclick="filterInterest('cultural',this)">🏛️ Culture</button><button class="ichip" onclick="filterInterest('nature',this)">🌿 Nature</button><button class="ichip" onclick="filterInterest('onsen',this)">♨️ Onsen</button><button class="ichip" onclick="filterInterest('food',this)">🍜 Food</button><button class="ichip" onclick="filterInterest('beach',this)">🌊 Beach</button><button class="ichip" onclick="filterInterest('accessible',this)">♿ Accessible</button><button class="ichip" onclick="filterInterest('solo',this)">🧍 Solo</button></div><div style="display:flex;gap:12px;flex-wrap:wrap;"><button class="btn btn-orange" onclick="openMatchModal()">🤝 Full Interest Matching</button><button class="btn btn-outline" style="border-color:#7C3AED;color:#7C3AED;" onclick="openCreateGroupModal()">✨ Start My Group</button></div>`,
@@ -6627,9 +6779,12 @@ const S = {
       <article class="card gcard" role="listitem"><div class="gcard-head"><div class="gcard-avatar" style="background:#DBEAFE;">👴</div><div><div class="gcard-name">台湾一周文化探訪ツアー</div><div class="gcard-host">林さん 72歳・主催</div></div></div><div class="gcard-body"><div class="gcard-tour">🏯 台湾一周文化観光 8日間</div><div class="gcard-info">📅 2026年5月3日出発 ・ 💰 ¥29,800</div><div class="gcard-quote">「ご夫婦での参加も歓迎！台湾文化をのんびり楽しみましょう。」</div><div style="display:flex;flex-wrap:wrap;gap:6px;"><span class="badge b-blue">🏥 医療サポート</span><span class="badge b-purple">夫婦参加OK</span></div></div><div class="gcard-foot"><div class="slots">残り <strong>3</strong> 席（12/15）</div><button class="btn btn-orange btn-sm" onclick="joinGroup('台湾一周文化探訪ツアー')">参加申請</button></div></article>
       <article class="card gcard" role="listitem"><div class="gcard-head"><div class="gcard-avatar" style="background:#FEF3C7;">👵</div><div><div class="gcard-name">北海道温泉シニアツアー</div><div class="gcard-host">陳さん 75歳・主催</div></div></div><div class="gcard-body"><div class="gcard-tour">🌿 北海道温泉養生 6日間</div><div class="gcard-info">📅 2026年5月20日出発 ・ 💰 ¥56,800</div><div class="gcard-quote">「車椅子使用者です。全行程バリアフリー。介助具が必要な方を歓迎！」</div><div style="display:flex;flex-wrap:wrap;gap:6px;"><span class="badge b-green">♿ 完全バリアフリー</span><span class="badge b-green">🚶 らくらく</span></div></div><div class="gcard-foot"><div class="slots">残り <strong>4</strong> 席（4/8）</div><button class="btn btn-orange btn-sm" onclick="joinGroup('北海道温泉シニアツアー')">参加申請</button></div></article>`,
     'reviews-grid': `
-      <div class="card review-card"><div class="stars" aria-label="星5つ">★★★★★</div><p class="review-text">「料金がすべて明確で、予想外の出費は一切ありませんでした。旅のペースもちょうどよく、ガイドさんも非常に丁寧。終始安心して旅できました。」</p><div class="reviewer"><div class="rev-avatar">👵</div><div><div class="rev-name">田中さん</div><div class="rev-info">68歳・元教員</div></div></div></div>
-      <div class="card review-card" style="border:3px solid var(--orange-m);"><div class="stars" aria-label="星5つ">★★★★★</div><p class="review-text">「糖尿病を持っているのですが、食事管理ができるツアーを見つけてもらえました。看護師さんがずっと気にかけてくれて、とても心強かったです！」</p><div class="reviewer"><div class="rev-avatar">👴</div><div><div class="rev-name">林さん</div><div class="rev-info">72歳・糖尿病の旅人</div></div></div></div>
-      <div class="card review-card"><div class="stars" aria-label="星5つ">★★★★★</div><p class="review-text">「子どもたちが代わりに予約してくれました。旅の途中も家族がリアルタイムで位置確認でき、みんな安心していました！また来年も行きます！」</p><div class="reviewer"><div class="rev-avatar">👵</div><div><div class="rev-name">陳さん</div><div class="rev-info">75歳・補助具使用者</div></div></div></div>`,
+      <div class="card review-card" onclick="openReviewModal('r1')"><div class="stars" aria-label="星5つ">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">♿ バリアフリー</span><span class="rv-tag">🌸 お花見</span></div><p class="review-text">「料金がすべて明確で、予想外の出費は一切ありませんでした。旅のペースもちょうどよく、ガイドさんも非常に丁寧。終始安心して旅できました。」</p><div class="reviewer"><div class="rev-avatar">👵</div><div><div class="rev-name">田中さん</div><div class="rev-info">68歳・元教員・台北在住</div></div></div><div class="rv-read-more">レビュー全文を読む →</div></div>
+      <div class="card review-card" style="border:3px solid var(--orange-m);" onclick="openReviewModal('r2')"><div class="stars" aria-label="星5つ">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">💊 慢性疾患サポート</span><span class="rv-tag">🏡 台湾</span></div><p class="review-text">「糖尿病を持っているのですが、食事管理ができるツアーを見つけてもらえました。看護師さんがずっと気にかけてくれて、とても心強かったです！」</p><div class="reviewer"><div class="rev-avatar">👴</div><div><div class="rev-name">林さん</div><div class="rev-info">72歳・元エンジニア・高雄在住</div></div></div><div class="rv-read-more">レビュー全文を読む →</div></div>
+      <div class="card review-card" onclick="openReviewModal('r3')"><div class="stars" aria-label="星5つ">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">👨‍👩‍👧 家族安心</span><span class="rv-tag">♨️ 温泉</span></div><p class="review-text">「子どもたちが代わりに予約してくれました。旅の途中も家族がリアルタイムで位置確認でき、みんな安心していました！また来年も行きます！」</p><div class="reviewer"><div class="rev-avatar">👵</div><div><div class="rev-name">陳さん</div><div class="rev-info">75歳・主婦・台中在住</div></div></div><div class="rv-read-more">レビュー全文を読む →</div></div>
+      <div class="card review-card" onclick="openReviewModal('r4')"><div class="stars" aria-label="星5つ">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">♿ 車いす対応</span><span class="rv-tag">❄️ 北海道</span></div><p class="review-text">「初めて車いすで海外旅行をしましたが、北海道の観光地はほぼすべてバリアフリー対応。ガイドさんの心遣いに思わず涙がこぼれました！」</p><div class="reviewer"><div class="rev-avatar">👩</div><div><div class="rev-name">張さん</div><div class="rev-info">70歳・元看護師・新北在住</div></div></div><div class="rv-read-more">レビュー全文を読む →</div></div>
+      <div class="card review-card" onclick="openReviewModal('r5')"><div class="stars" aria-label="星5つ">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">🏥 医療サポート</span><span class="rv-tag">🌍 ヨーロッパ</span></div><p class="review-text">「元医師として医療体制を特に重視していました。24時間緊急医療連絡サービスがあり、ヨーロッパの旅を心から楽しめました！」</p><div class="reviewer"><div class="rev-avatar">👨</div><div><div class="rev-name">吳さん</div><div class="rev-info">65歳・元医師・台北在住</div></div></div><div class="rv-read-more">レビュー全文を読む →</div></div>
+      <div class="card review-card" onclick="openReviewModal('r6')"><div class="stars" aria-label="星5つ">★★★★★</div><div class="rv-tags-row"><span class="rv-tag">🌿 リラックス</span><span class="rv-tag">🏖️ バリ島</span></div><p class="review-text">「ひざの退化で旅行を心配していましたが、1日の歩行量が2,000歩以内に抑えられ、毎日スパトリートメントも楽しめました！ひざが楽になった気がします。」</p><div class="reviewer"><div class="rev-avatar">👩‍🦳</div><div><div class="rev-name">李さん</div><div class="rev-info">73歳・元会計士・台南在住</div></div></div><div class="rv-read-more">レビュー全文を読む →</div></div>`,
     'footer-grid': `<div><div class="foot-brand">🌸 悠旅趣</div><p class="foot-desc">すべての旅人のために丁寧に設計された旅行プラットフォーム。ゆっくり旅して、深く楽しむ。すべての旅に温もりと物語を。</p></div><div><div class="foot-head">クイックリンク</div><nav class="foot-links"><a href="#tours">旅を探す</a><a href="#health">健康チェック</a><a href="#group">仲間を探す</a><a href="#family">家族エリア</a></nav></div><div><div class="foot-head">サービス内容</div><nav class="foot-links"><a href="#why">選ばれる理由</a><a href="#steps">3ステップ説明</a><a href="#reviews">旅人の口コミ</a></nav></div><div><div class="foot-head">お問い合わせ</div><div class="foot-desc"><div>📞 <a href="tel:0800-888-888" style="color:var(--orange-m);">0800-888-888</a></div><div>毎日 09:00–21:00</div><div style="margin-top:6px;">✉️ hello@youtrip.tw</div></div></div>`,
     'footer-bottom': '© 2026 悠旅趣 YouTrip ・ 個人情報保護法準拠 ・ 旅行業許可番号 1234567',
     'expert-content': `
@@ -7673,6 +7828,86 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 
+  /* ════ 旅人評價資料 Review Data ════ */
+  const _REVIEWS_DATA = {
+    r1: {
+      avatar:'👵',
+      zh:{ name:'王阿姨', meta:'68歲・退休教師・台北市', date:'出遊日期：2025年12月', tour:'🌸 日本京都賞櫻溫泉 5天4夜', quote:'「費用清清楚楚，沒有任何意外支出，行程節奏剛剛好，導遊非常有耐心！整個旅程都很放心。特別喜歡無障礙設施安排完善，讓我這個要用輔助器具的阿姨也能輕鬆逛完所有景點，溫泉飯店的扶手浴缸讓我泡得超開心！下次還要再去！」', tags:['♿ 無障礙', '🌸 賞花之旅', '💊 健康友善'], helpful:128, goTour:'查看類似行程' },
+      en:{ name:'Mrs. Wang', meta:'68 yrs · Retired Teacher · Taipei', date:'Trip: December 2025', tour:'🌸 Kyoto Cherry Blossom Onsen 5D4N', quote:'"All costs were crystal clear — absolutely no surprises. The pace was just right and the guide was incredibly patient. Fully accessible facilities made this trip perfect for me. The onsen hotel even had handrail baths. I felt completely at ease throughout. I\'ll definitely be going again!"', tags:['♿ Accessible', '🌸 Cherry Blossom', '💊 Health-Friendly'], helpful:128, goTour:'Find Similar Tours' },
+      ja:{ name:'田中さん', meta:'68歳・元教員・台北市', date:'旅行日：2025年12月', tour:'🌸 京都桜観賞・温泉 5泊6日', quote:'「料金がすべて明確で、予想外の費用は一切ありませんでした。旅のペースもちょうどよく、ガイドさんも非常に丁寧。バリアフリー施設が充実していて、補助具を使っている私も安心して観光できました。温泉旅館の手すり付き浴槽も最高でした！また来年も行きたいです！」', tags:['♿ バリアフリー', '🌸 桜観賞', '💊 健康配慮'], helpful:128, goTour:'似たツアーを見る' }
+    },
+    r2: {
+      avatar:'👴',
+      zh:{ name:'林伯伯', meta:'72歲・退休工程師・高雄市', date:'出遊日期：2025年11月', tour:'🏡 台灣環島文化遊 8天7夜', quote:'「身為糖尿病患者，每次想出遊都很擔心飲食和血糖控制。悠旅趣幫我事先安排了低GI的餐點，每餐都符合我的飲食需求。護理師每天早晚幫我量血糖，還準備了急救箱隨行。台灣環島8天，沿途欣賞各地美景，第一次感覺旅行如此輕鬆自在。強烈推薦有慢性病的長輩試試看！」', tags:['💊 糖尿病管理', '🏡 台灣精選', '🚌 全程專車'], helpful:94, goTour:'查看類似行程' },
+      en:{ name:'Mr. Lin', meta:'72 yrs · Retired Engineer · Kaohsiung', date:'Trip: November 2025', tour:'🏡 Taiwan Island Cultural Tour 8D7N', quote:'"As a diabetic traveler, I always worried about diet and blood sugar. YouTrip pre-arranged low-GI meals for every meal. A nurse checked my blood sugar morning and evening and carried an emergency kit throughout. The 8-day Taiwan island tour was breathtaking — I\'ve never traveled so worry-free. Highly recommended for seniors with chronic conditions!"', tags:['💊 Diabetes Care', '🏡 Taiwan Tour', '🚌 Private Coach'], helpful:94, goTour:'Find Similar Tours' },
+      ja:{ name:'林さん', meta:'72歳・元エンジニア・高雄市', date:'旅行日：2025年11月', tour:'🏡 台湾一周文化観光 8泊9日', quote:'「糖尿病を持っているため、いつも食事と血糖値管理が心配でした。悠旅趣が低GI食を事前手配してくれ、看護師が毎朝晩血糖を測定。救急キットも常備されていて安心でした。台湾一周8日間、初めてこんなに気楽に旅できました！持病のある方にも自信を持っておすすめします！」', tags:['💊 糖尿病管理', '🏡 台湾観光', '🚌 専用車同行'], helpful:94, goTour:'似たツアーを見る' }
+    },
+    r3: {
+      avatar:'👵',
+      zh:{ name:'陳奶奶', meta:'75歲・家庭主婦・台中市', date:'出遊日期：2025年10月', tour:'⛩️ 九州溫泉文化 7天6夜', quote:'「我兒子在台灣，幫我在悠旅趣代訂了九州行程。整個旅途中，他隨時可以透過APP看到我的位置，還可以留言給導遊。九州的溫泉太美了，每天泡一次溫泉，血壓都改善很多。飯店為我們準備了和食早餐，熱量和鈉含量都有標示。我已經75歲了，還能獨立旅行，感謝悠旅趣！」', tags:['👨‍👩‍👧 家人安心', '♨️ 溫泉療癒', '🚌 全程接送'], helpful:87, goTour:'查看類似行程' },
+      en:{ name:'Grandma Chen', meta:'75 yrs · Homemaker · Taichung', date:'Trip: October 2025', tour:'⛩️ Kyushu Onsen Culture 7D6N', quote:'"My son booked it for me from home. Throughout the trip, he could track my location and message the guide through the app. The Kyushu onsens were simply magical — my blood pressure improved noticeably after daily soaks. The hotel prepared Japanese breakfast with calorie and sodium labels. At 75, I can still travel independently. Thank you YouTrip!"', tags:['👨‍👩‍👧 Family Peace of Mind', '♨️ Onsen Healing', '🚌 Full Transfer'], helpful:87, goTour:'Find Similar Tours' },
+      ja:{ name:'陳さん', meta:'75歳・主婦・台中市', date:'旅行日：2025年10月', tour:'⛩️ 九州温泉文化 7泊8日', quote:'「息子が台湾から代わりに予約してくれました。旅の間もアプリで位置確認・ガイドへメッセージが送れて、家族も安心。九州の温泉は本当に素晴らしく、毎日入浴で血圧も改善！朝食は和食でカロリー・塩分表示もあり安心でした。75歳でも一人旅できて感謝です！」', tags:['👨‍👩‍👧 家族安心', '♨️ 温泉療養', '🚌 送迎込み'], helpful:87, goTour:'似たツアーを見る' }
+    },
+    r4: {
+      avatar:'👩',
+      zh:{ name:'張太太', meta:'70歲・退休護理師・新北市', date:'出遊日期：2025年9月', tour:'❄️ 北海道四季療癒 6天5夜', quote:'「三年前中風之後，一直以為不能再出國旅行了。悠旅趣的客服耐心解釋每個景點的無障礙設施，讓我鼓起勇氣出發。北海道的美景超乎想像，富良野花田、小樽運河、函館山夜景，每一個景點都有無障礙通道。導遊不只幫我推輪椅，還在每個特別的景點讓我慢慢欣賞。這是中風後最美好的旅行！」', tags:['♿ 輪椅友善', '❄️ 自然風景', '🏥 健康管理'], helpful:156, goTour:'查看類似行程' },
+      en:{ name:'Mrs. Chang', meta:'70 yrs · Retired Nurse · New Taipei', date:'Trip: September 2025', tour:'❄️ Hokkaido Healing Retreat 6D5N', quote:'"After my stroke three years ago, I thought travel was over for me. YouTrip\'s team patiently walked me through every accessible facility, giving me the courage to go. Hokkaido\'s beauty was beyond words — Furano flower fields, Otaru Canal, Hakodate night view — all fully accessible. Our guide didn\'t just push my wheelchair; she let me savor every moment. The most beautiful trip since my stroke!"', tags:['♿ Wheelchair Friendly', '❄️ Nature Scenery', '🏥 Health Support'], helpful:156, goTour:'Find Similar Tours' },
+      ja:{ name:'張さん', meta:'70歳・元看護師・新北市', date:'旅行日：2025年9月', tour:'❄️ 北海道癒しの旅 6泊7日', quote:'「3年前に脳卒中を患ってから、海外旅行は諦めていました。悠旅趣のスタッフが各観光地のバリアフリー設備を丁寧に説明してくれ、勇気を出して出発できました。富良野のお花畑、小樽運河、函館山の夜景、すべてバリアフリー対応。ガイドさんは車椅子を押すだけでなく、各スポットでゆっくり楽しませてくれました。脳卒中後、最高の旅でした！」', tags:['♿ 車椅子対応', '❄️ 自然景観', '🏥 健康サポート'], helpful:156, goTour:'似たツアーを見る' }
+    },
+    r5: {
+      avatar:'👨',
+      zh:{ name:'吳大哥', meta:'65歲・退休醫生・台北市', date:'出遊日期：2025年8月', tour:'🌍 歐洲三國精選 12天11夜', quote:'「從事醫療工作40年，退休後終於帶太太去歐洲圓夢。身為醫生，我非常在意旅途中的醫療安全。悠旅趣提供了24小時緊急醫療熱線、海外醫療保險，還有隨團的急救設備。12天遊覽法國、瑞士、義大利，每一個地方都有詳細中文說明。巴黎鐵塔、湖光山色這些夢想景點都實現了，旅費物超所值！」', tags:['🏥 醫療保障', '🌍 深度文化', '✈️ 長途精選'], helpful:203, goTour:'查看類似行程' },
+      en:{ name:'Mr. Wu', meta:'65 yrs · Retired Doctor · Taipei', date:'Trip: August 2025', tour:'🌍 Europe 3-Country Tour 12D11N', quote:'"After 40 years in medicine, I finally took my wife to Europe. As a doctor, medical safety was my top priority. YouTrip provided 24-hour emergency medical hotlines, overseas insurance, and first-aid equipment on board. 12 days through France, Switzerland, and Italy with full Chinese-language guidance. The Eiffel Tower, Alpine lakes — every dream destination came true. Worth every penny!"', tags:['🏥 Medical Coverage', '🌍 Deep Culture', '✈️ Long-Haul'], helpful:203, goTour:'Find Similar Tours' },
+      ja:{ name:'吳さん', meta:'65歳・元医師・台北市', date:'旅行日：2025年8月', tour:'🌍 ヨーロッパ3カ国精選 12泊13日', quote:'「40年間医療に従事し、退職後ようやく妻とヨーロッパへ。医師として医療体制を重視していましたが、24時間緊急医療ホットライン、海外保険、車内救急キットが完備されていて安心でした。フランス・スイス・イタリアを12日間、すべて中国語ガイド付き。エッフェル塔やアルプス湖畔など夢の景地をすべて実現。コストパフォーマンス最高です！」', tags:['🏥 医療保障', '🌍 文化深度', '✈️ 長距離精選'], helpful:203, goTour:'似たツアーを見る' }
+    },
+    r6: {
+      avatar:'👩‍🦳',
+      zh:{ name:'李阿姨', meta:'73歲・退休會計師・台南市', date:'出遊日期：2025年7月', tour:'🏖️ 峇里島銀髮療癒 5天4夜', quote:'「膝蓋退化讓我擔心長途旅行。客服陳小姐很仔細問了我的膝蓋狀況，特別安排了步行量最少的行程組合。每天最多走2000步，景點之間都有車接送。峇里島的水療太享受了！每天下午有SPA時間，膝蓋舒服多了。食物有提供低鹽低油選項，而且真的很好吃。73歲了還能這樣享受旅遊，感謝悠旅趣！」', tags:['🌿 養生放鬆', '🏖️ 海島療癒', '🚶 少步行程'], helpful:119, goTour:'查看類似行程' },
+      en:{ name:'Mrs. Lee', meta:'73 yrs · Retired Accountant · Tainan', date:'Trip: July 2025', tour:'🏖️ Bali Senior Wellness Retreat 5D4N', quote:'"Knee degeneration made me nervous about travel. Our advisor carefully noted my condition and arranged the lowest-walking itinerary. Max 2,000 steps per day with transfers everywhere. The Bali spa treatments were heavenly — daily afternoon sessions eased my knees noticeably. Meals offered low-salt, low-oil options and were genuinely delicious. Still enjoying travel at 73 — thank you YouTrip!"', tags:['🌿 Wellness', '🏖️ Island Healing', '🚶 Low-Walking Tour'], helpful:119, goTour:'Find Similar Tours' },
+      ja:{ name:'李さん', meta:'73歳・元会計士・台南市', date:'旅行日：2025年7月', tour:'🏖️ バリ島シニア癒しの旅 5泊6日', quote:'「膝の変形性関節症で長旅が心配でしたが、スタッフが膝の状態を丁寧に確認し、歩行量最少のコースを提案してくれました。1日最大2000歩、移動はすべて車。バリ島のスパは最高で、毎日午後のトリートメントで膝が楽になりました。食事は低塩・低脂肪オプションがあり、とても美味しかったです。73歳でも旅を楽しめて感謝です！」', tags:['🌿 健康養生', '🏖️ 離島癒し', '🚶 歩行少なめ'], helpful:119, goTour:'似たツアーを見る' }
+    }
+  };
+
+  function openReviewModal(id) {
+    const rv = _REVIEWS_DATA[id];
+    if (!rv) return;
+    const lang = window._lang || 'zh';
+    const d = rv[lang] || rv.zh;
+    document.getElementById('rv-mhdr-stars').textContent = '★★★★★';
+    document.getElementById('rv-mhdr-tour').textContent = d.tour;
+    document.getElementById('rv-mquote').textContent = d.quote;
+    document.getElementById('rv-mavi').textContent = rv.avatar;
+    document.getElementById('rv-mname').textContent = d.name;
+    document.getElementById('rv-mmeta').textContent = d.meta;
+    document.getElementById('rv-mdate').textContent = d.date;
+    // Tags
+    const tagsEl = document.getElementById('rv-mtags');
+    tagsEl.innerHTML = d.tags.map(t => '<span class="rv-tag" style="font-size:13px;padding:4px 12px;">' + t + '</span>').join('');
+    // Helpful
+    document.getElementById('rv-mhelpful-label').textContent = lang === 'en' ? 'Was this review helpful?' : lang === 'ja' ? 'このレビューは役に立ちましたか？' : '這篇評價有幫助嗎？';
+    document.getElementById('rv-mhelpful-count').textContent = (lang === 'en' ? 'Helpful (' : lang === 'ja' ? '役に立った (' : '有幫助（') + d.helpful + ')';
+    document.getElementById('rv-goto-tour-btn').textContent = d.goTour;
+    const btn = document.getElementById('rv-mhelpful-btn');
+    btn.classList.remove('voted');
+    document.getElementById('rv-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeReviewModal() {
+    document.getElementById('rv-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function voteReviewHelpful(btn) {
+    if (btn.classList.contains('voted')) return;
+    btn.classList.add('voted');
+    const countSpan = document.getElementById('rv-mhelpful-count');
+    const text = countSpan.textContent;
+    const num = parseInt(text.match(/\d+/) || [0]);
+    const lang = window._lang || 'zh';
+    countSpan.textContent = (lang === 'en' ? 'Helpful (' : lang === 'ja' ? '役に立った (' : '有幫助（') + (num + 1) + ')';
+  }
+
   function renderExpertStatus() {
     const lang = window._lang || 'zh';
     document.querySelectorAll('#expert-grid .expert-story-btn').forEach(function(btn) {
@@ -7743,6 +7978,36 @@ document.addEventListener('DOMContentLoaded', function() {
 <div id="tour-mask" class="tour-mask"></div>
 <div id="tour-spotlight" class="tour-spotlight"></div>
 <div id="tour-tip" class="tour-tip" style="display:none;"></div>
+
+<!-- ══ 旅人評價 Detail Modal ══ -->
+<div class="rv-overlay" id="rv-overlay" role="dialog" aria-modal="true" onclick="if(event.target===this)closeReviewModal()">
+  <div class="rv-box">
+    <div class="rv-mhdr">
+      <div>
+        <div class="rv-mhdr-stars" id="rv-mhdr-stars">★★★★★</div>
+        <div class="rv-mhdr-tour" id="rv-mhdr-tour"></div>
+      </div>
+      <button class="rv-mclose" onclick="closeReviewModal()" aria-label="關閉">✕</button>
+    </div>
+    <div class="rv-mbody">
+      <p class="rv-mquote" id="rv-mquote"></p>
+      <div class="rv-mtags" id="rv-mtags"></div>
+      <div class="rv-mreviewer">
+        <div class="rev-avatar" id="rv-mavi" style="background:var(--orange-l);"></div>
+        <div>
+          <div style="font-size:20px;font-weight:800;color:var(--text);" id="rv-mname"></div>
+          <div style="font-size:15px;color:var(--text2);margin-top:2px;" id="rv-mmeta"></div>
+          <div style="font-size:13px;color:var(--text2);margin-top:3px;" id="rv-mdate"></div>
+        </div>
+      </div>
+      <div class="rv-mhelpful">
+        <span style="font-size:14px;color:var(--text2);" id="rv-mhelpful-label"></span>
+        <button class="rv-mhelpful-btn" id="rv-mhelpful-btn" onclick="voteReviewHelpful(this)">👍 <span id="rv-mhelpful-count"></span></button>
+        <button class="btn btn-orange btn-sm" style="margin-left:auto;" onclick="closeReviewModal();scrollTo('#tours')">🔍 <span id="rv-goto-tour-btn"></span></button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ══ 導覽觸發 FAB ══ -->
 <button class="tour-fab" onclick="openWelcome()" aria-label="互動導覽">
