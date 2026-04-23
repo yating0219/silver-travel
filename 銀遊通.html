@@ -7285,6 +7285,10 @@ async function loadToursFromSupabase() {
 
 // Auto-show welcome on first visit
 document.addEventListener('DOMContentLoaded', function() {
+  // 在頁面載入時自動儲存 ZH 達人內容（靜態 HTML 即為中文版）
+  const _expEl = document.getElementById('expert-content');
+  if (_expEl && !S.zh['expert-content']) S.zh['expert-content'] = _expEl.innerHTML;
+
   buildTours();              // 先用本地 tours_data.js 顯示
   loadToursFromSupabase();   // 背景非同步載入 Supabase（成功後自動更新）
   try {
