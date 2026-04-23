@@ -7254,9 +7254,39 @@ function endTour() {
   showToast('🎉 導覽完成！按右下角 ? 可隨時重新查看');
 }
 
+// ══════════════════════════════════════════════════════
+// Supabase 行程資料串接
+// ══════════════════════════════════════════════════════
+const SUPABASE_URL = 'https://frmkbahbbdslgdhnkxir.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_QYt15Rs9HSuSQw0KD4Bg0A_a7QBDzGZ';
+
+async function loadToursFromSupabase() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/tours?select=*&order=region,days`, {
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`
+      }
+    });
+    if (!res.ok) { console.warn('銀遊通：Supabase 回應錯誤', res.status); return; }
+    const data = await res.json();
+    if (!Array.isArray(data) || data.length === 0) { console.warn('銀遊通：Supabase 沒有資料'); return; }
+    window.TOURS_DATA = data.map(r => ({
+      ...r,
+      days:  parseInt(r.days)  || 1,
+      price: parseInt(r.price) || 0
+    }));
+    buildTours();
+    console.log(`✅ 銀遊通：已從 Supabase 載入 ${window.TOURS_DATA.length} 筆行程`);
+  } catch (err) {
+    console.warn('銀遊通：Supabase 載入失敗，使用本地備用資料', err);
+  }
+}
+
 // Auto-show welcome on first visit
 document.addEventListener('DOMContentLoaded', function() {
-  buildTours();
+  buildTours();              // 先用本地 tours_data.js 顯示
+  loadToursFromSupabase();   // 背景非同步載入 Supabase（成功後自動更新）
   try {
     if (!localStorage.getItem('youtrip_welcomed')) {
       setTimeout(() => openWelcome(), 800);

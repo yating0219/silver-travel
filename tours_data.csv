@@ -1,0 +1,166 @@
+key,region,days,name,emoji,c1,c2,price,meta,tags,tip,tipClass,b1,b1c,b2,b2c,b3,b3c
+tw_taipei1day,taiwan,1,台北故宮＋淡水老街,🏛️,#fde68a,#fb923c,1980,"台北市・小團12人・♿無障礙",taiwan easy accessible,一日遊,b-orange,♿ 無障礙,b-green,🌅 一日輕鬆,b-orange,🚌 全程專車,b-blue
+tw_taichung1day,taiwan,1,台中彩虹眷村＋逢甲夜市,🎨,#fbbf24,#f472b6,1880,"台中市・小團12人・♿無障礙",taiwan easy accessible,一日遊,b-orange,♿ 無障礙,b-green,🌅 一日輕鬆,b-orange,🚌 全程專車,b-blue
+tw_kaohsiung1day,taiwan,1,高雄蓮池潭＋駁二藝術特區,🪷,#86efac,#22d3ee,1880,"高雄市・小團12人・♿無障礙",taiwan easy accessible,一日遊,b-orange,♿ 無障礙,b-green,🌅 一日輕鬆,b-orange,🚌 全程專車,b-blue
+tw_yilan2d,taiwan,2,宜蘭溫泉礁溪養生 2天1夜,♨️,#6ee7b7,#3b82f6,5800,"宜蘭礁溪・小團12人・♿無障礙",taiwan easy accessible,泡湯首選,b-teal,♿ 無障礙,b-green,♨️ 溫泉養生,b-teal,🍚 銀髮餐,b-green
+tw_kenting2d,taiwan,2,墾丁南灣海景悠閒 2天1夜,🌊,#34d399,#facc15,5980,"屏東墾丁・小團12人・♿無障礙",taiwan easy accessible,海景首選,b-teal,♿ 無障礙,b-green,🌊 海景療癒,b-teal,🚌 全程專車,b-blue
+tw_beitou2d,taiwan,2,北投溫泉文化館養生 2天1夜,♨️,#a5f3fc,#818cf8,5600,"台北北投・小團10人・♿無障礙",taiwan easy accessible,療癒之旅,b-teal,♿ 無障礙,b-green,♨️ 溫泉放鬆,b-teal,🏥 醫療保障,b-blue
+tw_taichung3d,taiwan,3,台中日月潭清境農場 3天2夜,🌄,#fde68a,#4ade80,8800,"台中・南投・小團12人・♿無障礙",taiwan easy accessible,山水之美,b-green,♿ 無障礙,b-green,🌄 山景療癒,b-green,🚌 全程專車,b-blue
+tw_tainan3d,taiwan,3,台南古蹟美食文化 3天2夜,🏯,#fbbf24,#f97316,8500,"台南市・小團12人・♿無障礙",taiwan easy accessible,文化饗宴,b-orange,♿ 無障礙,b-green,🍜 在地美食,b-orange,🚌 全程專車,b-blue
+tw_penghu3d,taiwan,3,澎湖藍海玄武岩 3天2夜,🏝️,#38bdf8,#34d399,9800,"澎湖群島・小團10人・♿無障礙",taiwan easy accessible,離島探秘,b-teal,♿ 無障礙,b-green,🌊 海島慢遊,b-teal,🍚 海鮮美食,b-orange
+tw_hualien4d,taiwan,4,花蓮太魯閣峽谷縱走 4天3夜,🏔️,#67e8f9,#818cf8,12800,"花蓮縣・小團10人・♿無障礙",taiwan accessible,峽谷奇景,b-blue,♿ 無障礙,b-green,🏔️ 山水奇景,b-blue,🚌 全程專車,b-blue
+tw_taitung4d,taiwan,4,台東池上綠野縱谷慢活 4天3夜,🌾,#86efac,#fbbf24,12500,"台東縣・小團12人・♿無障礙",taiwan easy accessible,縱谷慢活,b-green,♿ 無障礙,b-green,🌾 田園風光,b-green,🍚 有機飲食,b-teal
+tw_kinmen4d,taiwan,4,金門戰地歷史文化 4天3夜,🏰,#fca5a5,#fbbf24,13200,"金門縣・小團12人・♿無障礙",taiwan easy accessible,歷史之旅,b-orange,♿ 無障礙,b-green,🏰 戰地文化,b-orange,🚌 全程專車,b-blue
+tw_tainan5d,taiwan,5,台南嘉義府城深度文化 5天4夜,🎋,#fde68a,#86efac,15800,"台南・嘉義・小團12人・♿無障礙",taiwan easy accessible,文化深度,b-purple,♿ 無障礙,b-green,🎋 深度文化,b-purple,🍜 古早味美食,b-orange
+tw_northcoast5d,taiwan,5,北海岸野柳基隆海岸線 5天4夜,🌊,#38bdf8,#6366f1,14800,"新北・基隆・小團12人・♿無障礙",taiwan easy accessible,海岸秘境,b-teal,♿ 無障礙,b-green,🌊 海岸風光,b-teal,🚌 全程專車,b-blue
+tw_penghu5d,taiwan,5,澎湖七美望安秘境 5天4夜,🏝️,#22d3ee,#4ade80,16800,"澎湖群島・小團10人・♿無障礙",taiwan easy accessible,離島天堂,b-teal,♿ 無障礙,b-green,🏝️ 離島秘境,b-teal,🍚 海鮮盛宴,b-orange
+tw_alishan6d,taiwan,6,阿里山日出神木森林 6天5夜,🌲,#4ade80,#fbbf24,19800,"嘉義阿里山・小團10人・♿無障礙",taiwan accessible,高山秘境,b-green,♿ 無障礙,b-green,🌲 森林浴,b-green,🌅 雲海日出,b-orange
+tw_eastcoast6d,taiwan,6,東海岸石梯坪秀姑巒溪 6天5夜,🌊,#67e8f9,#34d399,19500,"花蓮・台東・小團12人・♿無障礙",taiwan accessible,東岸秘境,b-teal,♿ 無障礙,b-green,🌊 東岸風光,b-teal,🚌 全程專車,b-blue
+tw_teakulture6d,taiwan,6,坪林梨山茶文化慢遊 6天5夜,🍵,#86efac,#a78bfa,18800,"新北・台中梨山・小團12人・♿無障礙",taiwan easy accessible,茶鄉慢活,b-green,♿ 無障礙,b-green,🍵 茶文化體驗,b-green,🌿 養生之旅,b-teal
+tw_west7d,taiwan,7,西部縱貫精華城市 7天6夜,🏙️,#fbbf24,#f472b6,22800,"台北至高雄・小團12人・♿無障礙",taiwan easy accessible,西岸精華,b-orange,♿ 無障礙,b-green,🏙️ 城市文化,b-orange,🚌 全程專車,b-blue
+tw_eastvalley7d,taiwan,7,東部縱谷花東健康療癒 7天6夜,🌾,#86efac,#38bdf8,23800,"花蓮・台東縱谷・小團10人・♿無障礙",taiwan easy accessible,縱谷療癒,b-green,♿ 無障礙,b-green,🌾 縱谷風光,b-green,🏥 健康管理,b-blue
+tw_foodmap7d,taiwan,7,台灣美食地圖環島饗宴 7天6夜,🍜,#fca5a5,#fbbf24,22500,"全台美食・小團12人・♿無障礙",taiwan easy accessible,美食探索,b-orange,♿ 無障礙,b-green,🍜 在地美食,b-orange,🚌 全程專車,b-blue
+taiwan,taiwan,8,台灣環島全覽 8天7夜,🗺️,#f9a8d4,#818cf8,29800,"全台環島・小團12人・♿無障礙",taiwan accessible,環島經典,b-purple,♿ 無障礙,b-green,🗺️ 環島探索,b-purple,🚌 全程專車,b-blue
+tw_east8d,taiwan,8,東台灣深度花東縱谷 8天7夜,🏔️,#67e8f9,#4ade80,27800,"花蓮・台東・小團10人・♿無障礙",taiwan accessible,東台灣秘境,b-teal,♿ 無障礙,b-green,🏔️ 山海風光,b-teal,🌿 自然療癒,b-green
+tw_natural8d,taiwan,8,台灣自然生態濕地秘境 8天7夜,🦋,#86efac,#fbbf24,26800,"全台生態・小團10人・♿無障礙",taiwan easy accessible,生態探秘,b-green,♿ 無障礙,b-green,🦋 生態體驗,b-green,🌿 自然療癒,b-teal
+tw_10d,taiwan,10,台灣精華全覽深度 10天9夜,🌏,#a78bfa,#38bdf8,35800,"全台・小團12人・♿無障礙",taiwan accessible,深度精選,b-purple,♿ 無障礙,b-green,🌏 全台深度,b-purple,🚌 全程專車,b-blue
+tw_health10d,taiwan,10,台灣健康養生溫泉療癒 10天9夜,🌿,#4ade80,#a78bfa,36500,"全台溫泉・小團10人・♿無障礙",taiwan easy accessible,養生首選,b-green,♿ 無障礙,b-green,🌿 養生療癒,b-green,🏥 健康管理,b-blue
+tw_culture10d,taiwan,10,台灣原住民文化藝術 10天9夜,🎭,#fca5a5,#fbbf24,34800,"全台原鄉・小團10人・♿無障礙",taiwan easy accessible,文化體驗,b-orange,♿ 無障礙,b-green,🎭 原民文化,b-orange,🍚 原鄉美食,b-teal
+tw_12d,taiwan,12,台灣南北縱橫全程 12天11夜,🗺️,#818cf8,#f472b6,42800,"全台・小團12人・♿無障礙",taiwan accessible,全台精選,b-purple,♿ 無障礙,b-green,🗺️ 南北縱橫,b-purple,🚌 全程專車,b-blue
+tw_island12d,taiwan,12,台灣四大離島逐夢 12天11夜,🏝️,#22d3ee,#818cf8,48800,"金門・馬祖・澎湖・綠島・小團10人",taiwan accessible,離島探秘,b-teal,♿ 無障礙,b-green,🏝️ 四島巡禮,b-teal,✈️ 含島內機票,b-blue
+tw_mountain12d,taiwan,12,台灣百岳周邊高山慢遊 12天11夜,⛰️,#86efac,#6366f1,44800,"全台山區・小團10人・♿無障礙",taiwan accessible,山岳精選,b-blue,♿ 無障礙,b-green,⛰️ 高山探秘,b-blue,🌿 森林浴,b-green
+tw_15d,taiwan,15,台灣深度全覽慢旅 15天14夜,🌏,#f9a8d4,#818cf8,56800,"全台・小團12人・♿無障礙",taiwan accessible,最完整,b-purple,♿ 無障礙,b-green,🌏 深度全覽,b-purple,🚌 全程專車,b-blue
+tw_wellness15d,taiwan,15,台灣銀髮健康慢活養生 15天14夜,🧘,#4ade80,#fbbf24,58800,"全台養生・小團10人・♿無障礙",taiwan easy accessible,養生療癒,b-green,♿ 無障礙,b-green,🧘 身心療癒,b-green,🏥 醫療保障,b-blue
+tw_heritage15d,taiwan,15,台灣世界遺產潛力點巡禮 15天14夜,🏛️,#fbbf24,#a78bfa,55800,"全台文化遺址・小團10人・♿無障礙",taiwan accessible,文化遺產,b-purple,♿ 無障礙,b-green,🏛️ 遺產探索,b-purple,🎭 文化饗宴,b-orange
+jp_tokyo3d,japan,3,東京淺草秋葉原銀座 3天2夜,🗼,#fca5a5,#f472b6,38800,"日本東京・小團10人・♿無障礙",japan easy accessible,東京精選,b-orange,♿ 無障礙,b-green,🗼 城市文化,b-orange,🚌 全程專車,b-blue
+jp_tokyo3d_b,japan,3,東京上野新宿日本橋 3天2夜,🌸,#fbcfe8,#fbbf24,39800,"日本東京・小團10人・♿無障礙",japan easy accessible,樂齡首選,b-green,♿ 無障礙,b-green,🌸 春季賞花,b-green,🍱 頂級料理,b-orange
+jp_tokyo3d_c,japan,3,東京迪士尼溫泉精選 3天2夜,🎡,#fde68a,#f472b6,41800,"日本東京・小團12人・♿無障礙",japan easy accessible,歡樂之旅,b-orange,♿ 無障礙,b-green,🎡 歡樂體驗,b-orange,♨️ 溫泉放鬆,b-teal
+jp_osaka4d,japan,4,大阪京都奈良關西漫步 4天3夜,🏯,#fbbf24,#f97316,44800,"日本關西・小團10人・♿無障礙",japan easy accessible,關西精選,b-orange,♿ 無障礙,b-green,🏯 古都文化,b-orange,🍱 大阪美食,b-orange
+jp_osaka4d_b,japan,4,大阪神戶淡路島海景 4天3夜,🌊,#38bdf8,#4ade80,43800,"日本關西・小團10人・♿無障礙",japan easy accessible,海景療癒,b-teal,♿ 無障礙,b-green,🌊 海景漫步,b-teal,🍱 神戶牛排,b-orange
+jp_osaka4d_c,japan,4,大阪名古屋東海道 4天3夜,🏙️,#fca5a5,#818cf8,45800,"日本東海・小團12人・♿無障礙",japan easy accessible,東海精選,b-blue,♿ 無障礙,b-green,🏙️ 城市探索,b-blue,🚌 全程專車,b-blue
+kyoto,japan,5,京都賞櫻溫泉 5天4夜,🌸,#fbbf24,#f97316,48800,"日本關西・小團10人・♿無障礙",japan accessible easy,朋友推薦,b-green,♿ 無障礙,b-green,🚶 緩步行,b-green,🏥 醫療,b-blue
+jp_okinawa5d,japan,5,沖繩海島療癒度假 5天4夜,🏖️,#22d3ee,#4ade80,46800,"日本沖繩・小團10人・♿無障礙",japan accessible easy,海島首選,b-teal,♿ 無障礙,b-green,🏖️ 海島療癒,b-teal,🍱 琉球料理,b-orange
+jp_5d_c,japan,5,東京富士山箱根溫泉 5天4夜,🗻,#a5f3fc,#818cf8,49800,"日本關東・小團10人・♿無障礙",japan accessible easy,富士精選,b-blue,♿ 無障礙,b-green,🗻 富士巡禮,b-blue,♨️ 箱根溫泉,b-teal
+hokkaido,japan,6,北海道養生溫泉療癒 6天5夜,🌿,#a78bfa,#ec4899,56800,"日本北海道・小團8人・♿無障礙",japan accessible easy,最輕鬆,b-green,♿ 無障礙,b-green,🍚 銀髮餐,b-green,🚶 最輕鬆,b-green
+jp_6d_b,japan,6,京都奈良金澤富山 6天5夜,🏯,#fde68a,#86efac,54800,"日本關西北陸・小團10人・♿無障礙",japan accessible easy,北陸精選,b-orange,♿ 無障礙,b-green,🏯 古都巡禮,b-orange,🍱 海鮮美食,b-orange
+jp_6d_c,japan,6,東北仙台松島楓葉 6天5夜,🍁,#fca5a5,#fbbf24,53800,"日本東北・小團10人・♿無障礙",japan accessible easy,楓葉首選,b-orange,♿ 無障礙,b-green,🍁 賞楓之旅,b-orange,♨️ 溫泉放鬆,b-teal
+jp_hiroshima7d,japan,7,廣島宮島四國巡禮 7天6夜,⛩️,#fbbf24,#818cf8,58800,"日本廣島・四國・小團10人・♿無障礙",japan accessible,深度歷史,b-purple,♿ 無障礙,b-green,⛩️ 神社巡禮,b-purple,🚌 全程專車,b-blue
+kyushu,japan,7,九州溫泉美食全覽 7天6夜,♨️,#fca5a5,#f97316,59800,"日本九州・小團10人・♿無障礙",japan accessible easy,九州療癒,b-teal,♿ 無障礙,b-green,♨️ 溫泉療癒,b-teal,🍱 九州美食,b-orange
+jp_7d_c,japan,7,北海道函館小樽秘境 7天6夜,❄️,#bfdbfe,#a78bfa,62800,"日本北海道・小團8人・♿無障礙",japan accessible easy,北海道秘境,b-blue,♿ 無障礙,b-green,❄️ 雪景療癒,b-blue,🍱 海鮮盛宴,b-orange
+jp_golden8d,japan,8,日本黃金路線東京大阪 8天7夜,🥇,#fde68a,#f97316,68800,"日本關東關西・小團10人・♿無障礙",japan accessible easy,黃金路線,b-orange,♿ 無障礙,b-green,🥇 精選路線,b-orange,🍱 頂級料理,b-orange
+jp_8d_b,japan,8,日本山陰山陽古道慢行 8天7夜,🏞️,#86efac,#6366f1,65800,"日本山陰山陽・小團10人・♿無障礙",japan accessible,山道秘境,b-purple,♿ 無障礙,b-green,🏞️ 古道探索,b-purple,♨️ 名湯療癒,b-teal
+jp_8d_c,japan,8,九州全域溫泉文化深度 8天7夜,🌋,#fca5a5,#a78bfa,67800,"日本九州全域・小團10人・♿無障礙",japan accessible easy,深度九州,b-purple,♿ 無障礙,b-green,🌋 火山奇景,b-purple,♨️ 別府溫泉,b-teal
+jp_full10d,japan,10,日本全覽東西精選 10天9夜,🗾,#818cf8,#f472b6,78800,"日本全境・小團10人・♿無障礙",japan accessible,全境精選,b-purple,♿ 無障礙,b-green,🗾 全境探索,b-purple,🏥 醫療保障,b-blue
+jp_10d_b,japan,10,日本東北北海道雙主題 10天9夜,🍁,#fbbf24,#4ade80,79800,"日本東北北海道・小團8人・♿無障礙",japan accessible easy,秋冬首選,b-orange,♿ 無障礙,b-green,🍁 楓雪雙享,b-orange,♨️ 溫泉療癒,b-teal
+jp_10d_c,japan,10,日本四國遍路秘境慢旅 10天9夜,⛩️,#a5f3fc,#fbbf24,76800,"日本四國・小團10人・♿無障礙",japan accessible,靈修之旅,b-teal,♿ 無障礙,b-green,⛩️ 遍路巡禮,b-teal,🌿 身心淨化,b-green
+jp_12d_a,japan,12,日本南北縱走九州至北海道 12天11夜,🗾,#f9a8d4,#818cf8,98800,"日本全境・小團8人・♿無障礙",japan accessible,南北縱走,b-purple,♿ 無障礙,b-green,🗾 南北縱走,b-purple,🏥 醫療保障,b-blue
+jp_12d_b,japan,12,日本溫泉名湯巡禮 12天11夜,♨️,#6ee7b7,#a78bfa,96800,"日本全境溫泉・小團8人・♿無障礙",japan accessible easy,溫泉精選,b-teal,♿ 無障礙,b-green,♨️ 名湯巡禮,b-teal,🍱 懷石料理,b-orange
+jp_12d_c,japan,12,日本四季祭典文化之旅 12天11夜,🎏,#fbbf24,#f472b6,95800,"日本全境・小團10人・♿無障礙",japan accessible,祭典體驗,b-orange,♿ 無障礙,b-green,🎏 祭典文化,b-orange,🍱 季節料理,b-orange
+jp_15d_a,japan,15,日本深度慢旅全境 15天14夜,🗾,#818cf8,#ec4899,128000,"日本全境・小團8人・♿無障礙",japan accessible,深度全境,b-purple,♿ 無障礙,b-green,🗾 全境深度,b-purple,🏥 醫療保障,b-blue
+jp_15d_b,japan,15,日本古道文化遺產精選 15天14夜,🏛️,#fde68a,#818cf8,125000,"日本全境古道・小團8人・♿無障礙",japan accessible,文化遺產,b-purple,♿ 無障礙,b-green,🏛️ 文化遺產,b-purple,🌸 四季風情,b-green
+jp_15d_c,japan,15,日本銀髮健康溫泉療養 15天14夜,🌿,#4ade80,#38bdf8,122000,"日本溫泉勝地・小團8人・♿無障礙",japan accessible easy,療養首選,b-green,♿ 無障礙,b-green,🌿 健康療養,b-green,🏥 醫療保障,b-blue
+jp_2d_a,japan,2,大阪神戶短程美食輕旅 2天1夜,🍜,#fde68a,#f97316,28800,"日本關西・小團12人・♿無障礙",japan easy accessible,輕鬆短遊,b-orange,♿ 無障礙,b-green,🍜 大阪美食,b-orange,🚌 全程專車,b-blue
+jp_2d_b,japan,2,東京輕井澤高原清新 2天1夜,🌿,#86efac,#38bdf8,29800,"日本關東・小團12人・♿無障礙",japan easy accessible,高原清涼,b-teal,♿ 無障礙,b-green,🌿 高原療癒,b-teal,♨️ 溫泉放鬆,b-teal
+jp_2d_c,japan,2,京都一泊古寺禪意之旅 2天1夜,⛩️,#fbbf24,#a78bfa,31800,"日本京都・小團10人・♿無障礙",japan easy accessible,京都禪意,b-purple,♿ 無障礙,b-green,⛩️ 禪寺文化,b-purple,🍱 精進料理,b-orange
+jp_14d_a,japan,14,日本縱貫本州四國九州 14天13夜,🗾,#fca5a5,#818cf8,118000,"日本全境・小團8人・♿無障礙",japan accessible,縱貫精選,b-purple,♿ 無障礙,b-green,🗾 縱貫壯遊,b-purple,🏥 醫療保障,b-blue
+jp_14d_b,japan,14,日本鐵道之旅四季風情 14天13夜,🚂,#38bdf8,#fbbf24,115000,"日本全境鐵道・小團8人・♿無障礙",japan accessible easy,鐵道慢旅,b-blue,♿ 無障礙,b-green,🚂 鐵道慢遊,b-blue,♨️ 名湯巡禮,b-teal
+jp_14d_c,japan,14,日本溫泉文化藝術精選 14天13夜,🎎,#f9a8d4,#a78bfa,112000,"日本全境・小團8人・♿無障礙",japan accessible,文化藝術,b-purple,♿ 無障礙,b-green,🎎 藝術文化,b-purple,♨️ 溫泉療癒,b-teal
+eu_5d_a,europe,5,法國巴黎週邊凡爾賽 5天4夜,🗼,#c4b5fd,#fbbf24,82000,"法國巴黎・小團12人・♿無障礙",europe easy accessible,巴黎精選,b-purple,♿ 無障礙,b-green,🗼 巴黎初探,b-purple,🍷 法式料理,b-orange
+eu_5d_b,europe,5,義大利羅馬梵蒂岡古蹟 5天4夜,🏛️,#fde68a,#f97316,80000,"義大利羅馬・小團12人・♿無障礙",europe easy accessible,永恆之城,b-orange,♿ 無障礙,b-green,🏛️ 古蹟巡禮,b-orange,🍝 義式料理,b-orange
+eu_5d_c,europe,5,西班牙巴塞隆納高第建築 5天4夜,🎨,#fca5a5,#fbbf24,83000,"西班牙・小團12人・♿無障礙",europe easy accessible,建築藝術,b-orange,♿ 無障礙,b-green,🎨 建築藝術,b-orange,🍷 美酒美食,b-orange
+eu_6d_a,europe,6,瑞士日內瓦琉森蘇黎世 6天5夜,🏔️,#bfdbfe,#f9a8d4,98000,"瑞士・小團10人・♿無障礙",europe accessible easy,湖光山色,b-blue,♿ 無障礙,b-green,🏔️ 阿爾卑斯,b-blue,🍫 瑞士美食,b-orange
+eu_6d_b,europe,6,捷克布拉格維也納音樂之旅 6天5夜,🎵,#a78bfa,#fbbf24,92000,"捷克・奧地利・小團12人・♿無障礙",europe easy accessible,音樂之都,b-purple,♿ 無障礙,b-green,🎵 音樂文化,b-purple,🏰 巴洛克建築,b-blue
+eu_6d_c,europe,6,希臘雅典聖托里尼 6天5夜,🌊,#38bdf8,#fbbf24,95000,"希臘・小團10人・♿無障礙",europe easy accessible,藍白之美,b-teal,♿ 無障礙,b-green,🌊 愛琴海藍,b-teal,🍷 地中海料理,b-orange
+eu_9d_a,europe,9,義大利全覽南北縱走 9天8夜,🏛️,#fde68a,#818cf8,108000,"義大利全境・小團10人・♿無障礙",europe accessible easy,義大利全覽,b-orange,♿ 無障礙,b-green,🏛️ 古蹟全覽,b-orange,🍝 義式美食,b-orange
+eu_9d_b,europe,9,法德荷三國文化漫遊 9天8夜,🌷,#60a5fa,#fbbf24,105000,"法德荷三國・小團12人・♿無障礙",europe accessible easy,三國文化,b-blue,♿ 無障礙,b-green,🌷 文化薈萃,b-blue,🚌 全程專車,b-blue
+eu_9d_c,europe,9,英國蘇格蘭威爾斯深度 9天8夜,🏰,#818cf8,#4ade80,102000,"英國全境・小團10人・♿無障礙",europe accessible easy,英倫深度,b-blue,♿ 無障礙,b-green,🏰 城堡探秘,b-blue,🍵 英式下午茶,b-teal
+eu_11d_a,europe,11,中歐五國精華捷奧匈斯洛 11天10夜,🏘️,#fca5a5,#a78bfa,122000,"中歐五國・小團10人・♿無障礙",europe accessible,中歐精選,b-purple,♿ 無障礙,b-green,🏘️ 童話小城,b-purple,🚌 全程專車,b-blue
+eu_11d_b,europe,11,西歐五國英法德比荷 11天10夜,🌷,#60a5fa,#f472b6,125000,"西歐五國・小團10人・♿無障礙",europe accessible,西歐精選,b-blue,♿ 無障礙,b-green,🌷 五國文化,b-blue,🏥 醫療保障,b-blue
+eu_11d_c,europe,11,南歐陽光義希土三國 11天10夜,☀️,#fde68a,#38bdf8,118000,"南歐三國・小團10人・♿無障礙",europe accessible,南歐陽光,b-orange,♿ 無障礙,b-green,☀️ 陽光地中海,b-orange,🍷 南歐美食,b-orange
+eu_13d_a,europe,13,歐洲鐵道慢遊六國精選 13天12夜,🚂,#818cf8,#fbbf24,158000,"歐洲六國・小團10人・♿無障礙",europe accessible,鐵道之旅,b-blue,♿ 無障礙,b-green,🚂 鐵道漫遊,b-blue,🏥 醫療保障,b-blue
+eu_13d_b,europe,13,北歐挪威峽灣丹麥芬蘭 13天12夜,🌊,#bfdbfe,#818cf8,165000,"北歐三國・小團8人・♿無障礙",europe accessible,北歐峽灣,b-blue,♿ 無障礙,b-green,🌊 峽灣奇景,b-blue,🌌 極光之旅,b-purple
+eu_13d_c,europe,13,東歐波羅的海三國秘境 13天12夜,🏰,#a78bfa,#38bdf8,148000,"波羅的海三國・小團10人・♿無障礙",europe accessible,秘境探索,b-purple,♿ 無障礙,b-green,🏰 古城漫步,b-purple,🚌 全程專車,b-blue
+eu_uk7d,europe,7,英國倫敦愛丁堡 7天6夜,🏰,#60a5fa,#f472b6,88000,"英國・小團12人・♿無障礙",europe accessible easy,英倫首選,b-blue,♿ 無障礙,b-green,🏰 皇室文化,b-blue,🚌 全程專車,b-blue
+eu_7d_b,europe,7,法國巴黎普羅旺斯 7天6夜,🗼,#c4b5fd,#fbbf24,92000,"法國・小團12人・♿無障礙",europe accessible easy,浪漫首選,b-purple,♿ 無障礙,b-green,🗼 浪漫巴黎,b-purple,🍷 法式料理,b-orange
+eu_7d_c,europe,7,義大利羅馬佛羅倫斯 7天6夜,🏛️,#fde68a,#f97316,89000,"義大利・小團12人・♿無障礙",europe accessible easy,文藝之旅,b-orange,♿ 無障礙,b-green,🏛️ 古蹟巡禮,b-orange,🍝 義式料理,b-orange
+eu_spain8d,europe,8,西班牙巴塞隆納馬德里 8天7夜,💃,#f97316,#fbbf24,98000,"西班牙・小團12人・♿無障礙",europe accessible easy,伊比利風情,b-orange,♿ 無障礙,b-green,💃 西班牙風情,b-orange,🍷 美食美酒,b-orange
+eu_8d_b,europe,8,荷蘭比利時風車鬱金香 8天7夜,🌷,#f9a8d4,#38bdf8,96000,"荷蘭・比利時・小團12人・♿無障礙",europe accessible easy,花卉之旅,b-green,♿ 無障礙,b-green,🌷 花卉王國,b-green,🚌 全程專車,b-blue
+eu_8d_c,europe,8,德國羅曼蒂克大道巴伐利亞 8天7夜,🏰,#fbbf24,#818cf8,95000,"德國・小團12人・♿無障礙",europe accessible easy,德意志精選,b-blue,♿ 無障礙,b-green,🏰 童話城堡,b-blue,🍺 德式美食,b-orange
+eu_swiss10d,europe,10,瑞士奧地利阿爾卑斯 10天9夜,🏔️,#bfdbfe,#a78bfa,128000,"瑞士・奧地利・小團10人・♿無障礙",europe accessible,阿爾卑斯,b-blue,♿ 無障礙,b-green,🏔️ 山岳奇景,b-blue,🚂 冰河列車,b-teal
+eu_10d_b,europe,10,希臘愛琴海島嶼巡禮 10天9夜,🌊,#38bdf8,#fbbf24,118000,"希臘・愛琴海・小團10人・♿無障礙",europe accessible easy,愛琴海夢,b-teal,♿ 無障礙,b-green,🌊 藍海療癒,b-teal,🍷 地中海料理,b-orange
+eu_10d_c,europe,10,捷克波蘭東歐童話小鎮 10天9夜,🏘️,#fca5a5,#818cf8,112000,"捷克・波蘭・小團12人・♿無障礙",europe accessible easy,童話小鎮,b-purple,♿ 無障礙,b-green,🏘️ 童話風情,b-purple,🚌 全程專車,b-blue
+europe,europe,12,歐洲三國慢遊 12天11夜,🏛️,#60a5fa,#a78bfa,128000,"法義瑞・小團12人",europe accessible,精選,b-blue,🏥 醫療保障,b-blue,🚌 全程專車,b-orange,,
+eu_nordic12d,europe,12,北歐四國峽灣極光 12天11夜,🌌,#818cf8,#38bdf8,158000,"北歐四國・小團10人・♿無障礙",europe accessible,極光追尋,b-blue,♿ 無障礙,b-green,🌌 極光奇景,b-blue,🏥 醫療保障,b-blue
+eu_12d_c,europe,12,葡萄牙西班牙伊比利深度 12天11夜,⛵,#fbbf24,#f472b6,138000,"葡萄牙・西班牙・小團10人・♿無障礙",europe accessible,伊比利深度,b-purple,♿ 無障礙,b-green,⛵ 大航海風情,b-purple,🍷 美酒佳餚,b-orange
+eu_east14d,europe,14,東歐五國古堡波光 14天13夜,🏰,#a78bfa,#fbbf24,168000,"東歐五國・小團10人・♿無障礙",europe accessible,東歐精選,b-purple,♿ 無障礙,b-green,🏰 古堡巡禮,b-purple,🚌 全程專車,b-blue
+eu_14d_b,europe,14,西歐四國精選慢旅 14天13夜,🗼,#60a5fa,#f97316,162000,"西歐四國・小團10人・♿無障礙",europe accessible,西歐精選,b-blue,♿ 無障礙,b-green,🗼 西歐精選,b-blue,🏥 醫療保障,b-blue
+eu_14d_c,europe,14,地中海郵輪義希土 14天13夜,🚢,#38bdf8,#818cf8,178000,"地中海・小團12人・♿無障礙",europe accessible,郵輪豪華,b-blue,♿ 無障礙,b-green,🚢 豪華郵輪,b-blue,🍷 美食美酒,b-orange
+eu_med15d,europe,15,地中海全覽義法西 15天14夜,🌊,#818cf8,#f97316,188000,"地中海三國・小團10人・♿無障礙",europe accessible,地中海精選,b-blue,♿ 無障礙,b-green,🌊 地中海風光,b-blue,🏥 醫療保障,b-blue
+eu_15d_b,europe,15,北歐冰島格陵蘭極地探秘 15天14夜,🧊,#bfdbfe,#6ee7b7,198000,"北歐・冰島・小團8人・♿無障礙",europe accessible,極地探秘,b-blue,♿ 無障礙,b-green,🧊 冰川奇景,b-blue,🌌 極光之旅,b-purple
+eu_15d_c,europe,15,英法德三國文化深度 15天14夜,🏛️,#c4b5fd,#fbbf24,185000,"英法德三國・小團10人・♿無障礙",europe accessible,文化深度,b-purple,♿ 無障礙,b-green,🏛️ 文化深度,b-purple,🏥 醫療保障,b-blue
+sea_thai4d,sea,4,泰國曼谷華欣 4天3夜,🐘,#fbbf24,#f97316,22800,"泰國・小團12人・♿無障礙",sea easy accessible,微笑國度,b-orange,♿ 無障礙,b-green,🐘 文化體驗,b-orange,🍜 泰式料理,b-orange
+sea_4d_b,sea,4,新加坡濱海灣花園城市 4天3夜,🌺,#4ade80,#38bdf8,28800,"新加坡・小團12人・♿無障礙",sea easy accessible,花園城市,b-teal,♿ 無障礙,b-green,🌺 花園漫步,b-teal,🍜 多元美食,b-orange
+sea_4d_c,sea,4,馬來西亞吉隆坡檳城 4天3夜,🕌,#fde68a,#4ade80,21800,"馬來西亞・小團12人・♿無障礙",sea easy accessible,多元文化,b-orange,♿ 無障礙,b-green,🕌 文化薈萃,b-orange,🍜 南洋美食,b-orange
+bali,sea,5,峇里島悠閒海景療癒 5天4夜,🌺,#4ade80,#facc15,38800,"印尼峇里島・小團10人・♿無障礙",sea accessible easy,熱帶天堂,b-teal,♿ 無障礙,b-green,🌊 海景療癒,b-teal,,
+sea_cam5d,sea,5,柬埔寨吳哥窟文化 5天4夜,🏛️,#fbbf24,#f97316,28800,"柬埔寨吳哥・小團12人・♿無障礙",sea accessible easy,古文明,b-orange,♿ 無障礙,b-green,🏛️ 古蹟探秘,b-orange,🚌 全程專車,b-blue
+sea_5d_c,sea,5,越南胡志明峴港慢遊 5天4夜,🏮,#fca5a5,#fbbf24,25800,"越南・小團12人・♿無障礙",sea easy accessible,越南精選,b-orange,♿ 無障礙,b-green,🏮 古城文化,b-orange,🍜 越式料理,b-orange
+sea_thai6d,sea,6,泰國清邁曼谷美食文化 6天5夜,🌸,#86efac,#fbbf24,32800,"泰國北南・小團10人・♿無障礙",sea easy accessible,泰北精選,b-teal,♿ 無障礙,b-green,🌸 清邁花市,b-teal,🍜 泰式料理,b-orange
+sea_palawan6d,sea,6,菲律賓巴拉望秘境海島 6天5夜,🏝️,#22d3ee,#4ade80,35800,"菲律賓巴拉望・小團10人・♿無障礙",sea accessible easy,秘境海島,b-teal,♿ 無障礙,b-green,🏝️ 秘境探索,b-teal,🌊 潛水體驗,b-blue
+sea_6d_c,sea,6,峇里島龍目島雙島療癒 6天5夜,🌺,#34d399,#a78bfa,36800,"印尼峇里龍目・小團10人・♿無障礙",sea accessible easy,雙島天堂,b-teal,♿ 無障礙,b-green,🌺 熱帶天堂,b-teal,🌊 海島療癒,b-blue
+sea_sg7d,sea,7,新馬雙城美食文化 7天6夜,🦁,#fbbf24,#4ade80,38800,"新加坡・馬來西亞・小團12人・♿無障礙",sea easy accessible,雙城精選,b-teal,♿ 無障礙,b-green,🦁 花園城市,b-teal,🍜 多元美食,b-orange
+sea_7d_b,sea,7,緬甸蒲甘佛塔古城 7天6夜,🛕,#fbbf24,#f97316,32800,"緬甸蒲甘・小團12人・♿無障礙",sea accessible,佛塔古城,b-orange,♿ 無障礙,b-green,🛕 佛塔文化,b-orange,🚌 全程專車,b-blue
+sea_7d_c,sea,7,印尼爪哇婆羅浮屠 7天6夜,🏛️,#86efac,#fbbf24,34800,"印尼爪哇・小團12人・♿無障礙",sea accessible,古文明探秘,b-orange,♿ 無障礙,b-green,🏛️ 世界遺產,b-orange,🚌 全程專車,b-blue
+sea_viet8d,sea,8,越南全覽河內下龍灣會安 8天7夜,🏮,#fca5a5,#86efac,39800,"越南南北・小團10人・♿無障礙",sea easy accessible,越南全覽,b-teal,♿ 無障礙,b-green,🏮 下龍灣奇景,b-teal,🍜 越式美食,b-orange
+sea_8d_b,sea,8,泰國普吉蘇梅島雙島 8天7夜,🏖️,#22d3ee,#fbbf24,42800,"泰國南部・小團10人・♿無障礙",sea easy accessible,雙島天堂,b-teal,♿ 無障礙,b-green,🏖️ 海島療癒,b-teal,🌊 藍海美景,b-blue
+sea_8d_c,sea,8,馬來西亞沙巴婆羅洲雨林 8天7夜,🌿,#4ade80,#fbbf24,38800,"馬來西亞沙巴・小團10人・♿無障礙",sea accessible,雨林探秘,b-green,♿ 無障礙,b-green,🌿 雨林生態,b-green,🦧 動物探索,b-teal
+sea_3d_a,sea,3,新加坡花園城市輕鬆 3天2夜,🌺,#34d399,#38bdf8,18800,"新加坡・小團12人・♿無障礙",sea easy accessible,輕鬆初遊,b-teal,♿ 無障礙,b-green,🌺 花園城市,b-teal,🍜 南洋美食,b-orange
+sea_3d_b,sea,3,泰國曼谷短遊精選 3天2夜,🐘,#fbbf24,#4ade80,16800,"泰國曼谷・小團12人・♿無障礙",sea easy accessible,曼谷精選,b-orange,♿ 無障礙,b-green,🐘 文化體驗,b-orange,🍜 泰式料理,b-orange
+sea_3d_c,sea,3,馬來西亞吉隆坡城市探索 3天2夜,🕌,#fde68a,#86efac,15800,"馬來西亞吉隆坡・小團12人・♿無障礙",sea easy accessible,城市精選,b-orange,♿ 無障礙,b-green,🕌 多元文化,b-orange,🚌 全程專車,b-blue
+sea_9d_a,sea,9,泰國北中南全覽文化 9天8夜,🐘,#fbbf24,#818cf8,45800,"泰國全境・小團10人・♿無障礙",sea accessible easy,泰國全覽,b-orange,♿ 無障礙,b-green,🐘 全境探索,b-orange,🍜 泰式美食,b-orange
+sea_9d_b,sea,9,新馬泰三國文化美食 9天8夜,🌴,#4ade80,#fbbf24,42800,"新馬泰三國・小團10人・♿無障礙",sea easy accessible,三國精選,b-teal,♿ 無障礙,b-green,🌴 南洋風情,b-teal,🍜 多國美食,b-orange
+sea_9d_c,sea,9,越南全程北中南完整 9天8夜,🏮,#fca5a5,#4ade80,40800,"越南全境・小團10人・♿無障礙",sea easy accessible,越南完整,b-teal,♿ 無障礙,b-green,🏮 越南文化,b-teal,🍜 越式美食,b-orange
+sea_11d_a,sea,11,東南亞精選郵輪之旅 11天10夜,🚢,#38bdf8,#4ade80,55800,"東南亞海域・小團12人・♿無障礙",sea accessible,郵輪精選,b-blue,♿ 無障礙,b-green,🚢 豪華郵輪,b-blue,🍜 多元料理,b-orange
+sea_11d_b,sea,11,印尼峇里爪哇蘇拉維西 11天10夜,🌺,#86efac,#f97316,52800,"印尼多島・小團10人・♿無障礙",sea accessible,印尼深度,b-orange,♿ 無障礙,b-green,🌺 多島探索,b-orange,🏛️ 世界遺產,b-purple
+sea_11d_c,sea,11,中南半島完整四國深度 11天10夜,🛕,#fbbf24,#a78bfa,50800,"中南半島四國・小團10人・♿無障礙",sea accessible,四國深度,b-purple,♿ 無障礙,b-green,🛕 古城文化,b-purple,🚌 全程專車,b-blue
+sea_14d_a,sea,14,東南亞六國文化深度之旅 14天13夜,🌏,#4ade80,#f472b6,65800,"東南亞六國・小團10人・♿無障礙",sea accessible,六國精選,b-purple,♿ 無障礙,b-green,🌏 深度探索,b-purple,🏥 醫療保障,b-blue
+sea_14d_b,sea,14,泰緬寮柬越完整中南半島 14天13夜,🛶,#fbbf24,#38bdf8,62800,"中南半島五國・小團10人・♿無障礙",sea accessible,半島全覽,b-teal,♿ 無障礙,b-green,🛶 半島探索,b-teal,🚌 全程專車,b-blue
+sea_14d_c,sea,14,東南亞銀髮養生度假精選 14天13夜,🌿,#86efac,#818cf8,58800,"東南亞度假勝地・小團10人・♿無障礙",sea easy accessible,養生度假,b-green,♿ 無障礙,b-green,🌿 養生療癒,b-green,🏥 醫療保障,b-blue
+sea_10d_a,sea,10,東南亞四國精選慢旅 10天9夜,🌏,#fbbf24,#4ade80,48800,"東南亞四國・小團10人・♿無障礙",sea accessible easy,四國精選,b-teal,♿ 無障礙,b-green,🌏 多國探索,b-teal,🚌 全程專車,b-blue
+sea_10d_b,sea,10,印尼峇里爪哇文化深度 10天9夜,🌺,#86efac,#f97316,46800,"印尼・小團10人・♿無障礙",sea accessible,印尼深度,b-orange,♿ 無障礙,b-green,🌺 文化探索,b-orange,🏛️ 世界遺產,b-purple
+sea_10d_c,sea,10,湄公河金三角古都巡禮 10天9夜,🛶,#fbbf24,#a78bfa,44800,"泰緬寮・小團10人・♿無障礙",sea accessible,金三角探秘,b-orange,♿ 無障礙,b-green,🛶 湄公河遊,b-orange,🚌 全程專車,b-blue
+sea_12d_a,sea,12,東南亞全覽五國深度 12天11夜,🌏,#4ade80,#818cf8,58800,"東南亞五國・小團10人・♿無障礙",sea accessible,五國全覽,b-purple,♿ 無障礙,b-green,🌏 深度探索,b-purple,🏥 醫療保障,b-blue
+sea_12d_b,sea,12,越南寮國柬埔寨古城慢旅 12天11夜,🏛️,#fca5a5,#fbbf24,52800,"中南半島三國・小團10人・♿無障礙",sea accessible,古城慢旅,b-orange,♿ 無障礙,b-green,🏛️ 古城文化,b-orange,🚌 全程專車,b-blue
+sea_12d_c,sea,12,馬來西亞全境海陸雙享 12天11夜,🌴,#34d399,#fbbf24,54800,"馬來西亞・小團10人・♿無障礙",sea accessible easy,馬來全境,b-teal,♿ 無障礙,b-green,🌴 海陸雙享,b-teal,🍜 南洋美食,b-orange
+ne_seoul4d,northeast,4,首爾景福宮明洞美食 4天3夜,🏯,#fca5a5,#818cf8,28800,"韓國首爾・小團12人・♿無障礙",northeast easy accessible,韓流首選,b-purple,♿ 無障礙,b-green,🏯 宮廷文化,b-purple,🍜 韓式料理,b-orange
+ne_4d_b,northeast,4,首爾仁川北村韓屋 4天3夜,🏘️,#fbbf24,#f472b6,27800,"韓國首爾仁川・小團12人・♿無障礙",northeast easy accessible,韓屋體驗,b-orange,♿ 無障礙,b-green,🏘️ 韓屋文化,b-orange,🍜 傳統料理,b-orange
+ne_4d_c,northeast,4,香港澳門雙城慢遊 4天3夜,🌃,#fbbf24,#f97316,25800,"香港・澳門・小團12人・♿無障礙",northeast easy accessible,雙城精選,b-orange,♿ 無障礙,b-green,🌃 夜景首選,b-orange,🍜 港澳美食,b-orange
+ne_jeju5d,northeast,5,濟州島火山海岸自然 5天4夜,🌋,#4ade80,#38bdf8,32800,"韓國濟州島・小團10人・♿無障礙",northeast easy accessible,火山島嶼,b-teal,♿ 無障礙,b-green,🌋 自然奇景,b-teal,🍜 海鮮料理,b-orange
+ne_beijing5d,northeast,5,北京故宮長城萬里 5天4夜,🏯,#fca5a5,#fbbf24,30800,"中國北京・小團12人・♿無障礙",northeast easy accessible,皇城首選,b-orange,♿ 無障礙,b-green,🏯 皇城文化,b-orange,🚌 全程專車,b-blue
+ne_5d_c,northeast,5,韓國釜山慶州歷史文化 5天4夜,⛩️,#a78bfa,#fbbf24,31800,"韓國釜山慶州・小團10人・♿無障礙",northeast easy accessible,古都文化,b-purple,♿ 無障礙,b-green,⛩️ 古都巡禮,b-purple,🍜 韓式料理,b-orange
+ne_6d_a,northeast,6,中國上海蘇杭江南水鄉 6天5夜,🌉,#38bdf8,#818cf8,32800,"中國江南・小團12人・♿無障礙",northeast easy accessible,江南水鄉,b-blue,♿ 無障礙,b-green,🌉 江南風情,b-blue,🍜 江南料理,b-orange
+ne_6d_b,northeast,6,韓國春川全州溫泉養生 6天5夜,♨️,#fca5a5,#4ade80,34800,"韓國中部・小團10人・♿無障礙",northeast easy accessible,溫泉養生,b-teal,♿ 無障礙,b-green,♨️ 溫泉療癒,b-teal,🍜 韓式料理,b-orange
+ne_6d_c,northeast,6,中國桂林山水漓江遊 6天5夜,⛰️,#86efac,#38bdf8,28800,"中國桂林・小團12人・♿無障礙",northeast easy accessible,山水奇景,b-teal,♿ 無障礙,b-green,⛰️ 山水秘境,b-teal,🛶 漓江遊船,b-blue
+ne_korea7d,northeast,7,韓國全境首爾釜山濟州 7天6夜,🇰🇷,#fca5a5,#60a5fa,42800,"韓國全境・小團10人・♿無障礙",northeast easy accessible,韓國全境,b-purple,♿ 無障礙,b-green,🏯 文化深度,b-purple,🍜 韓食饗宴,b-orange
+ne_mongolia7d,northeast,7,蒙古草原遊牧文化體驗 7天6夜,🐎,#fbbf24,#86efac,38800,"蒙古烏蘭巴托・小團10人・♿無障礙",northeast accessible,草原奇旅,b-orange,♿ 無障礙,b-green,🐎 草原文化,b-orange,⛺ 蒙古包住宿,b-teal
+ne_7d_c,northeast,7,中國西安兵馬俑古都絲路 7天6夜,🏺,#fbbf24,#f97316,36800,"中國西安・小團12人・♿無障礙",northeast easy accessible,絲路古都,b-orange,♿ 無障礙,b-green,🏺 古文明,b-orange,🚌 全程專車,b-blue
+ne_japankorea8d,northeast,8,日韓雙國東京首爾精選 8天7夜,✈️,#fbbf24,#f472b6,56800,"日本・韓國・小團10人・♿無障礙",northeast accessible easy,日韓雙享,b-purple,♿ 無障礙,b-green,✈️ 雙國精選,b-purple,🍱 日韓美食,b-orange
+ne_8d_b,northeast,8,中國雲南麗江大理慢活 8天7夜,🌸,#86efac,#a78bfa,38800,"中國雲南・小團10人・♿無障礙",northeast easy accessible,雲南慢活,b-teal,♿ 無障礙,b-green,🌸 古城慢遊,b-teal,🌿 生態療癒,b-green
+ne_8d_c,northeast,8,中國四川成都峨眉樂山 8天7夜,🐼,#86efac,#fbbf24,36800,"中國四川・小團12人・♿無障礙",northeast easy accessible,熊貓故鄉,b-green,♿ 無障礙,b-green,🐼 熊貓基地,b-green,🍜 川菜料理,b-orange
+ne_3d_a,northeast,3,首爾仁川輕旅精選 3天2夜,🏯,#fca5a5,#818cf8,18800,"韓國首爾・小團12人・♿無障礙",northeast easy accessible,輕鬆初遊,b-purple,♿ 無障礙,b-green,🏯 首爾精選,b-purple,🍜 韓式料理,b-orange
+ne_3d_b,northeast,3,香港夜景美食文化 3天2夜,🌃,#fbbf24,#f97316,16800,"香港・小團12人・♿無障礙",northeast easy accessible,香港精選,b-orange,♿ 無障礙,b-green,🌃 夜景之都,b-orange,🍜 港式美食,b-orange
+ne_3d_c,northeast,3,北京天安門天壇故宮 3天2夜,🏯,#fca5a5,#fbbf24,17800,"中國北京・小團12人・♿無障礙",northeast easy accessible,皇城初探,b-orange,♿ 無障礙,b-green,🏯 皇城文化,b-orange,🚌 全程專車,b-blue
+ne_9d_a,northeast,9,韓國全境深度文化美食 9天8夜,🏯,#fca5a5,#818cf8,48800,"韓國全境・小團10人・♿無障礙",northeast accessible easy,韓國深度,b-purple,♿ 無障礙,b-green,🏯 文化深度,b-purple,🍜 韓食全覽,b-orange
+ne_9d_b,northeast,9,中國江南水鄉蘇杭揚 9天8夜,🌉,#38bdf8,#fbbf24,42800,"中國江南・小團12人・♿無障礙",northeast easy accessible,江南慢活,b-blue,♿ 無障礙,b-green,🌉 水鄉風情,b-blue,🍜 江南料理,b-orange
+ne_9d_c,northeast,9,日韓精選東京首爾串聯 9天8夜,✈️,#fbbf24,#f472b6,52800,"日本・韓國・小團10人・♿無障礙",northeast accessible easy,日韓精選,b-purple,♿ 無障礙,b-green,✈️ 雙城精選,b-purple,🍱 日韓美食,b-orange
+ne_11d_a,northeast,11,日韓中三國文化深度 11天10夜,🌏,#818cf8,#fbbf24,62800,"日韓中三國・小團10人・♿無障礙",northeast accessible,三國深度,b-purple,♿ 無障礙,b-green,🌏 三國探索,b-purple,🏥 醫療保障,b-blue
+ne_11d_b,northeast,11,中國絲路黃河文明探秘 11天10夜,🏺,#fbbf24,#f97316,52800,"中國絲路黃河・小團10人・♿無障礙",northeast accessible,文明探秘,b-orange,♿ 無障礙,b-green,🏺 文明古蹟,b-orange,🚌 全程專車,b-blue
+ne_11d_c,northeast,11,韓國蒙古草原雙主題 11天10夜,🐎,#86efac,#a78bfa,56800,"韓國・蒙古・小團8人・♿無障礙",northeast accessible,草原文化,b-orange,♿ 無障礙,b-green,🐎 草原體驗,b-orange,⛺ 蒙古包住宿,b-teal
+ne_14d_a,northeast,14,東北亞四國深度文化慢旅 14天13夜,🌏,#a78bfa,#fbbf24,72800,"東北亞四國・小團8人・♿無障礙",northeast accessible,四國慢旅,b-purple,♿ 無障礙,b-green,🌏 深度探索,b-purple,🏥 醫療保障,b-blue
+ne_14d_b,northeast,14,中國全境南北絲路黃河長城 14天13夜,🏯,#fca5a5,#818cf8,65800,"中國全境・小團10人・♿無障礙",northeast accessible,中國全境,b-orange,♿ 無障礙,b-green,🏯 文化全覽,b-orange,🚌 全程專車,b-blue
+ne_14d_c,northeast,14,日本韓國蒙古三國精選 14天13夜,🌏,#fbbf24,#4ade80,68800,"日韓蒙三國・小團8人・♿無障礙",northeast accessible,三國精選,b-purple,♿ 無障礙,b-green,🌏 三國文化,b-purple,🏥 醫療保障,b-blue
+ne_10d_a,northeast,10,東北亞三國日韓中精選 10天9夜,🌏,#818cf8,#fbbf24,58800,"日韓中三國・小團10人・♿無障礙",northeast accessible,三國精選,b-purple,♿ 無障礙,b-green,🌏 三國探索,b-purple,🏥 醫療保障,b-blue
+ne_10d_b,northeast,10,中國絲路敦煌甘肅古道 10天9夜,🏺,#fbbf24,#f97316,48800,"中國絲路・小團10人・♿無障礙",northeast accessible,絲路探秘,b-orange,♿ 無障礙,b-green,🏺 絲路文化,b-orange,🚌 全程專車,b-blue
+ne_10d_c,northeast,10,韓國深度文化美食全覽 10天9夜,🏯,#fca5a5,#818cf8,52800,"韓國全境・小團10人・♿無障礙",northeast easy accessible,韓國深度,b-purple,♿ 無障礙,b-green,🏯 文化深度,b-purple,🍜 韓食全覽,b-orange
+ne_12d_a,northeast,12,東北亞文化深度全覽 12天11夜,🌏,#a78bfa,#f472b6,68800,"東北亞・小團10人・♿無障礙",northeast accessible,全境深度,b-purple,♿ 無障礙,b-green,🌏 深度探索,b-purple,🏥 醫療保障,b-blue
+ne_12d_b,northeast,12,中國南北縱走精華 12天11夜,🏯,#fca5a5,#fbbf24,58800,"中國南北・小團12人・♿無障礙",northeast accessible,南北精選,b-orange,♿ 無障礙,b-green,🏯 南北文化,b-orange,🚌 全程專車,b-blue
+ne_12d_c,northeast,12,蒙古西伯利亞草原極地 12天11夜,🐎,#bfdbfe,#86efac,62800,"蒙古・俄羅斯西伯利亞・小團8人・♿無障礙",northeast accessible,草原極地,b-blue,♿ 無障礙,b-green,🐎 草原文化,b-blue,❄️ 極地探秘,b-purple
