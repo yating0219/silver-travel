@@ -3864,28 +3864,29 @@
         border:none;color:#fff;width:34px;height:34px;border-radius:50%;
         font-size:18px;cursor:pointer;">✕</button>
       <div style="font-size:36px;margin-bottom:6px;">📋</div>
-      <div style="font-size:20px;font-weight:900;">留下聯絡資料，客服馬上聯繫您</div>
+      <div style="font-size:20px;font-weight:900;" data-i18n="qb-title">留下聯絡資料，客服馬上聯繫您</div>
       <div style="font-size:15px;opacity:.88;margin-top:4px;" id="qb-tour-name"></div>
     </div>
     <!-- body -->
     <div style="padding:24px 28px 28px;">
       <div style="margin-bottom:18px;">
-        <label style="font-size:17px;font-weight:700;display:block;margin-bottom:8px;">您的姓名 <span style="color:#ef4444;">*</span></label>
-        <input id="qb-name-input" type="text" placeholder="例：王阿姨"
+        <label style="font-size:17px;font-weight:700;display:block;margin-bottom:8px;"><span data-i18n="qb-name-label">您的姓名</span> <span style="color:#ef4444;">*</span></label>
+        <input id="qb-name-input" type="text" data-i18n-placeholder="qb-name-ph"
+          placeholder="例：王阿姨"
           style="width:100%;padding:12px 16px;border:2px solid #e5e7eb;border-radius:14px;font-size:18px;font-family:inherit;"
           onkeydown="if(event.key==='Enter')document.getElementById('qb-phone-input').focus()" />
       </div>
       <div style="margin-bottom:24px;">
-        <label style="font-size:17px;font-weight:700;display:block;margin-bottom:8px;">聯絡電話 <span style="color:#ef4444;">*</span></label>
+        <label style="font-size:17px;font-weight:700;display:block;margin-bottom:8px;"><span data-i18n="qb-phone-label">聯絡電話</span> <span style="color:#ef4444;">*</span></label>
         <input id="qb-phone-input" type="tel" placeholder="09xx-xxx-xxx"
           style="width:100%;padding:12px 16px;border:2px solid #e5e7eb;border-radius:14px;font-size:18px;font-family:inherit;"
           onkeydown="if(event.key==='Enter')submitQuickBook()" />
       </div>
       <button onclick="submitQuickBook()" class="btn btn-orange"
-        style="width:100%;font-size:19px;min-height:58px;">
+        style="width:100%;font-size:19px;min-height:58px;" data-i18n="qb-submit">
         ✅ 送出報名申請
       </button>
-      <div style="text-align:center;margin-top:14px;font-size:15px;color:#78716c;">
+      <div style="text-align:center;margin-top:14px;font-size:15px;color:#78716c;" data-i18n="qb-footer">
         客服將在 2 小時內以電話確認・免費撥打 0800-888-888
       </div>
     </div>
@@ -3901,70 +3902,70 @@
     <div class="bcon-header">
       <button class="bcon-close" onclick="closeBookingConfirm()" aria-label="關閉">✕</button>
       <div class="bcon-success-icon">✅</div>
-      <div class="bcon-title" id="bcon-title-txt">報名申請已送出！</div>
-      <div class="bcon-subtitle">悠旅趣客服將盡快與您聯繫確認</div>
+      <div class="bcon-title" id="bcon-title-txt" data-i18n="bcon-title">報名申請已送出！</div>
+      <div class="bcon-subtitle" data-i18n="bcon-subtitle">悠旅趣客服將盡快與您聯繫確認</div>
       <div class="bcon-order" id="bcon-order-num">訂單編號：YT2026-XXXXX</div>
     </div>
 
     <!-- Confirmation Slip -->
     <div class="bcon-slip">
-      <div class="bcon-slip-title">📋 報名資料確認單</div>
+      <div class="bcon-slip-title" data-i18n="bcon-slip-hd">📋 報名資料確認單</div>
       <div class="bcon-row">
-        <span class="bcon-label">旅人姓名</span>
+        <span class="bcon-label" data-i18n="bcon-lbl-name">旅人姓名</span>
         <span class="bcon-val" id="bcon-name">—</span>
       </div>
       <div class="bcon-row">
-        <span class="bcon-label">聯絡電話</span>
+        <span class="bcon-label" data-i18n="bcon-lbl-phone">聯絡電話</span>
         <span class="bcon-val" id="bcon-phone">—</span>
       </div>
       <div class="bcon-row" id="bcon-tour-row">
-        <span class="bcon-label">報名行程</span>
+        <span class="bcon-label" data-i18n="bcon-lbl-tour">報名行程</span>
         <span class="bcon-val" id="bcon-tour">—</span>
       </div>
       <div class="bcon-row" id="bcon-month-row">
-        <span class="bcon-label">希望出發</span>
+        <span class="bcon-label" data-i18n="bcon-lbl-month">希望出發</span>
         <span class="bcon-val" id="bcon-month">—</span>
       </div>
       <div class="bcon-row" id="bcon-note-row">
-        <span class="bcon-label">特殊需求</span>
+        <span class="bcon-label" data-i18n="bcon-lbl-note">特殊需求</span>
         <span class="bcon-val" id="bcon-note">—</span>
       </div>
       <div class="bcon-row">
-        <span class="bcon-label">申請時間</span>
+        <span class="bcon-label" data-i18n="bcon-lbl-time">申請時間</span>
         <span class="bcon-val" id="bcon-time">—</span>
       </div>
     </div>
 
     <!-- Next Steps -->
     <div class="bcon-next">
-      <div class="bcon-next-title">📬 接下來我們會這樣聯繫您</div>
+      <div class="bcon-next-title" data-i18n="bcon-next-hd">📬 接下來我們會這樣聯繫您</div>
       <div class="bcon-steps">
         <div class="bcon-step">
           <div class="bcon-step-num">1</div>
           <div class="bcon-step-body">
-            <div class="bcon-step-head">立即 — 系統確認通知</div>
-            <div class="bcon-step-desc">系統已自動記錄您的申請，訂單編號即為本確認單上方號碼，建議截圖或列印保存。</div>
+            <div class="bcon-step-head" data-i18n="bcon-s1-hd">立即 — 系統確認通知</div>
+            <div class="bcon-step-desc" data-i18n="bcon-s1-desc">系統已自動記錄您的申請，訂單編號即為本確認單上方號碼，建議截圖或列印保存。</div>
           </div>
         </div>
         <div class="bcon-step">
           <div class="bcon-step-num">2</div>
           <div class="bcon-step-body">
-            <div class="bcon-step-head">2 小時內 — 客服電話確認</div>
-            <div class="bcon-step-desc">專人客服將以您填寫的電話主動致電，確認行程細節、人數與特殊需求。<br><strong>上班時間：每日 08:00–22:00</strong></div>
+            <div class="bcon-step-head" data-i18n="bcon-s2-hd">2 小時內 — 客服電話確認</div>
+            <div class="bcon-step-desc" data-i18n-html="bcon-s2-desc">專人客服將以您填寫的電話主動致電，確認行程細節、人數與特殊需求。<br><strong>上班時間：每日 08:00–22:00</strong></div>
           </div>
         </div>
         <div class="bcon-step">
           <div class="bcon-step-num">3</div>
           <div class="bcon-step-body">
-            <div class="bcon-step-head">確認後 — 傳送正式訂單</div>
-            <div class="bcon-step-desc">電話確認完成後，客服會以 LINE 或簡訊傳送正式訂單與付款連結給您。</div>
+            <div class="bcon-step-head" data-i18n="bcon-s3-hd">確認後 — 傳送正式訂單</div>
+            <div class="bcon-step-desc" data-i18n="bcon-s3-desc">電話確認完成後，客服會以 LINE 或簡訊傳送正式訂單與付款連結給您。</div>
           </div>
         </div>
         <div class="bcon-step">
           <div class="bcon-step-num">4</div>
           <div class="bcon-step-body">
-            <div class="bcon-step-head">出發前 — 健康狀況確認</div>
-            <div class="bcon-step-desc">出發前 3 天客服再次確認健康狀況，確保旅途萬無一失。</div>
+            <div class="bcon-step-head" data-i18n="bcon-s4-hd">出發前 — 健康狀況確認</div>
+            <div class="bcon-step-desc" data-i18n="bcon-s4-desc">出發前 3 天客服再次確認健康狀況，確保旅途萬無一失。</div>
           </div>
         </div>
       </div>
@@ -3975,37 +3976,37 @@
       <a href="tel:0800-888-888" class="bcon-contact-btn">
         <span class="bcon-contact-icon">📞</span>
         <div>
-          <div>免費電話</div>
+          <div data-i18n="bcon-ct-phone">免費電話</div>
           <div class="bcon-contact-label">0800-888-888</div>
         </div>
       </a>
       <a href="https://line.me/R/ti/p/@silvertravelyoutripu" class="bcon-contact-btn" target="_blank" rel="noopener">
         <span class="bcon-contact-icon">💬</span>
         <div>
-          <div>LINE 客服</div>
-          <div class="bcon-contact-label">@悠旅趣</div>
+          <div data-i18n="bcon-ct-line">LINE 客服</div>
+          <div class="bcon-contact-label" data-i18n="bcon-ct-line-sub">@悠旅趣</div>
         </div>
       </a>
       <a href="mailto:service@yotrip.tw" class="bcon-contact-btn">
         <span class="bcon-contact-icon">✉️</span>
         <div>
-          <div>Email</div>
+          <div data-i18n="bcon-ct-email">Email</div>
           <div class="bcon-contact-label">service@yotrip.tw</div>
         </div>
       </a>
       <a href="#" class="bcon-contact-btn" onclick="event.preventDefault();closeBookingConfirm();goToHealth()">
         <span class="bcon-contact-icon">❤️</span>
         <div>
-          <div>健康問卷</div>
-          <div class="bcon-contact-label">提前填寫更安心</div>
+          <div data-i18n="bcon-ct-health">健康問卷</div>
+          <div class="bcon-contact-label" data-i18n="bcon-ct-health-sub">提前填寫更安心</div>
         </div>
       </a>
     </div>
 
     <!-- Actions -->
     <div class="bcon-actions">
-      <button class="btn btn-orange" style="flex:1;" onclick="window.print()">🖨️ 列印確認單</button>
-      <button class="btn btn-outline" style="flex:1;" onclick="closeBookingConfirm()">關閉</button>
+      <button class="btn btn-orange" style="flex:1;" onclick="window.print()" data-i18n="bcon-print">🖨️ 列印確認單</button>
+      <button class="btn btn-outline" style="flex:1;" onclick="closeBookingConfirm()" data-i18n="bcon-close">關閉</button>
     </div>
   </div>
 </div>
@@ -6247,11 +6248,11 @@ function closeQuickBook() {
 function submitQuickBook() {
   const name  = document.getElementById('qb-name-input').value.trim();
   const phone = document.getElementById('qb-phone-input').value.trim();
-  const isEn  = window._lang === 'en';
-  if (!name || !phone) {
-    alert(isEn ? 'Please fill in name and phone number.' : '請填寫姓名與聯絡電話');
-    return;
-  }
+  const _ql = window._lang || 'zh';
+  const _qMsg = _ql === 'en' ? 'Please fill in name and phone number.'
+    : _ql === 'ja' ? 'お名前と電話番号をご入力ください。'
+    : '請填寫姓名與聯絡電話';
+  if (!name || !phone) { alert(_qMsg); return; }
   closeQuickBook();
   showBookingConfirm({ name, phone, tour: window._pendingTourName || '' });
 }
@@ -6269,12 +6270,15 @@ function openModal(key) {
     : '<li>✈️ 來回機票</li><li>🏨 四星溫泉飯店</li><li>🍚 全程銀髮特製餐</li><li>🚌 全程交通接送</li><li>🏥 隨團護理師</li><li>🛡️ 海外旅遊保險</li>';
   const earlyBird = isEn ? '🎉 Book now — Save NT$3,000 early bird discount!' : '🎉 現在預訂享早鳥折扣 NT$3,000！';
   const datesLabel= isEn ? '📆 Upcoming Departure Dates'       : '📆 近期出發日期';
+  const isJa = window._lang === 'ja';
   const quizDone  = document.getElementById('match-results') && document.getElementById('match-results').style.display === 'block';
   const quizBtn   = quizDone
-    ? (isEn ? '📋 Book This Tour Now' : '📋 立即報名此行程')
-    : (isEn ? '📝 Take Health Quiz & Register' : '📝 立即填問卷報名');
-  const callBtn   = isEn ? '📞 Call to Enquire'                : '📞 電話詢問報名';
-  const toast     = isEn ? '✅ Please complete the health quiz — we will match this tour for you!' : '✅ 請先填寫健康問卷，完成後立即為您配對此行程！';
+    ? (isEn ? '📋 Book This Tour Now' : isJa ? '📋 このツアーに申し込む' : '📋 立即報名此行程')
+    : (isEn ? '📝 Take Health Quiz & Register' : isJa ? '📝 健康診断票を記入して申込む' : '📝 立即填問卷報名');
+  const callBtn   = isEn ? '📞 Call to Enquire' : isJa ? '📞 電話でお問い合わせ' : '📞 電話詢問報名';
+  const toast     = isEn ? '✅ Please complete the health quiz — we will match this tour for you!'
+    : isJa ? '✅ 健康診断票を記入してください。完成後にこのツアーをご提案します！'
+    : '✅ 請先填寫健康問卷，完成後立即為您配對此行程！';
   const bookAction = quizDone
     ? `closeModal();bookThisTour()`
     : `closeModal();scrollTo('#health');showToast('${toast}')`;
@@ -6654,6 +6658,31 @@ const T = {
     'quiz-submit':'🔍 幫我找最適合的行程！',
     'quiz-tel':'或電話 <strong>0800-888-888</strong> 由客服協助填寫',
     'match-reset':'↩ 重新填寫問卷','match-call':'📞 電話預約行程',
+    'qb-title':'留下聯絡資料，客服馬上聯繫您',
+    'qb-name-label':'您的姓名','qb-name-ph':'例：王阿姨',
+    'qb-phone-label':'聯絡電話',
+    'qb-submit':'✅ 送出報名申請',
+    'qb-footer':'客服將在 2 小時內以電話確認・免費撥打 0800-888-888',
+    'bcon-title':'報名申請已送出！',
+    'bcon-subtitle':'悠旅趣客服將盡快與您聯繫確認',
+    'bcon-slip-hd':'📋 報名資料確認單',
+    'bcon-lbl-name':'旅人姓名','bcon-lbl-phone':'聯絡電話',
+    'bcon-lbl-tour':'報名行程','bcon-lbl-month':'希望出發',
+    'bcon-lbl-note':'特殊需求','bcon-lbl-time':'申請時間',
+    'bcon-next-hd':'📬 接下來我們會這樣聯繫您',
+    'bcon-s1-hd':'立即 — 系統確認通知',
+    'bcon-s1-desc':'系統已自動記錄您的申請，訂單編號即為本確認單上方號碼，建議截圖或列印保存。',
+    'bcon-s2-hd':'2 小時內 — 客服電話確認',
+    'bcon-s2-desc':'專人客服將以您填寫的電話主動致電，確認行程細節、人數與特殊需求。<br><strong>上班時間：每日 08:00–22:00</strong>',
+    'bcon-s3-hd':'確認後 — 傳送正式訂單',
+    'bcon-s3-desc':'電話確認完成後，客服會以 LINE 或簡訊傳送正式訂單與付款連結給您。',
+    'bcon-s4-hd':'出發前 — 健康狀況確認',
+    'bcon-s4-desc':'出發前 3 天客服再次確認健康狀況，確保旅途萬無一失。',
+    'bcon-ct-phone':'免費電話','bcon-ct-line':'LINE 客服',
+    'bcon-ct-line-sub':'@悠旅趣',
+    'bcon-ct-email':'Email','bcon-ct-health':'健康問卷',
+    'bcon-ct-health-sub':'提前填寫更安心',
+    'bcon-print':'🖨️ 列印確認單','bcon-close':'關閉',
     'group-title':'👥 揪朋友一起去','group-sub':'找志同道合的銀髮好友，一起出發更安心、更快樂！',
     'family-title':'👨‍👩‍👧 家人關心專區','family-sub':'隨時掌握長輩旅途動態，出門更安心！',
     'reviews-title':'⭐ 旅人真實心聲','reviews-sub':'來自 5 萬位快樂旅人的真實評價',
@@ -6722,6 +6751,31 @@ const T = {
     'quiz-submit':'🔍 Find My Perfect Tour!',
     'quiz-tel':'Or call <strong>0800-888-888</strong> and our staff will help you',
     'match-reset':'↩ Retake Quiz','match-call':'📞 Call to Book',
+    'qb-title':'Leave your contact info — our team will reach you right away',
+    'qb-name-label':'Your Name','qb-name-ph':'e.g. Mrs. Wang',
+    'qb-phone-label':'Phone Number',
+    'qb-submit':'✅ Submit Booking Request',
+    'qb-footer':'Our team will call to confirm within 2 hours · Free call 0800-888-888',
+    'bcon-title':'Booking Request Submitted!',
+    'bcon-subtitle':'Our team will contact you shortly to confirm',
+    'bcon-slip-hd':'📋 Booking Confirmation Slip',
+    'bcon-lbl-name':'Traveler Name','bcon-lbl-phone':'Phone',
+    'bcon-lbl-tour':'Tour','bcon-lbl-month':'Preferred Date',
+    'bcon-lbl-note':'Special Needs','bcon-lbl-time':'Submitted At',
+    'bcon-next-hd':'📬 Here\'s How We\'ll Contact You',
+    'bcon-s1-hd':'Immediately — System Confirmation',
+    'bcon-s1-desc':'Your request has been recorded automatically. The order number above is your reference — we recommend taking a screenshot or printing this slip.',
+    'bcon-s2-hd':'Within 2 Hours — Team Will Call You',
+    'bcon-s2-desc':'A team member will call the number you provided to confirm tour details, group size, and special needs.<br><strong>Service hours: Daily 08:00–22:00</strong>',
+    'bcon-s3-hd':'After Confirmation — Official Booking Sent',
+    'bcon-s3-desc':'After the call, your official booking and payment link will be sent via LINE or SMS.',
+    'bcon-s4-hd':'Pre-departure — Health Check',
+    'bcon-s4-desc':'Our team will check in 3 days before departure to confirm your health status and ensure a smooth journey.',
+    'bcon-ct-phone':'Free Call','bcon-ct-line':'LINE Support',
+    'bcon-ct-line-sub':'@YouTrip',
+    'bcon-ct-email':'Email','bcon-ct-health':'Health Quiz',
+    'bcon-ct-health-sub':'Fill in advance for peace of mind',
+    'bcon-print':'🖨️ Print Confirmation','bcon-close':'Close',
     'group-title':'👥 Find Travel Companions','group-sub':'Meet like-minded senior travelers and enjoy the journey together!',
     'family-title':'👨‍👩‍👧 Family Care Zone','family-sub':'Track your loved one\'s journey anytime — travel with complete peace of mind!',
     'reviews-title':'⭐ Real Stories from Our Travelers','reviews-sub':'Genuine reviews from 50,000+ happy senior travelers',
@@ -6799,6 +6853,31 @@ const T = {
     'quiz-submit':'🔍 ぴったりの旅を探す！',
     'quiz-tel':'または <strong>0800-888-888</strong> にお電話いただければスタッフがサポートします',
     'match-reset':'↩ やり直す','match-call':'📞 電話で予約',
+    'qb-title':'連絡先をご入力ください。スタッフがすぐにご連絡します',
+    'qb-name-label':'お名前','qb-name-ph':'例：田中様',
+    'qb-phone-label':'電話番号',
+    'qb-submit':'✅ 予約申請を送信',
+    'qb-footer':'2時間以内にお電話でご確認します・無料電話 0800-888-888',
+    'bcon-title':'ご予約申請が送信されました！',
+    'bcon-subtitle':'スタッフが確認のために早急にご連絡いたします',
+    'bcon-slip-hd':'📋 ご予約確認書',
+    'bcon-lbl-name':'旅人氏名','bcon-lbl-phone':'電話番号',
+    'bcon-lbl-tour':'ツアー名','bcon-lbl-month':'ご希望出発',
+    'bcon-lbl-note':'特別なご要望','bcon-lbl-time':'申請日時',
+    'bcon-next-hd':'📬 今後のご連絡方法',
+    'bcon-s1-hd':'すぐに — システム確認通知',
+    'bcon-s1-desc':'お申込み内容は自動的に記録されました。上記の注文番号がご参照番号です。スクリーンショットまたは印刷して保管されることをお勧めします。',
+    'bcon-s2-hd':'2時間以内 — スタッフよりお電話',
+    'bcon-s2-desc':'担当スタッフよりご入力の電話番号へご連絡し、ツアーの詳細・人数・ご要望を確認いたします。<br><strong>営業時間：毎日 08:00–22:00</strong>',
+    'bcon-s3-hd':'確認後 — 正式予約書の送付',
+    'bcon-s3-desc':'お電話での確認後、正式予約書と支払いリンクをLINEまたはSMSにてお送りします。',
+    'bcon-s4-hd':'出発前 — 健康状態の確認',
+    'bcon-s4-desc':'出発3日前にスタッフが健康状態を確認し、安心してご旅行いただけるようサポートします。',
+    'bcon-ct-phone':'無料電話','bcon-ct-line':'LINEサポート',
+    'bcon-ct-line-sub':'@悠旅趣',
+    'bcon-ct-email':'メール','bcon-ct-health':'健康診断票',
+    'bcon-ct-health-sub':'事前にご記入で安心',
+    'bcon-print':'🖨️ 確認書を印刷','bcon-close':'閉じる',
     'group-title':'👥 一緒に旅する仲間を探す','group-sub':'気の合う旅仲間と出発すれば、もっと安心・もっと楽しい！',
     'family-title':'👨‍👩‍👧 ご家族サポートエリア','family-sub':'いつでもご旅行の状況を確認。安心してお見送りを！',
     'reviews-title':'⭐ 旅人のリアルな声','reviews-sub':'5万人以上の幸せな旅人からの本物の口コミ',
@@ -7356,6 +7435,11 @@ function setLang(lang) {
   document.querySelectorAll('[data-i18n-html]').forEach(el => {
     const key = el.dataset.i18nHtml;
     if (d[key] !== undefined) el.innerHTML = d[key];
+  });
+  // placeholder elements
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.dataset.i18nPlaceholder;
+    if (d[key] !== undefined) el.placeholder = d[key];
   });
   // Section-level HTML replacements
   const sectionMap = {
