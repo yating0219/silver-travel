@@ -682,6 +682,113 @@
     }
 
     /* ==============================
+       BOOKING CONFIRMATION MODAL
+    ============================== */
+    #booking-confirm-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.65);
+      z-index: 1100; display: none; align-items: center; justify-content: center;
+      padding: 20px; backdrop-filter: blur(4px);
+    }
+    #booking-confirm-overlay.open { display: flex; }
+    .bcon-box {
+      background: var(--white); border-radius: var(--r-lg);
+      max-width: 640px; width: 100%; max-height: 92vh;
+      overflow-y: auto; box-shadow: var(--shadow-lg);
+      animation: modalIn .25s ease;
+    }
+    .bcon-header {
+      background: linear-gradient(135deg,#15803D,#0D9488);
+      padding: 28px 32px 24px; border-radius: var(--r-lg) var(--r-lg) 0 0;
+      text-align: center; color: #fff; position: relative;
+    }
+    .bcon-success-icon { font-size: 54px; margin-bottom: 8px; }
+    .bcon-title { font-size: 26px; font-weight: 900; margin-bottom: 4px; }
+    .bcon-subtitle { font-size: 16px; opacity: .88; }
+    .bcon-order {
+      display: inline-block; background: rgba(255,255,255,.2);
+      border: 1px solid rgba(255,255,255,.4); border-radius: 999px;
+      padding: 4px 18px; font-size: 15px; font-weight: 700;
+      margin-top: 12px; letter-spacing: .5px;
+    }
+    .bcon-close {
+      position: absolute; top: 16px; right: 16px;
+      background: rgba(255,255,255,.2); border: none; color: #fff;
+      width: 36px; height: 36px; border-radius: 50%; font-size: 18px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .bcon-close:hover { background: rgba(255,255,255,.35); }
+    .bcon-slip {
+      padding: 28px 32px;
+      border-bottom: 2px dashed var(--border);
+    }
+    .bcon-slip-title {
+      font-size: 17px; font-weight: 900; color: var(--text2);
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+    }
+    .bcon-row {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 10px 0; border-bottom: 1px solid var(--border); gap: 12px;
+      font-size: 18px;
+    }
+    .bcon-row:last-child { border-bottom: none; }
+    .bcon-label { color: var(--text2); min-width: 100px; }
+    .bcon-val { font-weight: 700; text-align: right; flex: 1; }
+    .bcon-next {
+      padding: 24px 32px;
+    }
+    .bcon-next-title {
+      font-size: 18px; font-weight: 900; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bcon-steps {
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .bcon-step {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 12px 0;
+    }
+    .bcon-step:not(:last-child) {
+      border-bottom: 1px solid var(--border);
+    }
+    .bcon-step-num {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--orange-l); border: 2px solid var(--orange-m);
+      color: var(--orange); font-size: 16px; font-weight: 900;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .bcon-step-body { flex: 1; }
+    .bcon-step-head { font-size: 17px; font-weight: 800; margin-bottom: 2px; }
+    .bcon-step-desc { font-size: 15px; color: var(--text2); line-height: 1.6; }
+    .bcon-contacts {
+      padding: 0 32px 24px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .bcon-contact-btn {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px; border-radius: var(--r-sm); border: 2px solid var(--border);
+      background: var(--bg); cursor: pointer; font-size: 16px; font-weight: 700;
+      transition: border-color .15s, background .15s; text-decoration: none; color: var(--text);
+    }
+    .bcon-contact-btn:hover { border-color: var(--orange-m); background: var(--orange-l); }
+    .bcon-contact-icon { font-size: 28px; }
+    .bcon-contact-label { font-size: 13px; color: var(--text2); font-weight: 400; }
+    .bcon-actions {
+      padding: 20px 32px 28px;
+      display: flex; gap: 12px; flex-wrap: wrap;
+    }
+    @media print {
+      #booking-confirm-overlay { position: static; background: none; padding: 0; }
+      .bcon-box { box-shadow: none; max-height: none; animation: none; }
+      .bcon-close, .bcon-actions, .bcon-contacts { display: none; }
+    }
+    @media (max-width:520px) {
+      .bcon-contacts { grid-template-columns: 1fr; }
+      .bcon-slip, .bcon-next, .bcon-contacts, .bcon-actions { padding-left: 20px; padding-right: 20px; }
+      .bcon-header { padding: 22px 20px 20px; }
+    }
+
+    /* ==============================
        FAMILY SECTION
     ============================== */
     #family { background: var(--white); }
@@ -2936,7 +3043,14 @@
           <div class="gfield"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">希望出發月份</label><select class="fsb-input" style="width:100%;"><option>2026年 4月</option><option>2026年 5月</option><option>2026年 6月</option><option>2026年 7月</option><option>2026年 8月以後</option></select></div>
         </div>
         <div class="gfield" style="margin-top:14px;"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">特殊需求（行動輔具、飲食限制等）</label><textarea class="fsb-input" style="width:100%;min-height:70px;resize:vertical;" placeholder="例：使用助行器，需要低糖飲食…"></textarea></div>
-        <button class="btn btn-green" style="margin-top:8px;width:100%;" onclick="alert('代訂申請已送出！客服將在 1 個工作天內致電確認。\n\n也可直接來電：0800-888-888')">🛒 送出代訂申請</button>
+        <button class="btn btn-green" style="margin-top:8px;width:100%;" onclick="(function(){
+          var nm=document.querySelector('#ftab-book input[placeholder=\'王阿姨\'],#ftab-book input[placeholder=\'e.g. Mrs. Wang\']');
+          var ph=document.querySelector('#ftab-book input[type=tel]');
+          var mo=document.querySelector('#ftab-book select');
+          var nt=document.querySelector('#ftab-book textarea');
+          if(!nm||!nm.value.trim()||!ph||!ph.value.trim()){alert('請填寫姓名與聯絡電話');return;}
+          showBookingConfirm({name:nm.value.trim(),phone:ph.value.trim(),month:mo?mo.value:'',note:nt?nt.value.trim():''});
+        })()">🛒 送出代訂申請</button>
       </div>
     </div>
 
@@ -3729,6 +3843,124 @@
       <button class="modal-close" onclick="closeModal()" aria-label="關閉">✕</button>
     </div>
     <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     BOOKING CONFIRMATION MODAL
+══════════════════════════════════ -->
+<div id="booking-confirm-overlay" role="dialog" aria-modal="true" aria-labelledby="bcon-title-txt">
+  <div class="bcon-box">
+    <!-- Header -->
+    <div class="bcon-header">
+      <button class="bcon-close" onclick="closeBookingConfirm()" aria-label="關閉">✕</button>
+      <div class="bcon-success-icon">✅</div>
+      <div class="bcon-title" id="bcon-title-txt">報名申請已送出！</div>
+      <div class="bcon-subtitle">悠旅趣客服將盡快與您聯繫確認</div>
+      <div class="bcon-order" id="bcon-order-num">訂單編號：YT2026-XXXXX</div>
+    </div>
+
+    <!-- Confirmation Slip -->
+    <div class="bcon-slip">
+      <div class="bcon-slip-title">📋 報名資料確認單</div>
+      <div class="bcon-row">
+        <span class="bcon-label">旅人姓名</span>
+        <span class="bcon-val" id="bcon-name">—</span>
+      </div>
+      <div class="bcon-row">
+        <span class="bcon-label">聯絡電話</span>
+        <span class="bcon-val" id="bcon-phone">—</span>
+      </div>
+      <div class="bcon-row" id="bcon-tour-row">
+        <span class="bcon-label">報名行程</span>
+        <span class="bcon-val" id="bcon-tour">—</span>
+      </div>
+      <div class="bcon-row" id="bcon-month-row">
+        <span class="bcon-label">希望出發</span>
+        <span class="bcon-val" id="bcon-month">—</span>
+      </div>
+      <div class="bcon-row" id="bcon-note-row">
+        <span class="bcon-label">特殊需求</span>
+        <span class="bcon-val" id="bcon-note">—</span>
+      </div>
+      <div class="bcon-row">
+        <span class="bcon-label">申請時間</span>
+        <span class="bcon-val" id="bcon-time">—</span>
+      </div>
+    </div>
+
+    <!-- Next Steps -->
+    <div class="bcon-next">
+      <div class="bcon-next-title">📬 接下來我們會這樣聯繫您</div>
+      <div class="bcon-steps">
+        <div class="bcon-step">
+          <div class="bcon-step-num">1</div>
+          <div class="bcon-step-body">
+            <div class="bcon-step-head">立即 — 系統確認通知</div>
+            <div class="bcon-step-desc">系統已自動記錄您的申請，訂單編號即為本確認單上方號碼，建議截圖或列印保存。</div>
+          </div>
+        </div>
+        <div class="bcon-step">
+          <div class="bcon-step-num">2</div>
+          <div class="bcon-step-body">
+            <div class="bcon-step-head">2 小時內 — 客服電話確認</div>
+            <div class="bcon-step-desc">專人客服將以您填寫的電話主動致電，確認行程細節、人數與特殊需求。<br><strong>上班時間：每日 08:00–22:00</strong></div>
+          </div>
+        </div>
+        <div class="bcon-step">
+          <div class="bcon-step-num">3</div>
+          <div class="bcon-step-body">
+            <div class="bcon-step-head">確認後 — 傳送正式訂單</div>
+            <div class="bcon-step-desc">電話確認完成後，客服會以 LINE 或簡訊傳送正式訂單與付款連結給您。</div>
+          </div>
+        </div>
+        <div class="bcon-step">
+          <div class="bcon-step-num">4</div>
+          <div class="bcon-step-body">
+            <div class="bcon-step-head">出發前 — 健康狀況確認</div>
+            <div class="bcon-step-desc">出發前 3 天客服再次確認健康狀況，確保旅途萬無一失。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Buttons -->
+    <div class="bcon-contacts">
+      <a href="tel:0800-888-888" class="bcon-contact-btn">
+        <span class="bcon-contact-icon">📞</span>
+        <div>
+          <div>免費電話</div>
+          <div class="bcon-contact-label">0800-888-888</div>
+        </div>
+      </a>
+      <a href="https://line.me/R/ti/p/@silvertravelyoutripu" class="bcon-contact-btn" target="_blank" rel="noopener">
+        <span class="bcon-contact-icon">💬</span>
+        <div>
+          <div>LINE 客服</div>
+          <div class="bcon-contact-label">@悠旅趣</div>
+        </div>
+      </a>
+      <a href="mailto:service@yotrip.tw" class="bcon-contact-btn">
+        <span class="bcon-contact-icon">✉️</span>
+        <div>
+          <div>Email</div>
+          <div class="bcon-contact-label">service@yotrip.tw</div>
+        </div>
+      </a>
+      <a href="#" class="bcon-contact-btn" onclick="event.preventDefault();closeBookingConfirm();goToHealth()">
+        <span class="bcon-contact-icon">❤️</span>
+        <div>
+          <div>健康問卷</div>
+          <div class="bcon-contact-label">提前填寫更安心</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Actions -->
+    <div class="bcon-actions">
+      <button class="btn btn-orange" style="flex:1;" onclick="window.print()">🖨️ 列印確認單</button>
+      <button class="btn btn-outline" style="flex:1;" onclick="closeBookingConfirm()">關閉</button>
+    </div>
   </div>
 </div>
 
@@ -6518,7 +6750,7 @@ const S = {
     'family-search-banner': `<div class="fsb-icon">🔍</div><div style="flex:1;"><div class="fsb-title">立即查詢長輩行程</div><div class="fsb-sub">輸入訂單編號或長輩手機號碼，即時掌握動態</div><div class="fsb-row"><input type="text" id="family-search-input" class="fsb-input" placeholder="訂單編號（如 YT2026001）或手機號碼" /><button class="btn btn-green" onclick="searchFamilyDemo()">🔍 立即查詢</button></div></div>`,
     'family-search-result': `<div class="fsearch-found">✅ 找到行程！長輩目前旅途中，一切安好。</div><div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px;"><div style="flex:1;min-width:160px;background:#F0FDF9;border-radius:var(--r-sm);padding:12px;"><div style="font-size:13px;color:var(--text2);">👤 旅人</div><div style="font-weight:800;font-size:16px;" id="fsr-name">王阿姨</div></div><div style="flex:1;min-width:160px;background:#F0FDF9;border-radius:var(--r-sm);padding:12px;"><div style="font-size:13px;color:var(--text2);">📍 目前位置</div><div style="font-weight:800;font-size:16px;">京都 嵐山溫泉飯店</div></div><div style="flex:1;min-width:160px;background:#F0FDF9;border-radius:var(--r-sm);padding:12px;"><div style="font-size:13px;color:var(--text2);">🏥 健康狀態</div><div style="font-weight:800;font-size:16px;color:var(--green);">✅ 一切正常</div></div><div style="flex:1;min-width:160px;background:#F0FDF9;border-radius:var(--r-sm);padding:12px;"><div style="font-size:13px;color:var(--text2);">📅 今日行程</div><div style="font-weight:800;font-size:16px;">Day 2：嵐山賞櫻</div></div></div><button class="btn btn-green btn-sm" onclick="switchFamilyTab('track',document.querySelector('.ftab'))">📍 查看完整追蹤</button>`,
     'family-tab-bar': `<button class="ftab active" id="ftab-btn-track" onclick="switchFamilyTab('track',this)">📍 即時追蹤</button><button class="ftab" id="ftab-btn-book" onclick="switchFamilyTab('book',this)">🛒 代訂行程</button><button class="ftab" id="ftab-btn-health" onclick="switchFamilyTab('health',this)">❤️ 健康記錄</button><button class="ftab" id="ftab-btn-guide" onclick="switchFamilyTab('guide',this)">💬 聯絡導遊</button>`,
-    'ftab-book': `<div style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-radius:var(--r-lg);padding:28px;margin-bottom:24px;border:3px solid #BFDBFE;"><div style="font-size:22px;font-weight:900;color:#1E40AF;margin-bottom:8px;">🛒 代替長輩訂購行程</div><div style="font-size:16px;color:#3B82F6;line-height:1.7;">子女可代長輩完整辦理報名手續，長輩只需出發就好！<br>填寫以下資料，我們會在 1 個工作天內與您確認。</div></div><div class="book-steps"><div class="book-step"><div class="book-step-num">1</div><div class="book-step-title">選擇行程</div><div class="book-step-desc">從行程目錄選好適合長輩的路線</div></div><div class="book-step"><div class="book-step-num">2</div><div class="book-step-title">填寫資料</div><div class="book-step-desc">填入長輩基本資料與健康狀況</div></div><div class="book-step"><div class="book-step-num">3</div><div class="book-step-title">完成報名</div><div class="book-step-desc">客服確認後傳送訂單給您</div></div></div><div class="card card-p"><div style="font-size:19px;font-weight:800;margin-bottom:20px;">📋 代訂資料填寫</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;"><div class="gfield"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">長輩姓名 <span style="color:#EF4444;">*</span></label><input type="text" class="fsb-input" style="width:100%;" placeholder="王阿姨" /></div><div class="gfield"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">長輩年齡 <span style="color:#EF4444;">*</span></label><input type="number" class="fsb-input" style="width:100%;" placeholder="68" min="50" max="100" /></div><div class="gfield"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">聯絡電話 <span style="color:#EF4444;">*</span></label><input type="tel" class="fsb-input" style="width:100%;" placeholder="09xx-xxx-xxx" /></div><div class="gfield"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">希望出發月份</label><select class="fsb-input" style="width:100%;"><option>2026年 4月</option><option>2026年 5月</option><option>2026年 6月</option><option>2026年 7月</option><option>2026年 8月以後</option></select></div></div><div class="gfield" style="margin-top:14px;"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">特殊需求（行動輔具、飲食限制等）</label><textarea class="fsb-input" style="width:100%;min-height:70px;resize:vertical;" placeholder="例：使用助行器，需要低糖飲食…"></textarea></div><button class="btn btn-green" style="margin-top:8px;width:100%;" onclick="alert('代訂申請已送出！客服將在 1 個工作天內致電確認。\n\n也可直接來電：0800-888-888')">🛒 送出代訂申請</button></div>`,
+    'ftab-book': `<div style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-radius:var(--r-lg);padding:28px;margin-bottom:24px;border:3px solid #BFDBFE;"><div style="font-size:22px;font-weight:900;color:#1E40AF;margin-bottom:8px;">🛒 代替長輩訂購行程</div><div style="font-size:16px;color:#3B82F6;line-height:1.7;">子女可代長輩完整辦理報名手續，長輩只需出發就好！<br>填寫以下資料，我們會在 1 個工作天內與您確認。</div></div><div class="book-steps"><div class="book-step"><div class="book-step-num">1</div><div class="book-step-title">選擇行程</div><div class="book-step-desc">從行程目錄選好適合長輩的路線</div></div><div class="book-step"><div class="book-step-num">2</div><div class="book-step-title">填寫資料</div><div class="book-step-desc">填入長輩基本資料與健康狀況</div></div><div class="book-step"><div class="book-step-num">3</div><div class="book-step-title">完成報名</div><div class="book-step-desc">客服確認後傳送訂單給您</div></div></div><div class="card card-p"><div style="font-size:19px;font-weight:800;margin-bottom:20px;">📋 代訂資料填寫</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;"><div class="gfield"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">長輩姓名 <span style="color:#EF4444;">*</span></label><input type="text" class="fsb-input" style="width:100%;" placeholder="王阿姨" /></div><div class="gfield"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">長輩年齡 <span style="color:#EF4444;">*</span></label><input type="number" class="fsb-input" style="width:100%;" placeholder="68" min="50" max="100" /></div><div class="gfield"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">聯絡電話 <span style="color:#EF4444;">*</span></label><input type="tel" class="fsb-input" style="width:100%;" placeholder="09xx-xxx-xxx" /></div><div class="gfield"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">希望出發月份</label><select class="fsb-input" style="width:100%;"><option>2026年 4月</option><option>2026年 5月</option><option>2026年 6月</option><option>2026年 7月</option><option>2026年 8月以後</option></select></div></div><div class="gfield" style="margin-top:14px;"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">特殊需求（行動輔具、飲食限制等）</label><textarea class="fsb-input" style="width:100%;min-height:70px;resize:vertical;" placeholder="例：使用助行器，需要低糖飲食…"></textarea></div><button class="btn btn-green" style="margin-top:8px;width:100%;" onclick="(function(){var nm=document.querySelector('#ftab-book input[placeholder=\\'王阿姨\\']');var ph=document.querySelector('#ftab-book input[type=tel]');var mo=document.querySelector('#ftab-book select');var nt=document.querySelector('#ftab-book textarea');if(!nm||!nm.value.trim()||!ph||!ph.value.trim()){alert('請填寫姓名與聯絡電話');return;}showBookingConfirm({name:nm.value.trim(),phone:ph.value.trim(),month:mo?mo.value:'',note:nt?nt.value.trim():''});})()">🛒 送出代訂申請</button></div>`,
     'ftab-health': `<div style="background:linear-gradient(135deg,#FFF7ED,#FFEDD5);border-radius:var(--r-lg);padding:28px;margin-bottom:24px;border:3px solid var(--orange-m);"><div style="font-size:22px;font-weight:900;color:var(--orange-d);margin-bottom:8px;">❤️ 長輩健康記錄共享</div><div style="font-size:16px;color:var(--orange);line-height:1.7;">長輩同意後，健康評估結果與家人共享，方便一起挑選最合適的行程！</div></div><div style="font-size:18px;font-weight:800;margin-bottom:16px;">👵 王阿姨 的健康概況（示範）</div><div class="health-share-grid"><div class="hshare-card"><div class="hshare-label">🚶 行動能力</div><div class="hshare-val" style="color:var(--teal);">輕鬆步行 2～4 公里</div></div><div class="hshare-card"><div class="hshare-label">💊 健康狀況</div><div class="hshare-val" style="color:var(--orange);">輕微高血壓（控制中）</div></div><div class="hshare-card"><div class="hshare-label">🍱 飲食需求</div><div class="hshare-val" style="color:var(--blue);">低鹽飲食優先</div></div><div class="hshare-card"><div class="hshare-label">✅ 推薦行程等級</div><div class="hshare-val" style="color:var(--green);">輕鬆型（4 顆心）</div></div></div><div class="card card-p" style="margin-top:20px;"><div style="font-size:18px;font-weight:800;margin-bottom:14px;">🏥 護理師旅途健康日誌（示範）</div><div class="timeline"><div class="tl-item"><div class="tl-dot active"></div><div class="tl-time">Day 2 早上</div><div class="tl-text">血壓量測正常</div><div class="tl-detail">收縮壓 128，舒張壓 80，狀況良好</div></div><div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Day 1 晚上</div><div class="tl-text">抵達飯店身體評估</div><div class="tl-detail">飛行順利，精神良好，無不適反應</div></div><div class="tl-item"><div class="tl-dot"></div><div class="tl-time">出發前</div><div class="tl-text">出發前健康確認</div><div class="tl-detail">攜帶備用藥物，血壓計，緊急聯絡人已建檔</div></div></div><button class="btn btn-orange btn-sm" style="margin-top:16px;" onclick="alert('完整健康記錄請登入帳戶查看，或來電 0800-888-888')">📋 查看完整健康記錄</button></div>`,
     'ftab-guide': `<div style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border-radius:var(--r-lg);padding:28px;margin-bottom:24px;border:3px solid var(--green-l);"><div style="font-size:22px;font-weight:900;color:var(--green);margin-bottom:8px;">💬 與隨行人員聯絡</div><div style="font-size:16px;color:#166534;line-height:1.7;">有任何疑問或需要傳達事項，可直接留言給隨行導遊或護理師，通常在 30 分鐘內回覆。</div></div><div style="font-size:18px;font-weight:800;margin-bottom:14px;">👨‍💼 隨行人員（示範）</div><div class="guide-card" onclick="openGuideMsg('林護理師','隨行護理師')"><div class="guide-avatar">🏥</div><div style="flex:1;"><div class="guide-info-name">林護理師</div><div class="guide-info-role">隨行護理師 · 日文流利</div></div><div style="font-size:13px;color:var(--green);font-weight:700;">● 在線</div><button class="btn btn-green btn-sm" style="min-height:36px;font-size:14px;">💬 留言</button></div><div class="guide-card" onclick="openGuideMsg('陳導遊','領隊導遊')"><div class="guide-avatar">🎌</div><div style="flex:1;"><div class="guide-info-name">陳導遊</div><div class="guide-info-role">領隊導遊 · 日本線資深 12 年</div></div><div style="font-size:13px;color:var(--text2);font-weight:700;">📍 帶團中</div><button class="btn btn-green btn-sm" style="min-height:36px;font-size:14px;">💬 留言</button></div><div class="card card-p" style="margin-top:8px;"><div style="font-size:17px;font-weight:800;margin-bottom:14px;">📝 傳訊給導遊 / 護理師</div><textarea id="guide-msg-text" class="fsb-input" style="width:100%;min-height:80px;resize:vertical;" placeholder="例：媽媽有帶備用藥，請提醒她晚餐後服用。有任何狀況請馬上聯絡我，謝謝！"></textarea><div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;"><button class="btn btn-green" style="flex:1;" onclick="submitGuideMsg()">💬 送出留言</button><a href="tel:0800-888-888" class="btn btn-outline" style="border-color:var(--green);color:var(--green);">📞 直接致電</a></div></div>`,
     'family-features': `<div class="ff-item"><div class="ff-icon">🛒</div><div class="ff-title">代為訂購行程</div><p class="ff-desc">子女可代長輩選行程、填資料、完成報名</p></div><div class="ff-item"><div class="ff-icon">❤️</div><div class="ff-title">健康記錄共享</div><p class="ff-desc">健康評估結果與家人共享，挑選最合適行程</p></div><div class="ff-item"><div class="ff-icon">💬</div><div class="ff-title">與導遊直接溝通</div><p class="ff-desc">家人可透過平台留言給隨行導遊</p></div>`,
@@ -6561,7 +6793,7 @@ const S = {
     'family-search-banner': `<div class="fsb-icon">🔍</div><div style="flex:1;"><div class="fsb-title">Find Your Loved One's Journey</div><div class="fsb-sub">Enter booking number or phone number to track in real-time</div><div class="fsb-row"><input type="text" id="family-search-input" class="fsb-input" placeholder="Booking No. (e.g. YT2026001) or phone" /><button class="btn btn-green" onclick="searchFamilyDemo()">🔍 Search</button></div></div>`,
     'family-search-result': `<div class="fsearch-found">✅ Trip found! Your loved one is on the journey — all is well.</div><div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px;"><div style="flex:1;min-width:160px;background:#F0FDF9;border-radius:var(--r-sm);padding:12px;"><div style="font-size:13px;color:var(--text2);">👤 Traveler</div><div style="font-weight:800;font-size:16px;" id="fsr-name">Mrs. Wang</div></div><div style="flex:1;min-width:160px;background:#F0FDF9;border-radius:var(--r-sm);padding:12px;"><div style="font-size:13px;color:var(--text2);">📍 Current Location</div><div style="font-weight:800;font-size:16px;">Arashiyama Onsen Hotel, Kyoto</div></div><div style="flex:1;min-width:160px;background:#F0FDF9;border-radius:var(--r-sm);padding:12px;"><div style="font-size:13px;color:var(--text2);">🏥 Health Status</div><div style="font-weight:800;font-size:16px;color:var(--green);">✅ All Normal</div></div><div style="flex:1;min-width:160px;background:#F0FDF9;border-radius:var(--r-sm);padding:12px;"><div style="font-size:13px;color:var(--text2);">📅 Today</div><div style="font-weight:800;font-size:16px;">Day 2: Arashiyama Walk</div></div></div><button class="btn btn-green btn-sm" onclick="switchFamilyTab('track',document.querySelector('.ftab'))">📍 View Full Tracking</button>`,
     'family-tab-bar': `<button class="ftab active" id="ftab-btn-track" onclick="switchFamilyTab('track',this)">📍 Live Tracking</button><button class="ftab" id="ftab-btn-book" onclick="switchFamilyTab('book',this)">🛒 Book for Family</button><button class="ftab" id="ftab-btn-health" onclick="switchFamilyTab('health',this)">❤️ Health Records</button><button class="ftab" id="ftab-btn-guide" onclick="switchFamilyTab('guide',this)">💬 Contact Guide</button>`,
-    'ftab-book': `<div style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-radius:var(--r-lg);padding:28px;margin-bottom:24px;border:3px solid #BFDBFE;"><div style="font-size:22px;font-weight:900;color:#1E40AF;margin-bottom:8px;">🛒 Book on Behalf of a Senior</div><div style="font-size:16px;color:#3B82F6;line-height:1.7;">Children can handle the entire booking process on behalf of seniors. Seniors just need to show up and enjoy!<br>Fill in the form below and we will confirm within 1 business day.</div></div><div class="book-steps"><div class="book-step"><div class="book-step-num">1</div><div class="book-step-title">Choose Tour</div><div class="book-step-desc">Browse and select a suitable tour</div></div><div class="book-step"><div class="book-step-num">2</div><div class="book-step-title">Fill Details</div><div class="book-step-desc">Enter the senior's info and health conditions</div></div><div class="book-step"><div class="book-step-num">3</div><div class="book-step-title">Confirm</div><div class="book-step-desc">Our team confirms and sends the booking</div></div></div><div class="card card-p"><div style="font-size:19px;font-weight:800;margin-bottom:20px;">📋 Booking Form</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;"><div class="gfield"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">Senior's Name <span style="color:#EF4444;">*</span></label><input type="text" class="fsb-input" style="width:100%;" placeholder="e.g. Mrs. Wang" /></div><div class="gfield"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">Age <span style="color:#EF4444;">*</span></label><input type="number" class="fsb-input" style="width:100%;" placeholder="68" min="50" max="100" /></div><div class="gfield"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">Contact Phone <span style="color:#EF4444;">*</span></label><input type="tel" class="fsb-input" style="width:100%;" placeholder="09xx-xxx-xxx" /></div><div class="gfield"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">Preferred Month</label><select class="fsb-input" style="width:100%;"><option>April 2026</option><option>May 2026</option><option>June 2026</option><option>July 2026</option><option>August 2026+</option></select></div></div><div class="gfield" style="margin-top:14px;"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">Special Requirements (mobility aids, dietary restrictions, etc.)</label><textarea class="fsb-input" style="width:100%;min-height:70px;resize:vertical;" placeholder="e.g. Uses a walker, requires low-sugar meals…"></textarea></div><button class="btn btn-green" style="margin-top:8px;width:100%;" onclick="alert('Booking request submitted! Our team will call to confirm within 1 business day.\n\nOr call us: 0800-888-888')">🛒 Submit Booking Request</button></div>`,
+    'ftab-book': `<div style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-radius:var(--r-lg);padding:28px;margin-bottom:24px;border:3px solid #BFDBFE;"><div style="font-size:22px;font-weight:900;color:#1E40AF;margin-bottom:8px;">🛒 Book on Behalf of a Senior</div><div style="font-size:16px;color:#3B82F6;line-height:1.7;">Children can handle the entire booking process on behalf of seniors. Seniors just need to show up and enjoy!<br>Fill in the form below and we will confirm within 1 business day.</div></div><div class="book-steps"><div class="book-step"><div class="book-step-num">1</div><div class="book-step-title">Choose Tour</div><div class="book-step-desc">Browse and select a suitable tour</div></div><div class="book-step"><div class="book-step-num">2</div><div class="book-step-title">Fill Details</div><div class="book-step-desc">Enter the senior's info and health conditions</div></div><div class="book-step"><div class="book-step-num">3</div><div class="book-step-title">Confirm</div><div class="book-step-desc">Our team confirms and sends the booking</div></div></div><div class="card card-p"><div style="font-size:19px;font-weight:800;margin-bottom:20px;">📋 Booking Form</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;"><div class="gfield"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">Senior's Name <span style="color:#EF4444;">*</span></label><input type="text" class="fsb-input" style="width:100%;" placeholder="e.g. Mrs. Wang" /></div><div class="gfield"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">Age <span style="color:#EF4444;">*</span></label><input type="number" class="fsb-input" style="width:100%;" placeholder="68" min="50" max="100" /></div><div class="gfield"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">Contact Phone <span style="color:#EF4444;">*</span></label><input type="tel" class="fsb-input" style="width:100%;" placeholder="09xx-xxx-xxx" /></div><div class="gfield"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">Preferred Month</label><select class="fsb-input" style="width:100%;"><option>April 2026</option><option>May 2026</option><option>June 2026</option><option>July 2026</option><option>August 2026+</option></select></div></div><div class="gfield" style="margin-top:14px;"><label style="font-size:15px;font-weight:700;display:block;margin-bottom:6px;">Special Requirements (mobility aids, dietary restrictions, etc.)</label><textarea class="fsb-input" style="width:100%;min-height:70px;resize:vertical;" placeholder="e.g. Uses a walker, requires low-sugar meals…"></textarea></div><button class="btn btn-green" style="margin-top:8px;width:100%;" onclick="(function(){var nm=document.querySelector('#ftab-book input[placeholder=\\'e.g. Mrs. Wang\\']');var ph=document.querySelector('#ftab-book input[type=tel]');var mo=document.querySelector('#ftab-book select');var nt=document.querySelector('#ftab-book textarea');if(!nm||!nm.value.trim()||!ph||!ph.value.trim()){alert('Please fill in name and phone');return;}showBookingConfirm({name:nm.value.trim(),phone:ph.value.trim(),month:mo?mo.value:'',note:nt?nt.value.trim():''});})()">🛒 Submit Booking Request</button></div>`,
     'ftab-health': `<div style="background:linear-gradient(135deg,#FFF7ED,#FFEDD5);border-radius:var(--r-lg);padding:28px;margin-bottom:24px;border:3px solid var(--orange-m);"><div style="font-size:22px;font-weight:900;color:var(--orange-d);margin-bottom:8px;">❤️ Senior Health Records Sharing</div><div style="font-size:16px;color:var(--orange);line-height:1.7;">With the senior's consent, health results are shared with family so you can choose the most suitable tour together!</div></div><div style="font-size:18px;font-weight:800;margin-bottom:16px;">👵 Mrs. Wang's Health Overview (Demo)</div><div class="health-share-grid"><div class="hshare-card"><div class="hshare-label">🚶 Mobility</div><div class="hshare-val" style="color:var(--teal);">Comfortable walking 2–4 km</div></div><div class="hshare-card"><div class="hshare-label">💊 Health Condition</div><div class="hshare-val" style="color:var(--orange);">Mild hypertension (managed)</div></div><div class="hshare-card"><div class="hshare-label">🍱 Dietary Needs</div><div class="hshare-val" style="color:var(--blue);">Low-sodium preferred</div></div><div class="hshare-card"><div class="hshare-label">✅ Recommended Level</div><div class="hshare-val" style="color:var(--green);">Easy (4 Hearts)</div></div></div><div class="card card-p" style="margin-top:20px;"><div style="font-size:18px;font-weight:800;margin-bottom:14px;">🏥 Nurse's On-Trip Health Log (Demo)</div><div class="timeline"><div class="tl-item"><div class="tl-dot active"></div><div class="tl-time">Day 2 Morning</div><div class="tl-text">Blood pressure normal</div><div class="tl-detail">Systolic 128, Diastolic 80 — all good</div></div><div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Day 1 Evening</div><div class="tl-text">Arrived — health check</div><div class="tl-detail">Smooth flight, spirits high, no discomfort</div></div><div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Pre-departure</div><div class="tl-text">Pre-trip health confirmation</div><div class="tl-detail">Backup meds packed, BP monitor ready, emergency contact registered</div></div></div><button class="btn btn-orange btn-sm" style="margin-top:16px;" onclick="alert('Full health records available after login, or call 0800-888-888')">📋 View Full Health Records</button></div>`,
     'ftab-guide': `<div style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border-radius:var(--r-lg);padding:28px;margin-bottom:24px;border:3px solid var(--green-l);"><div style="font-size:22px;font-weight:900;color:var(--green);margin-bottom:8px;">💬 Contact Your On-Trip Team</div><div style="font-size:16px;color:#166534;line-height:1.7;">Have a message to pass along? Leave a note for the guide or nurse — they typically reply within 30 minutes.</div></div><div style="font-size:18px;font-weight:800;margin-bottom:14px;">👨‍💼 On-Trip Staff (Demo)</div><div class="guide-card" onclick="openGuideMsg('Nurse Lin','On-trip Nurse')"><div class="guide-avatar">🏥</div><div style="flex:1;"><div class="guide-info-name">Nurse Lin</div><div class="guide-info-role">On-trip Nurse · Fluent in Japanese</div></div><div style="font-size:13px;color:var(--green);font-weight:700;">● Online</div><button class="btn btn-green btn-sm" style="min-height:36px;font-size:14px;">💬 Message</button></div><div class="guide-card" onclick="openGuideMsg('Guide Chen','Tour Leader')"><div class="guide-avatar">🎌</div><div style="flex:1;"><div class="guide-info-name">Guide Chen</div><div class="guide-info-role">Tour Leader · 12 Years Japan Experience</div></div><div style="font-size:13px;color:var(--text2);font-weight:700;">📍 On Tour</div><button class="btn btn-green btn-sm" style="min-height:36px;font-size:14px;">💬 Message</button></div><div class="card card-p" style="margin-top:8px;"><div style="font-size:17px;font-weight:800;margin-bottom:14px;">📝 Message the Guide / Nurse</div><textarea id="guide-msg-text" class="fsb-input" style="width:100%;min-height:80px;resize:vertical;" placeholder="e.g. Mom brought extra meds — please remind her to take them after dinner. Contact me if anything happens. Thank you!"></textarea><div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;"><button class="btn btn-green" style="flex:1;" onclick="submitGuideMsg()">💬 Send Message</button><a href="tel:0800-888-888" class="btn btn-outline" style="border-color:var(--green);color:var(--green);">📞 Call Directly</a></div></div>`,
     'family-features': `<div class="ff-item"><div class="ff-icon">🛒</div><div class="ff-title">Book for Your Senior</div><p class="ff-desc">Children can select tours, fill forms, and complete registration on behalf of their loved one</p></div><div class="ff-item"><div class="ff-icon">❤️</div><div class="ff-title">Shared Health Records</div><p class="ff-desc">Health assessment shared with family to choose the most suitable tour</p></div><div class="ff-item"><div class="ff-icon">💬</div><div class="ff-title">Contact the Guide</div><p class="ff-desc">Family members can send messages directly to the on-trip guide via the platform</p></div>`,
@@ -7593,13 +7825,50 @@ document.addEventListener('DOMContentLoaded', function() {
     _svcOpenFaq = el.classList.contains('show') ? i : null;
   }
 
+  /* ── 報名確認單 Modal ── */
+  function showBookingConfirm(opts) {
+    // opts: { name, phone, tour, month, note }
+    const now = new Date();
+    const pad = n => String(n).padStart(2,'0');
+    const timeStr = `${now.getFullYear()}/${pad(now.getMonth()+1)}/${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+    const orderNum = 'YT' + now.getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000);
+
+    document.getElementById('bcon-order-num').textContent = '訂單編號：' + orderNum;
+    document.getElementById('bcon-name').textContent  = opts.name  || '—';
+    document.getElementById('bcon-phone').textContent = opts.phone || '—';
+    document.getElementById('bcon-time').textContent  = timeStr;
+
+    const tourRow   = document.getElementById('bcon-tour-row');
+    const monthRow  = document.getElementById('bcon-month-row');
+    const noteRow   = document.getElementById('bcon-note-row');
+
+    if (opts.tour)  { document.getElementById('bcon-tour').textContent  = opts.tour;  tourRow.style.display  = 'flex'; }
+    else            { tourRow.style.display  = 'none'; }
+    if (opts.month) { document.getElementById('bcon-month').textContent = opts.month; monthRow.style.display = 'flex'; }
+    else            { monthRow.style.display = 'none'; }
+    if (opts.note && opts.note.trim()) { document.getElementById('bcon-note').textContent = opts.note; noteRow.style.display = 'flex'; }
+    else            { noteRow.style.display  = 'none'; }
+
+    document.getElementById('booking-confirm-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBookingConfirm() {
+    document.getElementById('booking-confirm-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('booking-confirm-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeBookingConfirm();
+  });
+
   function submitCallback() {
     const lang = window._lang || 'zh';
     const L = _svcLabels[lang] || _svcLabels.zh;
     const phone = document.getElementById('svc-cb-phone').value.trim();
     const slot  = document.getElementById('svc-cb-slot').value;
     if (!phone || !slot) { alert(L.cbFail); return; }
-    alert(L.cbOk);
+    showBookingConfirm({ name: '旅客', phone: phone, tour: '預約回電・' + slot });
     document.getElementById('svc-cb-phone').value = '';
     document.getElementById('svc-cb-slot').value = '';
   }
