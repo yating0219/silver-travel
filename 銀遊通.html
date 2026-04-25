@@ -682,6 +682,95 @@
     }
 
     /* ==============================
+       CALL ENQUIRY MODAL
+    ============================== */
+    #call-modal-overlay {
+      position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:1150;
+      display:none;align-items:center;justify-content:center;
+      padding:20px;backdrop-filter:blur(4px);
+    }
+    #call-modal-overlay.open { display:flex; }
+    .cmod-box {
+      background:#fff;border-radius:var(--r-lg);max-width:480px;width:100%;
+      box-shadow:var(--shadow-lg);animation:modalIn .22s ease;overflow:hidden;
+    }
+    .cmod-header {
+      background:linear-gradient(135deg,#1D4ED8,#0D9488);
+      padding:24px 28px 20px;color:#fff;position:relative;text-align:center;
+    }
+    .cmod-close {
+      position:absolute;top:14px;right:14px;background:rgba(255,255,255,.2);
+      border:none;color:#fff;width:34px;height:34px;border-radius:50%;
+      font-size:18px;cursor:pointer;
+    }
+    .cmod-close:hover { background:rgba(255,255,255,.35); }
+    .cmod-icon { font-size:40px;margin-bottom:6px; }
+    .cmod-title { font-size:20px;font-weight:900; }
+    .cmod-tour-tag {
+      display:inline-block;margin-top:8px;padding:4px 14px;
+      background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);
+      border-radius:999px;font-size:14px;max-width:100%;
+      overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    }
+    .cmod-tabs {
+      display:flex;border-bottom:2px solid var(--border);
+    }
+    .cmod-tab {
+      flex:1;padding:14px;font-size:16px;font-weight:700;
+      background:none;border:none;cursor:pointer;color:var(--text2);
+      border-bottom:3px solid transparent;margin-bottom:-2px;
+      transition:color .15s,border-color .15s;
+    }
+    .cmod-tab.active { color:var(--blue);border-bottom-color:var(--blue); }
+    .cmod-panel { padding:24px 28px;display:none; }
+    .cmod-panel.active { display:block; }
+    .cmod-direct-box {
+      text-align:center;padding:12px 0 8px;
+    }
+    .cmod-phone-num {
+      font-size:38px;font-weight:900;color:var(--blue);letter-spacing:1px;
+      margin:12px 0;
+    }
+    .cmod-call-btn {
+      display:inline-flex;align-items:center;gap:10px;
+      background:var(--green);color:#fff;border:none;border-radius:var(--r-md);
+      padding:16px 40px;font-size:20px;font-weight:800;cursor:pointer;
+      text-decoration:none;margin-bottom:8px;
+      transition:background .15s,transform .1s;
+    }
+    .cmod-call-btn:hover { background:#166534;transform:translateY(-2px); }
+    .cmod-hours { font-size:14px;color:var(--text2);margin-top:10px; }
+    .cmod-or { text-align:center;color:var(--text2);font-size:15px;margin:16px 0;position:relative; }
+    .cmod-or::before,.cmod-or::after {
+      content:'';position:absolute;top:50%;width:38%;height:1px;background:var(--border);
+    }
+    .cmod-or::before { left:0; } .cmod-or::after { right:0; }
+    .cmod-input {
+      width:100%;padding:12px 16px;border:2px solid var(--border);
+      border-radius:var(--r-sm);font-size:18px;font-family:inherit;
+      margin-bottom:12px;
+    }
+    .cmod-input:focus { outline:none;border-color:var(--blue); }
+    .cmod-select {
+      width:100%;padding:12px 16px;border:2px solid var(--border);
+      border-radius:var(--r-sm);font-size:17px;font-family:inherit;
+      margin-bottom:16px;background:#fff;
+    }
+    .cmod-submit {
+      width:100%;padding:14px;font-size:18px;font-weight:800;
+      background:var(--orange);color:#fff;border:none;border-radius:var(--r-md);
+      cursor:pointer;transition:background .15s;
+    }
+    .cmod-submit:hover { background:var(--orange-d); }
+    .cmod-success {
+      text-align:center;padding:20px 0 8px;
+      display:none;
+    }
+    .cmod-success-icon { font-size:52px;margin-bottom:10px; }
+    .cmod-success-title { font-size:20px;font-weight:900;color:var(--green);margin-bottom:8px; }
+    .cmod-success-desc { font-size:16px;color:var(--text2);line-height:1.7; }
+
+    /* ==============================
        BOOKING CONFIRMATION MODAL
     ============================== */
     #booking-confirm-overlay {
@@ -3847,6 +3936,73 @@
 </div>
 
 <!-- ══════════════════════════════════
+     CALL ENQUIRY MODAL
+══════════════════════════════════ -->
+<div id="call-modal-overlay" onclick="if(event.target===this)closeCallModal()">
+  <div class="cmod-box">
+    <!-- Header -->
+    <div class="cmod-header">
+      <button class="cmod-close" onclick="closeCallModal()" aria-label="關閉">✕</button>
+      <div class="cmod-icon">📞</div>
+      <div class="cmod-title" data-i18n="cmod-title">電話詢問報名</div>
+      <div class="cmod-tour-tag" id="cmod-tour-tag" style="display:none;"></div>
+    </div>
+    <!-- Tabs -->
+    <div class="cmod-tabs">
+      <button class="cmod-tab active" id="cmod-tab-direct" onclick="switchCallTab('direct')" data-i18n="cmod-tab-direct">📞 立即撥打</button>
+      <button class="cmod-tab" id="cmod-tab-cb" onclick="switchCallTab('cb')" data-i18n="cmod-tab-cb">📅 預約回電</button>
+    </div>
+    <!-- Panel: Direct Call -->
+    <div class="cmod-panel active" id="cmod-panel-direct">
+      <div class="cmod-direct-box">
+        <div style="font-size:16px;color:var(--text2);" data-i18n="cmod-direct-hint">點擊下方號碼即可撥打，告知客服您感興趣的行程</div>
+        <div class="cmod-phone-num">0800-888-888</div>
+        <a href="tel:0800-888-888" class="cmod-call-btn" id="cmod-call-btn">
+          📞 <span data-i18n="cmod-call-now">現在撥打</span>
+        </a>
+        <div class="cmod-hours" data-i18n="cmod-hours">⏰ 每日 08:00–22:00・免費撥打・長輩也方便</div>
+      </div>
+      <div class="cmod-or"><span data-i18n="cmod-or">或</span></div>
+      <div style="background:var(--orange-l);border-radius:var(--r-sm);padding:14px 18px;font-size:15px;color:var(--orange-d);">
+        <strong data-i18n="cmod-tip-hd">💡 撥打前小提示：</strong>
+        <ul style="margin:8px 0 0 16px;line-height:2;" id="cmod-tips-list">
+          <li data-i18n="cmod-tip1">告知您的姓名與行動電話</li>
+          <li data-i18n="cmod-tip2">說明您感興趣的行程名稱</li>
+          <li data-i18n="cmod-tip3">告知希望出發的月份與人數</li>
+          <li data-i18n="cmod-tip4">如有特殊健康需求請一併告知</li>
+        </ul>
+      </div>
+    </div>
+    <!-- Panel: Callback -->
+    <div class="cmod-panel" id="cmod-panel-cb">
+      <div id="cmod-cb-form">
+        <div style="font-size:15px;color:var(--text2);margin-bottom:16px;" data-i18n="cmod-cb-hint">填寫後客服將在您指定時段主動致電，完全不需要等候</div>
+        <label style="font-size:16px;font-weight:700;display:block;margin-bottom:6px;"><span data-i18n="cmod-cb-name-label">您的姓名</span> <span style="color:#ef4444;">*</span></label>
+        <input id="cmod-cb-name" type="text" class="cmod-input" data-i18n-placeholder="cmod-cb-name-ph" placeholder="例：王阿姨" />
+        <label style="font-size:16px;font-weight:700;display:block;margin-bottom:6px;"><span data-i18n="cmod-cb-phone-label">回電電話</span> <span style="color:#ef4444;">*</span></label>
+        <input id="cmod-cb-phone" type="tel" class="cmod-input" placeholder="09xx-xxx-xxx" />
+        <label style="font-size:16px;font-weight:700;display:block;margin-bottom:6px;" data-i18n="cmod-cb-time-label">希望回電時段</label>
+        <select id="cmod-cb-slot" class="cmod-select">
+          <option value="" data-i18n="cmod-cb-slot0">請選擇時段</option>
+          <option data-i18n="cmod-cb-slot1">上午 9:00–12:00</option>
+          <option data-i18n="cmod-cb-slot2">下午 13:00–17:00</option>
+          <option data-i18n="cmod-cb-slot3">傍晚 17:00–19:00</option>
+        </select>
+        <label style="font-size:16px;font-weight:700;display:block;margin-bottom:6px;" data-i18n="cmod-cb-note-label">想了解的行程（選填）</label>
+        <input id="cmod-cb-tour-input" type="text" class="cmod-input" data-i18n-placeholder="cmod-cb-tour-ph" placeholder="例：日本京都賞櫻" />
+        <button class="cmod-submit" onclick="submitCallModal()" data-i18n="cmod-cb-submit">✅ 送出預約回電</button>
+      </div>
+      <div class="cmod-success" id="cmod-cb-success">
+        <div class="cmod-success-icon">✅</div>
+        <div class="cmod-success-title" data-i18n="cmod-ok-title">預約成功！</div>
+        <div class="cmod-success-desc" id="cmod-ok-desc"></div>
+        <button class="btn btn-outline" style="margin-top:18px;" onclick="closeCallModal()" data-i18n="bcon-close">關閉</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
      QUICK BOOK CONTACT FORM MODAL
 ══════════════════════════════════ -->
 <div id="quick-book-overlay" style="
@@ -6224,6 +6380,57 @@ const tours = {
   }
 };
 
+/* ── 電話詢問 Modal ── */
+function openCallModal(tourName) {
+  const tag = document.getElementById('cmod-tour-tag');
+  if (tourName) { tag.textContent = '🗺️ ' + tourName; tag.style.display = 'inline-block'; }
+  else          { tag.style.display = 'none'; }
+  // Pre-fill the tour input in callback tab
+  const tourInput = document.getElementById('cmod-cb-tour-input');
+  if (tourInput && tourName) tourInput.value = tourName;
+  // Reset success state
+  document.getElementById('cmod-cb-form').style.display = 'block';
+  document.getElementById('cmod-cb-success').style.display = 'none';
+  // Default to direct tab
+  switchCallTab('direct');
+  document.getElementById('call-modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCallModal() {
+  document.getElementById('call-modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function switchCallTab(tab) {
+  ['direct','cb'].forEach(t => {
+    document.getElementById('cmod-tab-' + t).classList.toggle('active', t === tab);
+    document.getElementById('cmod-panel-' + t).classList.toggle('active', t === tab);
+  });
+}
+
+function submitCallModal() {
+  const name  = document.getElementById('cmod-cb-name').value.trim();
+  const phone = document.getElementById('cmod-cb-phone').value.trim();
+  const slot  = document.getElementById('cmod-cb-slot').value;
+  const tour  = document.getElementById('cmod-cb-tour-input').value.trim();
+  const lang  = window._lang || 'zh';
+  const errMsg = lang === 'en' ? 'Please fill in your name and phone number.'
+    : lang === 'ja' ? 'お名前と電話番号をご入力ください。'
+    : '請填寫姓名與回電電話';
+  if (!name || !phone) { alert(errMsg); return; }
+  // Show success
+  const slotText = slot || (lang === 'en' ? 'any time' : lang === 'ja' ? 'いつでも' : '任何時段');
+  const descMap = {
+    zh: `您好，<strong>${name}</strong>！<br>我們已收到您的回電預約，<br>客服將在「<strong>${slotText}</strong>」以 <strong>${phone}</strong> 聯繫您。${tour ? '<br>行程：' + tour : ''}`,
+    en: `Hello, <strong>${name}</strong>!<br>We've received your callback request.<br>Our team will call <strong>${phone}</strong> during <strong>${slotText}</strong>.${tour ? '<br>Tour: ' + tour : ''}`,
+    ja: `<strong>${name}</strong> 様、<br>折り返し電話のご予約を承りました。<br>「<strong>${slotText}</strong>」に <strong>${phone}</strong> へご連絡いたします。${tour ? '<br>ツアー：' + tour : ''}`
+  };
+  document.getElementById('cmod-cb-form').style.display = 'none';
+  document.getElementById('cmod-ok-desc').innerHTML = descMap[lang] || descMap.zh;
+  document.getElementById('cmod-cb-success').style.display = 'block';
+}
+
 function bookThisTour() {
   const key = window._currentTourKey;
   const isEn = window._lang === 'en';
@@ -6318,9 +6525,9 @@ function openModal(key) {
           <button class="btn btn-orange btn-full" style="margin-top:20px;font-size:20px;min-height:64px;" onclick="${bookAction}">
             ${quizBtn}
           </button>
-          <a href="tel:0800-888-888" class="btn btn-outline btn-full" style="margin-top:10px;">
+          <button class="btn btn-outline btn-full" style="margin-top:10px;" onclick="openCallModal('${(t.title||'').replace(/'/g,'\\'+'\\'')}')">
             ${callBtn}
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -6683,6 +6890,27 @@ const T = {
     'bcon-ct-email':'Email','bcon-ct-health':'健康問卷',
     'bcon-ct-health-sub':'提前填寫更安心',
     'bcon-print':'🖨️ 列印確認單','bcon-close':'關閉',
+    'cmod-title':'電話詢問報名',
+    'cmod-tab-direct':'📞 立即撥打','cmod-tab-cb':'📅 預約回電',
+    'cmod-direct-hint':'點擊下方號碼即可撥打，告知客服您感興趣的行程',
+    'cmod-call-now':'現在撥打',
+    'cmod-hours':'⏰ 每日 08:00–22:00・免費撥打・長輩也方便',
+    'cmod-or':'或',
+    'cmod-tip-hd':'💡 撥打前小提示：',
+    'cmod-tip1':'告知您的姓名與行動電話',
+    'cmod-tip2':'說明您感興趣的行程名稱',
+    'cmod-tip3':'告知希望出發的月份與人數',
+    'cmod-tip4':'如有特殊健康需求請一併告知',
+    'cmod-cb-hint':'填寫後客服將在您指定時段主動致電，完全不需要等候',
+    'cmod-cb-name-label':'您的姓名','cmod-cb-name-ph':'例：王阿姨',
+    'cmod-cb-phone-label':'回電電話',
+    'cmod-cb-time-label':'希望回電時段',
+    'cmod-cb-slot0':'請選擇時段','cmod-cb-slot1':'上午 9:00–12:00',
+    'cmod-cb-slot2':'下午 13:00–17:00','cmod-cb-slot3':'傍晚 17:00–19:00',
+    'cmod-cb-note-label':'想了解的行程（選填）',
+    'cmod-cb-tour-ph':'例：日本京都賞櫻',
+    'cmod-cb-submit':'✅ 送出預約回電',
+    'cmod-ok-title':'預約成功！',
     'group-title':'👥 揪朋友一起去','group-sub':'找志同道合的銀髮好友，一起出發更安心、更快樂！',
     'family-title':'👨‍👩‍👧 家人關心專區','family-sub':'隨時掌握長輩旅途動態，出門更安心！',
     'reviews-title':'⭐ 旅人真實心聲','reviews-sub':'來自 5 萬位快樂旅人的真實評價',
@@ -6776,6 +7004,27 @@ const T = {
     'bcon-ct-email':'Email','bcon-ct-health':'Health Quiz',
     'bcon-ct-health-sub':'Fill in advance for peace of mind',
     'bcon-print':'🖨️ Print Confirmation','bcon-close':'Close',
+    'cmod-title':'Call to Enquire',
+    'cmod-tab-direct':'📞 Call Now','cmod-tab-cb':'📅 Request Callback',
+    'cmod-direct-hint':'Tap the number below to call us — let our team know which tour you\'re interested in',
+    'cmod-call-now':'Call Now',
+    'cmod-hours':'⏰ Daily 08:00–22:00 · Toll Free · Senior-Friendly',
+    'cmod-or':'or',
+    'cmod-tip-hd':'💡 Before you call:',
+    'cmod-tip1':'Have your name and mobile number ready',
+    'cmod-tip2':'Mention the tour you\'re interested in',
+    'cmod-tip3':'Let us know your preferred month and group size',
+    'cmod-tip4':'Share any special health needs',
+    'cmod-cb-hint':'Fill in your details and our team will call you at your preferred time — no waiting on hold',
+    'cmod-cb-name-label':'Your Name','cmod-cb-name-ph':'e.g. Mrs. Wang',
+    'cmod-cb-phone-label':'Callback Number',
+    'cmod-cb-time-label':'Preferred Callback Time',
+    'cmod-cb-slot0':'Select a time slot','cmod-cb-slot1':'Morning 9:00–12:00',
+    'cmod-cb-slot2':'Afternoon 13:00–17:00','cmod-cb-slot3':'Evening 17:00–19:00',
+    'cmod-cb-note-label':'Tour you\'re interested in (optional)',
+    'cmod-cb-tour-ph':'e.g. Kyoto Cherry Blossom',
+    'cmod-cb-submit':'✅ Submit Callback Request',
+    'cmod-ok-title':'Callback Scheduled!',
     'group-title':'👥 Find Travel Companions','group-sub':'Meet like-minded senior travelers and enjoy the journey together!',
     'family-title':'👨‍👩‍👧 Family Care Zone','family-sub':'Track your loved one\'s journey anytime — travel with complete peace of mind!',
     'reviews-title':'⭐ Real Stories from Our Travelers','reviews-sub':'Genuine reviews from 50,000+ happy senior travelers',
@@ -6878,6 +7127,27 @@ const T = {
     'bcon-ct-email':'メール','bcon-ct-health':'健康診断票',
     'bcon-ct-health-sub':'事前にご記入で安心',
     'bcon-print':'🖨️ 確認書を印刷','bcon-close':'閉じる',
+    'cmod-title':'電話でお問い合わせ',
+    'cmod-tab-direct':'📞 今すぐ電話','cmod-tab-cb':'📅 折り返し予約',
+    'cmod-direct-hint':'下の番号をタップしてお電話ください。ご興味のあるツアーをスタッフにお伝えください',
+    'cmod-call-now':'今すぐ電話',
+    'cmod-hours':'⏰ 毎日 08:00–22:00・無料通話・シニアの方も安心',
+    'cmod-or':'または',
+    'cmod-tip-hd':'💡 お電話前のご確認：',
+    'cmod-tip1':'お名前と携帯電話番号をご用意ください',
+    'cmod-tip2':'ご興味のあるツアー名をお伝えください',
+    'cmod-tip3':'ご希望の出発月と人数をお伝えください',
+    'cmod-tip4':'特別な健康上のご要望があればお知らせください',
+    'cmod-cb-hint':'ご入力いただければ、ご指定の時間帯にスタッフからお電話いたします。お待たせしません',
+    'cmod-cb-name-label':'お名前','cmod-cb-name-ph':'例：田中様',
+    'cmod-cb-phone-label':'折り返し電話番号',
+    'cmod-cb-time-label':'ご希望の折り返し時間帯',
+    'cmod-cb-slot0':'時間帯を選択','cmod-cb-slot1':'午前 9:00–12:00',
+    'cmod-cb-slot2':'午後 13:00–17:00','cmod-cb-slot3':'夕方 17:00–19:00',
+    'cmod-cb-note-label':'ご興味のあるツアー（任意）',
+    'cmod-cb-tour-ph':'例：京都桜ツアー',
+    'cmod-cb-submit':'✅ 折り返し予約を送信',
+    'cmod-ok-title':'ご予約完了！',
     'group-title':'👥 一緒に旅する仲間を探す','group-sub':'気の合う旅仲間と出発すれば、もっと安心・もっと楽しい！',
     'family-title':'👨‍👩‍👧 ご家族サポートエリア','family-sub':'いつでもご旅行の状況を確認。安心してお見送りを！',
     'reviews-title':'⭐ 旅人のリアルな声','reviews-sub':'5万人以上の幸せな旅人からの本物の口コミ',
@@ -7482,6 +7752,11 @@ function setLang(lang) {
       ? 'あなたの健康状態とご希望に合ったツアーはこちら 👇'
       : '根據您的健康狀況與偏好，以下行程最適合您 👇';
   }
+  // select option text (data-i18n on <option> not updated by forEach above)
+  document.querySelectorAll('select [data-i18n]').forEach(opt => {
+    const key = opt.dataset.i18n;
+    if (d[key] !== undefined) opt.textContent = d[key];
+  });
   showToast(lang === 'en' ? '🌐 Switched to English' : lang === 'ja' ? '🌐 日本語に切り替えました' : '🌐 已切換為中文');
   if (typeof buildTours === 'function') buildTours();
   setTimeout(renderExpertStatus, 80);
