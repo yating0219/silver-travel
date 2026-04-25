@@ -3847,6 +3847,52 @@
 </div>
 
 <!-- ══════════════════════════════════
+     QUICK BOOK CONTACT FORM MODAL
+══════════════════════════════════ -->
+<div id="quick-book-overlay" style="
+  position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:1200;
+  display:none;align-items:center;justify-content:center;
+  padding:20px;backdrop-filter:blur(4px);"
+  onclick="if(event.target===this)closeQuickBook()">
+  <div style="
+    background:#fff;border-radius:28px;max-width:440px;width:100%;
+    box-shadow:0 8px 40px rgba(0,0,0,.18);animation:modalIn .22s ease;overflow:hidden;">
+    <!-- header -->
+    <div style="background:linear-gradient(135deg,var(--orange),#f97316);padding:24px 28px 20px;color:#fff;position:relative;">
+      <button onclick="closeQuickBook()" style="
+        position:absolute;top:14px;right:14px;background:rgba(255,255,255,.2);
+        border:none;color:#fff;width:34px;height:34px;border-radius:50%;
+        font-size:18px;cursor:pointer;">✕</button>
+      <div style="font-size:36px;margin-bottom:6px;">📋</div>
+      <div style="font-size:20px;font-weight:900;">留下聯絡資料，客服馬上聯繫您</div>
+      <div style="font-size:15px;opacity:.88;margin-top:4px;" id="qb-tour-name"></div>
+    </div>
+    <!-- body -->
+    <div style="padding:24px 28px 28px;">
+      <div style="margin-bottom:18px;">
+        <label style="font-size:17px;font-weight:700;display:block;margin-bottom:8px;">您的姓名 <span style="color:#ef4444;">*</span></label>
+        <input id="qb-name-input" type="text" placeholder="例：王阿姨"
+          style="width:100%;padding:12px 16px;border:2px solid #e5e7eb;border-radius:14px;font-size:18px;font-family:inherit;"
+          onkeydown="if(event.key==='Enter')document.getElementById('qb-phone-input').focus()" />
+      </div>
+      <div style="margin-bottom:24px;">
+        <label style="font-size:17px;font-weight:700;display:block;margin-bottom:8px;">聯絡電話 <span style="color:#ef4444;">*</span></label>
+        <input id="qb-phone-input" type="tel" placeholder="09xx-xxx-xxx"
+          style="width:100%;padding:12px 16px;border:2px solid #e5e7eb;border-radius:14px;font-size:18px;font-family:inherit;"
+          onkeydown="if(event.key==='Enter')submitQuickBook()" />
+      </div>
+      <button onclick="submitQuickBook()" class="btn btn-orange"
+        style="width:100%;font-size:19px;min-height:58px;">
+        ✅ 送出報名申請
+      </button>
+      <div style="text-align:center;margin-top:14px;font-size:15px;color:#78716c;">
+        客服將在 2 小時內以電話確認・免費撥打 0800-888-888
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
      BOOKING CONFIRMATION MODAL
 ══════════════════════════════════ -->
 <div id="booking-confirm-overlay" role="dialog" aria-modal="true" aria-labelledby="bcon-title-txt">
@@ -6177,7 +6223,41 @@ const tours = {
   }
 };
 
+function bookThisTour() {
+  const key = window._currentTourKey;
+  const isEn = window._lang === 'en';
+  const t = isEn ? (tours_en && tours_en[key] || tours[key]) : tours[key];
+  const tourName = t ? t.title : '';
+  // Show quick contact form before confirmation slip
+  const overlay = document.getElementById('quick-book-overlay');
+  document.getElementById('qb-tour-name').textContent = tourName;
+  document.getElementById('qb-name-input').value = '';
+  document.getElementById('qb-phone-input').value = '';
+  window._pendingTourName = tourName;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('qb-name-input').focus(), 100);
+}
+
+function closeQuickBook() {
+  document.getElementById('quick-book-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function submitQuickBook() {
+  const name  = document.getElementById('qb-name-input').value.trim();
+  const phone = document.getElementById('qb-phone-input').value.trim();
+  const isEn  = window._lang === 'en';
+  if (!name || !phone) {
+    alert(isEn ? 'Please fill in name and phone number.' : '請填寫姓名與聯絡電話');
+    return;
+  }
+  closeQuickBook();
+  showBookingConfirm({ name, phone, tour: window._pendingTourName || '' });
+}
+
 function openModal(key) {
+  window._currentTourKey = key;
   const isEn = window._lang === 'en';
   const t = isEn ? (tours_en[key] || tours[key]) : tours[key];
   if (!t) return;
@@ -6189,9 +6269,15 @@ function openModal(key) {
     : '<li>✈️ 來回機票</li><li>🏨 四星溫泉飯店</li><li>🍚 全程銀髮特製餐</li><li>🚌 全程交通接送</li><li>🏥 隨團護理師</li><li>🛡️ 海外旅遊保險</li>';
   const earlyBird = isEn ? '🎉 Book now — Save NT$3,000 early bird discount!' : '🎉 現在預訂享早鳥折扣 NT$3,000！';
   const datesLabel= isEn ? '📆 Upcoming Departure Dates'       : '📆 近期出發日期';
-  const quizBtn   = isEn ? '📝 Take Health Quiz & Register'    : '📝 立即填問卷報名';
+  const quizDone  = document.getElementById('match-results') && document.getElementById('match-results').style.display === 'block';
+  const quizBtn   = quizDone
+    ? (isEn ? '📋 Book This Tour Now' : '📋 立即報名此行程')
+    : (isEn ? '📝 Take Health Quiz & Register' : '📝 立即填問卷報名');
   const callBtn   = isEn ? '📞 Call to Enquire'                : '📞 電話詢問報名';
   const toast     = isEn ? '✅ Please complete the health quiz — we will match this tour for you!' : '✅ 請先填寫健康問卷，完成後立即為您配對此行程！';
+  const bookAction = quizDone
+    ? `closeModal();bookThisTour()`
+    : `closeModal();scrollTo('#health');showToast('${toast}')`;
   document.getElementById('modal-title').textContent = t.title;
   document.getElementById('modal-body').innerHTML = `
     <div class="modal-grid">
@@ -6225,7 +6311,7 @@ function openModal(key) {
               <div style="font-size:17px;font-weight:700;">${d.date}</div>
               <span class="badge ${d.ok?'b-green':'b-red'}">${d.status}</span>
             </div>`).join('')}
-          <button class="btn btn-orange btn-full" style="margin-top:20px;font-size:20px;min-height:64px;" onclick="closeModal();scrollTo('#health');showToast('${toast}')">
+          <button class="btn btn-orange btn-full" style="margin-top:20px;font-size:20px;min-height:64px;" onclick="${bookAction}">
             ${quizBtn}
           </button>
           <a href="tel:0800-888-888" class="btn btn-outline btn-full" style="margin-top:10px;">
