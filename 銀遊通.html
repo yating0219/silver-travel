@@ -6503,6 +6503,11 @@ const tours = {
 
 /* ── 電話詢問 Modal ── */
 function openCallModal(tourName) {
+  if (!tourName && window._currentTourKey) {
+    const isEn = window._lang === 'en';
+    const t = isEn ? (tours_en[window._currentTourKey] || tours[window._currentTourKey]) : tours[window._currentTourKey];
+    if (t) tourName = t.title;
+  }
   const tag = document.getElementById('cmod-tour-tag');
   if (tourName) { tag.textContent = '🗺️ ' + tourName; tag.style.display = 'inline-block'; }
   else          { tag.style.display = 'none'; }
@@ -6646,7 +6651,7 @@ function openModal(key) {
           <button class="btn btn-orange btn-full" style="margin-top:20px;font-size:20px;min-height:64px;" onclick="${bookAction}">
             ${quizBtn}
           </button>
-          <button class="btn btn-outline btn-full" style="margin-top:10px;" onclick="openCallModal('${(t.title||'').replace(/'/g,'\\'+'\\'')}')">
+          <button class="btn btn-outline btn-full" style="margin-top:10px;" onclick="openCallModal()">
             ${callBtn}
           </button>
         </div>
