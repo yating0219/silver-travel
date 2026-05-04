@@ -549,6 +549,37 @@
     .tour-dot-row { display:flex; gap:6px; align-items:center; flex:1; }
     .tour-dot { width:8px; height:8px; border-radius:50%; background:#E5E7EB; transition:all .3s; }
     .tour-dot.active { background:#E8601C; width:22px; border-radius:4px; }
+    /* ── My-Tour Ribbon ── */
+    #my-tour-ribbon {
+      position:fixed; bottom:76px; left:50%; transform:translateX(-50%) translateY(140%);
+      background:linear-gradient(135deg,#059669,#0891b2); color:#fff;
+      border-radius:999px; padding:11px 20px 11px 16px;
+      display:flex; align-items:center; gap:12px; z-index:4900;
+      box-shadow:0 4px 24px rgba(5,150,105,.45); cursor:pointer;
+      transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+      font-size:15px; font-weight:800; max-width:calc(100% - 40px);
+      white-space:nowrap; border:none; font-family:inherit;
+    }
+    #my-tour-ribbon.show { transform:translateX(-50%) translateY(0); }
+    #my-tour-ribbon:hover { filter:brightness(1.08); }
+    #mtr-text { display:flex; flex-direction:column; gap:1px; }
+    #mtr-label { font-size:12px; opacity:.82; letter-spacing:.03em; }
+    #mtr-name  { font-size:15px; font-weight:900; max-width:200px; overflow:hidden; text-overflow:ellipsis; }
+    /* ── Guide toast with action button ── */
+    #guide-bar {
+      position:fixed; bottom:140px; left:50%; transform:translateX(-50%) translateY(140%);
+      background:#1a1a2e; color:#fff; border-radius:var(--r-lg);
+      padding:14px 20px; z-index:4950; max-width:calc(100% - 32px);
+      box-shadow:0 8px 32px rgba(0,0,0,.28); display:flex; align-items:center;
+      gap:14px; font-size:16px; font-weight:700; transition:transform .35s ease, opacity .35s ease;
+      opacity:0; pointer-events:none; white-space:nowrap;
+    }
+    #guide-bar.show { transform:translateX(-50%) translateY(0); opacity:1; pointer-events:auto; }
+    #guide-bar-btn {
+      background:linear-gradient(135deg,#059669,#0891b2); color:#fff; border:none;
+      border-radius:999px; padding:8px 16px; font-size:14px; font-weight:900;
+      cursor:pointer; white-space:nowrap; font-family:inherit;
+    }
     .tour-fab { position:fixed; bottom:90px; right:20px; width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg,#7C3AED,#E8601C); color:#fff; border:none; font-size:22px; cursor:pointer; box-shadow:0 6px 20px rgba(124,58,237,.45); z-index:5000; display:flex; align-items:center; justify-content:center; transition:transform .2s; }
     .tour-fab:hover { transform:scale(1.1); }
     .tour-fab .fab-label { position:absolute; right:60px; background:#1a1a2e; color:#fff; font-size:13px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap; opacity:0; transition:opacity .2s; pointer-events:none; }
@@ -4189,6 +4220,21 @@
 <!-- ══════════════════════════════════
      SUCCESS TOAST
 ══════════════════════════════════ -->
+<!-- My-Tour Ribbon -->
+<button id="my-tour-ribbon" onclick="returnToConfirmedTour()" aria-label="查看我的預約行程">
+  <span style="font-size:22px;">🎫</span>
+  <div id="mtr-text">
+    <div id="mtr-label" data-i18n="mtr-label">我的預約行程</div>
+    <div id="mtr-name"></div>
+  </div>
+  <span style="font-size:18px;opacity:.75;">→</span>
+</button>
+<!-- Guide bar with action button -->
+<div id="guide-bar" role="alert">
+  <span id="guide-bar-msg"></span>
+  <button id="guide-bar-btn" onclick="returnToConfirmedTour()">查看行程 →</button>
+</div>
+
 <div id="toast" style="
   position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);
   background:var(--green);color:#fff;padding:16px 28px;border-radius:var(--r-lg);
@@ -4335,8 +4381,42 @@ function scrollToExpert(key) {
 }
 
 // ── Go to Tours: scroll + focus search bar ──
+// ── Confirmed-tour ribbon helpers ──
+let _guideBarTimer = null;
+
+function showMyTourRibbon(tourName) {
+  const ribbon = document.getElementById('my-tour-ribbon');
+  document.getElementById('mtr-name').textContent = tourName;
+  ribbon.classList.add('show');
+}
+
+function showGuideBar() {
+  if (!window._confirmedTour && !window._currentTourKey) return;
+  const lang = window._lang || 'zh';
+  const name = window._confirmedTour ? window._confirmedTour.name
+    : (document.getElementById('mtr-name').textContent || '');
+  if (!name) return;
+  const msgMap = {
+    zh: '🎫 您已選擇「' + name + '」',
+    en: '🎫 Your tour: "' + name + '"',
+    ja: '🎫 ご選択のツアー：「' + name + '」'
+  };
+  const btnMap = { zh: '查看行程 →', en: 'View Tour →', ja: 'ツアーを見る →' };
+  document.getElementById('guide-bar-msg').textContent = msgMap[lang] || msgMap.zh;
+  document.getElementById('guide-bar-btn').textContent = btnMap[lang] || btnMap.zh;
+  const bar = document.getElementById('guide-bar');
+  bar.classList.add('show');
+  clearTimeout(_guideBarTimer);
+  _guideBarTimer = setTimeout(() => bar.classList.remove('show'), 4500);
+}
+
+function returnToConfirmedTour() {
+  document.getElementById('guide-bar').classList.remove('show');
+  const key = window._confirmedTour ? window._confirmedTour.key : window._currentTourKey;
+  if (key) openModal(key);
+}
+
 function goToTours() {
-  // Switch to filter view first
   setTourView('filter');
   const section = document.getElementById('tours');
   if (section) section.scrollIntoView({ behavior: 'smooth' });
@@ -4349,18 +4429,19 @@ function goToTours() {
       setTimeout(() => { inp.style.boxShadow = ''; }, 900);
     }
   }, 450);
+  setTimeout(showGuideBar, 600);
 }
 
 function goToHealth() {
   const el = document.getElementById('health');
   if (!el) return;
   el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  // Remove then re-add class to restart animation each time
   el.classList.remove('health-highlight');
-  void el.offsetWidth; // force reflow
+  void el.offsetWidth;
   el.classList.add('health-highlight');
   setTimeout(() => el.classList.remove('health-highlight'), 5600);
   showToast(currentLang === 'en' ? '❤️ Scroll down to take the health quiz!' : '❤️ 請往下填寫健康問卷！', '#E8601C');
+  setTimeout(showGuideBar, 600);
 }
 
 // ── Toast ──
@@ -4390,6 +4471,7 @@ function openMeals() {
   document.body.style.overflow = 'hidden';
   overlay.scrollTop = 0;
   overlay.focus && overlay.focus();
+  setTimeout(showGuideBar, 600);
 }
 function closeMeals() {
   document.getElementById('meals-overlay').classList.remove('open');
@@ -4750,6 +4832,7 @@ function openMatchModal() {
   document.querySelectorAll('.mchip').forEach(c => c.classList.remove('sel'));
   goMatchStep1();
   document.getElementById('match-modal').classList.add('open');
+  setTimeout(showGuideBar, 600);
 }
 function toggleMchip(btn, key) {
   btn.classList.toggle('sel');
@@ -4822,6 +4905,7 @@ function openFamilyModal() {
   document.getElementById('family-modal').classList.add('open');
   document.getElementById('fmodal-result').style.display = 'none';
   document.getElementById('fmodal-search-input').value = '';
+  setTimeout(showGuideBar, 600);
 }
 function closeFamilyModal() {
   document.getElementById('family-modal').classList.remove('open');
@@ -6929,7 +7013,7 @@ const T = {
     'bcon-ct-line-sub':'@悠旅趣',
     'bcon-ct-email':'Email','bcon-ct-health':'健康問卷',
     'bcon-ct-health-sub':'提前填寫更安心',
-    'bcon-print':'🖨️ 列印確認單','bcon-close':'關閉',
+    'bcon-print':'🖨️ 列印確認單','bcon-close':'關閉','mtr-label':'我的預約行程',
     'cmod-title':'電話詢問報名',
     'cmod-tab-direct':'📞 立即撥打','cmod-tab-cb':'📅 預約回電',
     'cmod-direct-hint':'點擊下方號碼即可撥打，告知客服您感興趣的行程',
@@ -7048,7 +7132,7 @@ const T = {
     'bcon-ct-line-sub':'@YouTrip',
     'bcon-ct-email':'Email','bcon-ct-health':'Health Quiz',
     'bcon-ct-health-sub':'Fill in advance for peace of mind',
-    'bcon-print':'🖨️ Print Confirmation','bcon-close':'Close',
+    'bcon-print':'🖨️ Print Confirmation','bcon-close':'Close','mtr-label':'My Booked Tour',
     'cmod-title':'Call to Enquire',
     'cmod-tab-direct':'📞 Call Now','cmod-tab-cb':'📅 Request Callback',
     'cmod-direct-hint':'Tap the number below to call us — let our team know which tour you\'re interested in',
@@ -7176,7 +7260,7 @@ const T = {
     'bcon-ct-line-sub':'@悠旅趣',
     'bcon-ct-email':'メール','bcon-ct-health':'健康診断票',
     'bcon-ct-health-sub':'事前にご記入で安心',
-    'bcon-print':'🖨️ 確認書を印刷','bcon-close':'閉じる',
+    'bcon-print':'🖨️ 確認書を印刷','bcon-close':'閉じる','mtr-label':'予約中のツアー',
     'cmod-title':'電話でお問い合わせ',
     'cmod-tab-direct':'📞 今すぐ電話','cmod-tab-cb':'📅 折り返し予約',
     'cmod-direct-hint':'下の番号をタップしてお電話ください。ご興味のあるツアーをスタッフにお伝えください',
@@ -8317,6 +8401,12 @@ document.addEventListener('DOMContentLoaded', function() {
     else            { monthRow.style.display = 'none'; }
     if (opts.note && opts.note.trim()) { document.getElementById('bcon-note').textContent = opts.note; noteRow.style.display = 'flex'; }
     else            { noteRow.style.display  = 'none'; }
+
+    // Save confirmed tour for nav guidance
+    if (opts.tour) {
+      window._confirmedTour = { key: window._currentTourKey || '', name: opts.tour, orderNum };
+      showMyTourRibbon(opts.tour);
+    }
 
     document.getElementById('booking-confirm-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
