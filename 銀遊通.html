@@ -2007,7 +2007,7 @@
       <button class="qbtn" onclick="openMatchModal()"  data-i18n="qbtn-group">👥 揪朋友</button>
       <button class="qbtn" onclick="openFamilyModal()" data-i18n="qbtn-family">👨‍👩‍👧 家人專區</button>
       <div class="qbtn-expert-wrap">
-        <button class="qbtn" onclick="scrollTo('#expert-tips')" style="background:var(--green-l);color:var(--green);border-color:var(--green);" data-i18n="qbtn-expert">🧭 達人推薦</button>
+        <button class="qbtn" onclick="goToExpert()" style="background:var(--green-l);color:var(--green);border-color:var(--green);" data-i18n="qbtn-expert">🧭 達人推薦</button>
         <div class="expert-qdrop" id="expert-qdrop">
           <div class="eqdrop-hdr" data-i18n="eq-hdr">🧭 6位銀髮達人・即時動態</div>
           <div class="eqdrop-item" onclick="scrollToExpert('wangmeizhu')">
@@ -2064,7 +2064,7 @@
         </div>
       </div>
       <div class="qbtn-reviews-wrap">
-        <button class="qbtn" onclick="scrollTo('#reviews')" data-i18n="qbtn-reviews">⭐ 旅人評價</button>
+        <button class="qbtn" onclick="goToReviews()" data-i18n="qbtn-reviews">⭐ 旅人評價</button>
         <div class="reviews-qdrop">
           <div class="rvdrop-hdr">
             <div class="rvdrop-hdr-title" data-i18n="rv-qdrop-title">⭐ 旅人真實心聲</div>
@@ -4366,6 +4366,8 @@ function scrollTo(id) {
   const el = document.querySelector(id);
   if (el) el.scrollIntoView({ behavior: 'smooth' });
 }
+function goToExpert()  { scrollTo('#expert-tips'); setTimeout(showGuideBar, 600); }
+function goToReviews() { scrollTo('#reviews');     setTimeout(showGuideBar, 600); }
 
 function scrollToExpert(key) {
   scrollTo('#expert-tips');
