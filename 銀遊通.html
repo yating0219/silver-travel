@@ -1300,6 +1300,20 @@
       background: linear-gradient(135deg, #FFFBF5, #FFF7ED);
       position: relative; overflow: hidden;
     }
+    .match-card-actions { display:flex; gap:10px; margin-top:14px; }
+    .match-card-actions .btn { flex:1; font-size:16px; }
+    /* Quiz guide banner */
+    #quiz-guide-banner {
+      display:none; background:linear-gradient(135deg,#FFF7ED,#FFEDD5);
+      border:3px solid var(--orange); border-radius:var(--r-lg);
+      padding:24px 28px; margin-bottom:32px; text-align:center;
+    }
+    #quiz-guide-banner.show { display:block; }
+    .qgb-steps { display:flex; justify-content:center; gap:0; flex-wrap:wrap; margin:20px 0 0; }
+    .qgb-step { display:flex; flex-direction:column; align-items:center; gap:6px; padding:0 20px; }
+    .qgb-num { width:36px; height:36px; border-radius:50%; background:var(--orange); color:#fff; font-size:16px; font-weight:900; display:flex; align-items:center; justify-content:center; }
+    .qgb-label { font-size:14px; font-weight:700; color:var(--text2); white-space:nowrap; }
+    .qgb-arrow { font-size:22px; color:var(--orange-m); align-self:flex-start; margin-top:6px; }
     .match-badge-best {
       position: absolute; top: 12px; left: 12px;
       background: var(--orange); color: #fff;
@@ -2358,6 +2372,20 @@
     </div>
 
     <!-- ── QUIZ PANEL ── -->
+    <!-- 找行程引導橫幅 -->
+    <div id="quiz-guide-banner">
+      <div style="font-size:40px;margin-bottom:10px;">🗺️</div>
+      <div style="font-size:24px;font-weight:900;color:var(--orange-d);margin-bottom:8px;" data-i18n="qgb-title">只需 3 分鐘，找到最適合您的行程！</div>
+      <div style="font-size:17px;color:var(--text2);line-height:1.8;" data-i18n="qgb-desc">填寫下方 6 題健康問卷，我們會根據您的身體狀況、興趣與預算，為您量身推薦最安心的行程。</div>
+      <div class="qgb-steps">
+        <div class="qgb-step"><div class="qgb-num">1</div><div class="qgb-label" data-i18n="qgb-s1">填寫問卷</div></div>
+        <div class="qgb-arrow">→</div>
+        <div class="qgb-step"><div class="qgb-num">2</div><div class="qgb-label" data-i18n="qgb-s2">智能配對</div></div>
+        <div class="qgb-arrow">→</div>
+        <div class="qgb-step"><div class="qgb-num">3</div><div class="qgb-label" data-i18n="qgb-s3">確認報名</div></div>
+      </div>
+    </div>
+
     <div class="form-wrap" id="quiz-panel">
       <div class="privacy-box" data-i18n-html="privacy-box">🔒 <strong>資料嚴格保護</strong>，僅用於推薦行程，符合《個資法》規範。</div>
 
@@ -4419,19 +4447,42 @@ function returnToConfirmedTour() {
 }
 
 function goToTours() {
-  setTourView('filter');
-  const section = document.getElementById('tours');
-  if (section) section.scrollIntoView({ behavior: 'smooth' });
-  setTimeout(() => {
-    const inp = document.getElementById('tour-search');
-    if (inp) {
-      inp.focus();
-      inp.style.transition = 'box-shadow .1s';
-      inp.style.boxShadow = '0 0 0 6px rgba(232,96,28,.35)';
-      setTimeout(() => { inp.style.boxShadow = ''; }, 900);
-    }
-  }, 450);
+  if (!window._quizDone) {
+    // Guide user to health quiz first
+    const lang = window._lang || 'zh';
+    const msg = lang === 'en' ? '❤️ Please complete the health quiz first — we\'ll recommend the perfect tour for you!'
+      : lang === 'ja' ? '❤️ まず健康チェックにお答えください。最適なツアーをご提案します！'
+      : '❤️ 請先填寫健康問卷，我們將為您推薦最適合的行程！';
+    const banner = document.getElementById('quiz-guide-banner');
+    if (banner) banner.classList.add('show');
+    const healthEl = document.getElementById('health');
+    if (healthEl) healthEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    healthEl && healthEl.classList.remove('health-highlight');
+    healthEl && void healthEl.offsetWidth;
+    healthEl && healthEl.classList.add('health-highlight');
+    setTimeout(() => healthEl && healthEl.classList.remove('health-highlight'), 5600);
+    showToast(msg, '#E8601C');
+    return;
+  }
+  // Quiz done — jump straight to matched results
+  const resultEl = document.getElementById('match-results');
+  if (resultEl) {
+    resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    showToast(window._lang === 'en' ? '🎉 Here are your matched tours!' : window._lang === 'ja' ? '🎉 あなたにぴったりのツアーです！' : '🎉 以下是為您推薦的行程！', '#059669');
+  }
   setTimeout(showGuideBar, 600);
+}
+
+function confirmMatchTour(key, name) {
+  window._currentTourKey = key;
+  window._pendingTourName = name;
+  const overlay = document.getElementById('quick-book-overlay');
+  document.getElementById('qb-tour-name').textContent = name;
+  document.getElementById('qb-name-input').value = '';
+  document.getElementById('qb-phone-input').value = '';
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('qb-name-input').focus(), 100);
 }
 
 function goToHealth() {
@@ -5097,19 +5148,27 @@ function runHealthMatch() {
             <div class="tour-price-sub">全含費用</div>
             <div class="tour-price">${t.price}</div>
           </div>
-          <button class="btn btn-orange btn-sm" onclick="event.stopPropagation();openModal('${t.key}')">查看詳情</button>
+        </div>
+        <div class="match-card-actions">
+          <button class="btn btn-outline btn-sm" onclick="event.stopPropagation();openModal('${t.key}')">📋 查看詳情</button>
+          <button class="btn btn-green" onclick="event.stopPropagation();confirmMatchTour('${t.key}','${t.name}')">✅ 立即確認報名</button>
         </div>
       </div>
     </article>
   `).join('');
 
   // Show results
+  const banner = document.getElementById('quiz-guide-banner');
+  if (banner) banner.classList.remove('show');
   document.getElementById('quiz-panel').style.display = 'none';
   const resultEl = document.getElementById('match-results');
   resultEl.style.display = 'block';
   resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
   window._quizDone = true;
-  showToast('🎉 配對完成！找到 ' + results.length + ' 個最適合您的行程！');
+  const _rl = window._lang || 'zh';
+  showToast(_rl === 'en' ? '🎉 Matched! Found ' + results.length + ' tours for you!'
+    : _rl === 'ja' ? '🎉 マッチング完了！' + results.length + 'つのツアーが見つかりました！'
+    : '🎉 配對完成！找到 ' + results.length + ' 個最適合您的行程！');
 }
 
 function resetQuiz() {
@@ -6993,6 +7052,9 @@ const T = {
     'q6-opt3':'<span class="opt-icon">✈️</span>長程 9 天以上',
     'q6-opt4':'<span class="opt-icon">😊</span>都可以，看行程決定',
     'quiz-hint':'✨ 答完 6 題後，按下方按鈕，立即顯示適合您的行程！',
+    'qgb-title':'只需 3 分鐘，找到最適合您的行程！',
+    'qgb-desc':'填寫下方 6 題健康問卷，我們會根據您的身體狀況、興趣與預算，為您量身推薦最安心的行程。',
+    'qgb-s1':'填寫問卷','qgb-s2':'智能配對','qgb-s3':'確認報名',
     'quiz-submit':'🔍 幫我找最適合的行程！',
     'quiz-tel':'或電話 <strong>0800-888-888</strong> 由客服協助填寫',
     'match-reset':'↩ 重新填寫問卷','match-call':'📞 電話預約行程',
@@ -7112,6 +7174,9 @@ const T = {
     'q6-opt3':'<span class="opt-icon">✈️</span>Long  9+ Days',
     'q6-opt4':'<span class="opt-icon">😊</span>Flexible — it depends',
     'quiz-hint':'✨ After answering all 6 questions, click below to instantly see your matched tours!',
+    'qgb-title':'Find your perfect tour in just 3 minutes!',
+    'qgb-desc':'Answer 6 quick health questions and we\'ll recommend the safest, most suitable tours based on your health, interests and budget.',
+    'qgb-s1':'Fill Quiz','qgb-s2':'Smart Match','qgb-s3':'Confirm Tour',
     'quiz-submit':'🔍 Find My Perfect Tour!',
     'quiz-tel':'Or call <strong>0800-888-888</strong> and our staff will help you',
     'match-reset':'↩ Retake Quiz','match-call':'📞 Call to Book',
@@ -7240,6 +7305,9 @@ const T = {
     'q6-opt3':'<span class="opt-icon">✈️</span>長め 9日間以上',
     'q6-opt4':'<span class="opt-icon">😊</span>どちらでも、内容次第',
     'quiz-hint':'✨ 6問すべてに答えたら下のボタンを押してください。ぴったりのツアーが表示されます！',
+    'qgb-title':'たった3分で、あなたにぴったりのツアーが見つかります！',
+    'qgb-desc':'6つの健康チェックにお答えいただくと、お体の状態・ご興味・ご予算に合った最適なツアーをご提案します。',
+    'qgb-s1':'問診記入','qgb-s2':'AIマッチング','qgb-s3':'ご予約確認',
     'quiz-submit':'🔍 ぴったりの旅を探す！',
     'quiz-tel':'または <strong>0800-888-888</strong> にお電話いただければスタッフがサポートします',
     'match-reset':'↩ やり直す','match-call':'📞 電話で予約',
