@@ -2418,8 +2418,27 @@
         </div>
       </div>
 
+      <!-- Q6 行程長短 -->
+      <div class="quiz-block">
+        <div class="quiz-q"><span class="quiz-num">6</span><span data-i18n="q6-text">您偏好幾天的行程？</span></div>
+        <div class="option-grid">
+          <label class="opt-card" onclick="selectOpt(this,'q6')">
+            <input type="radio" name="q6" value="short" /><span data-i18n-html="q6-opt1"><span class="opt-icon">🌤️</span>短程 3～5 天</span>
+          </label>
+          <label class="opt-card" onclick="selectOpt(this,'q6')">
+            <input type="radio" name="q6" value="medium" /><span data-i18n-html="q6-opt2"><span class="opt-icon">🗓️</span>中程 6～8 天</span>
+          </label>
+          <label class="opt-card" onclick="selectOpt(this,'q6')">
+            <input type="radio" name="q6" value="long" /><span data-i18n-html="q6-opt3"><span class="opt-icon">✈️</span>長程 9 天以上</span>
+          </label>
+          <label class="opt-card" onclick="selectOpt(this,'q6')">
+            <input type="radio" name="q6" value="any-days" /><span data-i18n-html="q6-opt4"><span class="opt-icon">😊</span>都可以，看行程決定</span>
+          </label>
+        </div>
+      </div>
+
       <div class="submit-zone">
-        <p style="font-size:20px;color:var(--text2);margin-bottom:16px;" data-i18n="quiz-hint">✨ 答完 5 題後，按下方按鈕，立即顯示適合您的行程！</p>
+        <p style="font-size:20px;color:var(--text2);margin-bottom:16px;" data-i18n="quiz-hint">✨ 答完 6 題後，按下方按鈕，立即顯示適合您的行程！</p>
         <button type="button" class="btn btn-orange btn-lg" style="min-width:320px;" onclick="runHealthMatch()" data-i18n="quiz-submit">
           🔍 幫我找最適合的行程！
         </button>
@@ -4854,9 +4873,9 @@ const tourMatchData = [
     key: 'kyoto',
     name: '日本京都賞櫻溫泉 5天4夜',
     emoji: '🌸', color: 'linear-gradient(135deg,#fbbf24,#f97316)',
-    price: 'NT$48,800', priceVal: 48800,
+    price: 'NT$48,800', priceVal: 48800, daysVal: 5,
     tags: ['♿ 無障礙','🚶 緩步行','♨️ 溫泉','🏛️ 文化'],
-    keywords: ['wheelchair','easy','moderate','culture','onsen','solo','couple','friends','mid','high','any'],
+    keywords: ['wheelchair','easy','moderate','culture','onsen','solo','couple','friends','mid','high','any','short','any-days'],
     badgeClass: 'b-green',
     reason: '京都全程無障礙，步行少、溫泉多，非常適合您的體能狀況。'
   },
@@ -4864,9 +4883,9 @@ const tourMatchData = [
     key: 'taiwan',
     name: '台灣環島文化遊 8天7夜',
     emoji: '🏯', color: 'linear-gradient(135deg,#34d399,#0891b2)',
-    price: 'NT$29,800', priceVal: 29800,
+    price: 'NT$29,800', priceVal: 29800, daysVal: 8,
     tags: ['🏛️ 文化','🍜 美食','💰 超值','🏥 醫療'],
-    keywords: ['easy','moderate','active','culture','nature','family','couple','friends','low','mid','any','dm','bp'],
+    keywords: ['easy','moderate','active','culture','nature','family','couple','friends','low','mid','any','dm','bp','medium','any-days'],
     badgeClass: 'b-blue',
     reason: '台灣環島近又方便，文化豐富，是家庭同遊或初次旅遊的最佳選擇。'
   },
@@ -4874,9 +4893,9 @@ const tourMatchData = [
     key: 'hokkaido',
     name: '北海道養生溫泉療癒 6天5夜',
     emoji: '🌿', color: 'linear-gradient(135deg,#a78bfa,#ec4899)',
-    price: 'NT$56,800', priceVal: 56800,
+    price: 'NT$56,800', priceVal: 56800, daysVal: 6,
     tags: ['♿ 無障礙','🌿 自然','♨️ 溫泉','🥣 銀髮餐'],
-    keywords: ['wheelchair','easy','nature','onsen','solo','couple','high','any','knee','bp'],
+    keywords: ['wheelchair','easy','nature','onsen','solo','couple','high','any','knee','bp','medium','any-days'],
     badgeClass: 'b-green',
     reason: '北海道全程最輕鬆，大自然療癒身心，溫泉舒緩膝蓋與關節不適。'
   },
@@ -4884,9 +4903,9 @@ const tourMatchData = [
     key: 'europe',
     name: '歐洲法瑞義精選 10天9夜',
     emoji: '🗼', color: 'linear-gradient(135deg,#60a5fa,#7c3aed)',
-    price: 'NT$128,000', priceVal: 128000,
+    price: 'NT$128,000', priceVal: 128000, daysVal: 10,
     tags: ['🏛️ 文化','✈️ 豪華','🌍 歐洲'],
-    keywords: ['active','moderate','culture','nature','family','couple','high','any'],
+    keywords: ['active','moderate','culture','nature','family','couple','high','any','long','any-days'],
     badgeClass: 'b-blue',
     reason: '歐洲精華路線，體力好、預算充裕的您絕對值得！文化歷史滿載而歸。'
   },
@@ -4894,9 +4913,9 @@ const tourMatchData = [
     key: 'bali',
     name: '峇里島悠閒海景療癒 5天4夜',
     emoji: '🌺', color: 'linear-gradient(135deg,#f0abfc,#fb7185)',
-    price: 'NT$38,800', priceVal: 38800,
+    price: 'NT$38,800', priceVal: 38800, daysVal: 5,
     tags: ['🌊 海景','🌿 療癒','♿ 接送','💆 放鬆'],
-    keywords: ['easy','moderate','beach','nature','couple','solo','friends','mid','any','bp','dm'],
+    keywords: ['easy','moderate','beach','nature','couple','solo','friends','mid','any','bp','dm','short','any-days'],
     badgeClass: 'b-purple',
     reason: '峇里島全程接送服務，海景療癒，節奏輕鬆，很適合放鬆解壓的長輩。'
   },
@@ -4904,9 +4923,9 @@ const tourMatchData = [
     key: 'kyushu',
     name: '九州溫泉文化探索 6天5夜',
     emoji: '🏔️', color: 'linear-gradient(135deg,#fb7185,#f472b6)',
-    price: 'NT$52,000', priceVal: 52000,
+    price: 'NT$52,000', priceVal: 52000, daysVal: 6,
     tags: ['♨️ 溫泉','🏛️ 文化','🍜 美食','🥣 銀髮餐'],
-    keywords: ['moderate','active','culture','onsen','couple','family','friends','mid','high','any','dm'],
+    keywords: ['moderate','active','culture','onsen','couple','family','friends','mid','high','any','dm','medium','any-days'],
     badgeClass: 'b-orange',
     reason: '九州結合溫泉與文化，步行適中，銀髮餐貼心，非常適合美食愛好者。'
   }
@@ -4917,14 +4936,16 @@ function runHealthMatch() {
   const q3 = document.querySelector('input[name="q3"]:checked');
   const q4 = document.querySelector('input[name="q4"]:checked');
   const q5 = document.querySelector('input[name="q5"]:checked');
+  const q6 = document.querySelector('input[name="q6"]:checked');
 
-  if (!q1 || !q3 || !q4 || !q5) {
-    showToast('⚠️ 請回答所有 5 道題目！', '#D97706');
+  if (!q1 || !q3 || !q4 || !q5 || !q6) {
+    const isEn = window._lang === 'en', isJa = window._lang === 'ja';
+    showToast(isEn ? '⚠️ Please answer all 6 questions!' : isJa ? '⚠️ 6問すべてにお答えください！' : '⚠️ 請回答所有 6 道題目！', '#D97706');
     return;
   }
 
   const health = [...document.querySelectorAll('input[name="health"]:checked')].map(c => c.value);
-  const keys = [q1.value, q3.value, q4.value, q5.value, ...health];
+  const keys = [q1.value, q3.value, q4.value, q5.value, q6.value, ...health];
 
   // Score each tour
   const scored = tourMatchData.map(t => {
@@ -4934,6 +4955,18 @@ function runHealthMatch() {
     if (q5.value === 'low'  && t.priceVal > 40000) score -= 2;
     if (q5.value === 'mid'  && t.priceVal > 80000) score -= 3;
     if (q5.value === 'high' && t.priceVal < 40000) score -= 1;
+    // Duration scoring: boost exact match, penalise mismatch
+    if (q6.value !== 'any-days') {
+      const d = t.daysVal || 0;
+      const isShort  = d >= 3 && d <= 5;
+      const isMedium = d >= 6 && d <= 8;
+      const isLong   = d >= 9;
+      if (q6.value === 'short'  && isShort)  score += 2;
+      if (q6.value === 'medium' && isMedium) score += 2;
+      if (q6.value === 'long'   && isLong)   score += 2;
+      if (q6.value === 'short'  && isLong)   score -= 3;
+      if (q6.value === 'long'   && isShort)  score -= 2;
+    }
     // Wheelchair accessibility
     if (q1.value === 'wheelchair' && !t.keywords.includes('wheelchair')) score -= 3;
     return { ...t, score: Math.max(0, score) };
@@ -4948,7 +4981,8 @@ function runHealthMatch() {
     culture:'🏛️ 文化行程', nature:'🌿 自然行程', onsen:'♨️ 溫泉行程', beach:'🌊 海景行程',
     solo:'🙋 獨行旅人', couple:'👫 雙人同遊', family:'👨‍👩‍👧 親子旅遊', friends:'👥 揪團出遊',
     low:'💰 3萬以下', mid:'💳 3～5萬', high:'✈️ 5萬以上', any:'😊 彈性預算',
-    bp:'💊 心血管友善', dm:'💉 控糖飲食', knee:'🦵 低衝擊步行', lung:'🌬️ 低海拔路線'
+    bp:'💊 心血管友善', dm:'💉 控糖飲食', knee:'🦵 低衝擊步行', lung:'🌬️ 低海拔路線',
+    short:'🌤️ 短程 3～5天', medium:'🗓️ 中程 6～8天', long:'✈️ 長程 9天+', 'any-days':'😊 天數彈性'
   };
   const tagsHtml = keys.filter(k => tagMap[k]).map(k =>
     `<span class="badge b-orange" style="font-size:17px;padding:8px 16px;">${tagMap[k]}</span>`
@@ -6862,7 +6896,12 @@ const T = {
     'q5-opt2':'<span class="opt-icon">💳</span>3～5 萬',
     'q5-opt3':'<span class="opt-icon">✈️</span>5 萬以上',
     'q5-opt4':'<span class="opt-icon">😊</span>看行程再說',
-    'quiz-hint':'✨ 答完 5 題後，按下方按鈕，立即顯示適合您的行程！',
+    'q6-text':'您偏好幾天的行程？',
+    'q6-opt1':'<span class="opt-icon">🌤️</span>短程 3～5 天',
+    'q6-opt2':'<span class="opt-icon">🗓️</span>中程 6～8 天',
+    'q6-opt3':'<span class="opt-icon">✈️</span>長程 9 天以上',
+    'q6-opt4':'<span class="opt-icon">😊</span>都可以，看行程決定',
+    'quiz-hint':'✨ 答完 6 題後，按下方按鈕，立即顯示適合您的行程！',
     'quiz-submit':'🔍 幫我找最適合的行程！',
     'quiz-tel':'或電話 <strong>0800-888-888</strong> 由客服協助填寫',
     'match-reset':'↩ 重新填寫問卷','match-call':'📞 電話預約行程',
@@ -6976,7 +7015,12 @@ const T = {
     'q5-opt2':'<span class="opt-icon">💳</span>NT$30,000 – 50,000',
     'q5-opt3':'<span class="opt-icon">✈️</span>Over NT$50,000',
     'q5-opt4':'<span class="opt-icon">😊</span>Depends on the tour',
-    'quiz-hint':'✨ After answering all 5 questions, click below to instantly see your matched tours!',
+    'q6-text':'How long would you like your trip to be?',
+    'q6-opt1':'<span class="opt-icon">🌤️</span>Short  3–5 Days',
+    'q6-opt2':'<span class="opt-icon">🗓️</span>Medium  6–8 Days',
+    'q6-opt3':'<span class="opt-icon">✈️</span>Long  9+ Days',
+    'q6-opt4':'<span class="opt-icon">😊</span>Flexible — it depends',
+    'quiz-hint':'✨ After answering all 6 questions, click below to instantly see your matched tours!',
     'quiz-submit':'🔍 Find My Perfect Tour!',
     'quiz-tel':'Or call <strong>0800-888-888</strong> and our staff will help you',
     'match-reset':'↩ Retake Quiz','match-call':'📞 Call to Book',
@@ -7099,7 +7143,12 @@ const T = {
     'q5-opt2':'<span class="opt-icon">💳</span>3〜5万円',
     'q5-opt3':'<span class="opt-icon">✈️</span>5万円以上',
     'q5-opt4':'<span class="opt-icon">😊</span>ツアー内容次第',
-    'quiz-hint':'✨ 5問すべてに答えたら下のボタンを押してください。ぴったりのツアーが表示されます！',
+    'q6-text':'旅行の日数はどのくらいをご希望ですか？',
+    'q6-opt1':'<span class="opt-icon">🌤️</span>短め 3〜5日間',
+    'q6-opt2':'<span class="opt-icon">🗓️</span>中程度 6〜8日間',
+    'q6-opt3':'<span class="opt-icon">✈️</span>長め 9日間以上',
+    'q6-opt4':'<span class="opt-icon">😊</span>どちらでも、内容次第',
+    'quiz-hint':'✨ 6問すべてに答えたら下のボタンを押してください。ぴったりのツアーが表示されます！',
     'quiz-submit':'🔍 ぴったりの旅を探す！',
     'quiz-tel':'または <strong>0800-888-888</strong> にお電話いただければスタッフがサポートします',
     'match-reset':'↩ やり直す','match-call':'📞 電話で予約',
