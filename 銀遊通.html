@@ -4988,6 +4988,7 @@ function runHealthMatch() {
   const resultEl = document.getElementById('match-results');
   resultEl.style.display = 'block';
   resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  window._quizDone = true;
   showToast('🎉 配對完成！找到 ' + results.length + ' 個最適合您的行程！');
 }
 
@@ -6478,7 +6479,7 @@ function openModal(key) {
   const earlyBird = isEn ? '🎉 Book now — Save NT$3,000 early bird discount!' : '🎉 現在預訂享早鳥折扣 NT$3,000！';
   const datesLabel= isEn ? '📆 Upcoming Departure Dates'       : '📆 近期出發日期';
   const isJa = window._lang === 'ja';
-  const quizDone  = document.getElementById('match-results') && document.getElementById('match-results').style.display === 'block';
+  const quizDone  = !!window._quizDone;
   const quizBtn   = quizDone
     ? (isEn ? '📋 Book This Tour Now' : isJa ? '📋 このツアーに申し込む' : '📋 立即報名此行程')
     : (isEn ? '📝 Take Health Quiz & Register' : isJa ? '📝 健康診断票を記入して申込む' : '📝 立即填問卷報名');
