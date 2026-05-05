@@ -8438,6 +8438,100 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // Topic action buttons config
+  const _svcActions = {
+    booking: {
+      zh: [
+        { label:'🔍 找行程', fn:"closeServiceModal();goToTours()" },
+        { label:'❤️ 先填健康問卷', fn:"closeServiceModal();goToHealth()" },
+        { label:'📞 電話預訂', fn:"window.location.href='tel:0800-888-888'" }
+      ],
+      en: [
+        { label:'🔍 Browse Tours', fn:"closeServiceModal();goToTours()" },
+        { label:'❤️ Health Quiz First', fn:"closeServiceModal();goToHealth()" },
+        { label:'📞 Call to Book', fn:"window.location.href='tel:0800-888-888'" }
+      ],
+      ja: [
+        { label:'🔍 ツアーを探す', fn:"closeServiceModal();goToTours()" },
+        { label:'❤️ 健康チェック', fn:"closeServiceModal();goToHealth()" },
+        { label:'📞 電話で予約', fn:"window.location.href='tel:0800-888-888'" }
+      ]
+    },
+    payment: {
+      zh: [
+        { label:'💳 查看付款說明', fn:"closeServiceModal();scrollTo('#tours')" },
+        { label:'📞 付款問題諮詢', fn:"window.location.href='tel:0800-888-888'" }
+      ],
+      en: [
+        { label:'💳 Payment Info', fn:"closeServiceModal();scrollTo('#tours')" },
+        { label:'📞 Call for Help', fn:"window.location.href='tel:0800-888-888'" }
+      ],
+      ja: [
+        { label:'💳 お支払い案内', fn:"closeServiceModal();scrollTo('#tours')" },
+        { label:'📞 電話でご相談', fn:"window.location.href='tel:0800-888-888'" }
+      ]
+    },
+    health: {
+      zh: [
+        { label:'❤️ 立即填健康問卷', fn:"closeServiceModal();goToHealth()" },
+        { label:'📞 健康需求諮詢', fn:"window.location.href='tel:0800-888-888'" }
+      ],
+      en: [
+        { label:'❤️ Take Health Quiz', fn:"closeServiceModal();goToHealth()" },
+        { label:'📞 Health Enquiry', fn:"window.location.href='tel:0800-888-888'" }
+      ],
+      ja: [
+        { label:'❤️ 健康アンケート記入', fn:"closeServiceModal();goToHealth()" },
+        { label:'📞 健康相談', fn:"window.location.href='tel:0800-888-888'" }
+      ]
+    },
+    cancel: {
+      zh: [
+        { label:'📞 立即致電取消/更改', fn:"window.location.href='tel:0800-888-888'" },
+        { label:'💬 LINE 聯繫', fn:"window.open('https://line.me','_blank')" }
+      ],
+      en: [
+        { label:'📞 Call to Cancel/Change', fn:"window.location.href='tel:0800-888-888'" },
+        { label:'💬 Message on LINE', fn:"window.open('https://line.me','_blank')" }
+      ],
+      ja: [
+        { label:'📞 キャンセル・変更の電話', fn:"window.location.href='tel:0800-888-888'" },
+        { label:'💬 LINEでメッセージ', fn:"window.open('https://line.me','_blank')" }
+      ]
+    },
+    ontrip: {
+      zh: [
+        { label:'🚨 緊急求助專線', fn:"window.location.href='tel:0800-888-888'", emergency:true },
+        { label:'👨‍👩‍👧 通知家人', fn:"closeServiceModal();openFamilyModal()" }
+      ],
+      en: [
+        { label:'🚨 Emergency Hotline', fn:"window.location.href='tel:0800-888-888'", emergency:true },
+        { label:'👨‍👩‍👧 Notify Family', fn:"closeServiceModal();openFamilyModal()" }
+      ],
+      ja: [
+        { label:'🚨 緊急ホットライン', fn:"window.location.href='tel:0800-888-888'", emergency:true },
+        { label:'👨‍👩‍👧 家族に通知', fn:"closeServiceModal();openFamilyModal()" }
+      ]
+    },
+    other: {
+      zh: [
+        { label:'💬 LINE 即時詢問', fn:"window.open('https://line.me','_blank')" },
+        { label:'📧 Email 客服', fn:"window.location.href='mailto:service@silveryoutrip.com'" },
+        { label:'📞 電話諮詢', fn:"window.location.href='tel:0800-888-888'" }
+      ],
+      en: [
+        { label:'💬 Chat on LINE', fn:"window.open('https://line.me','_blank')" },
+        { label:'📧 Email Us', fn:"window.location.href='mailto:service@silveryoutrip.com'" },
+        { label:'📞 Call Us', fn:"window.location.href='tel:0800-888-888'" }
+      ],
+      ja: [
+        { label:'💬 LINEでチャット', fn:"window.open('https://line.me','_blank')" },
+        { label:'📧 メールで問い合わせ', fn:"window.location.href='mailto:service@silveryoutrip.com'" },
+        { label:'📞 お電話', fn:"window.location.href='tel:0800-888-888'" }
+      ]
+    }
+  };
+
   function selectSvcTopic(topic) {
     const lang = window._lang || 'zh';
     const data = (_svcFaq[lang] || _svcFaq.zh)[topic];
@@ -8446,17 +8540,42 @@ document.addEventListener('DOMContentLoaded', function() {
     event.currentTarget.classList.add('active');
     const detail = document.getElementById('svc-detail');
     document.getElementById('svc-detail-title').textContent = data.title;
+
+    // Build FAQ accordion
     const list = document.getElementById('svc-faq-list');
     list.innerHTML = '';
     data.items.forEach((item, i) => {
       const div = document.createElement('div');
       div.className = 'svc-faq-item';
-      div.innerHTML = '<span style="font-size:16px;color:#FF6B35;flex-shrink:0;">Q</span><div style="flex:1"><div class="svc-faq-q">' + item.q + '</div><div class="svc-faq-a" id="svc-faq-a-' + i + '">' + item.a + '</div></div><span style="color:#ccc;font-size:12px;">▼</span>';
+      div.innerHTML = '<span style="font-size:16px;color:#FF6B35;flex-shrink:0;">Q</span><div style="flex:1"><div class="svc-faq-q">' + item.q + '</div><div class="svc-faq-a" id="svc-faq-a-' + i + '">' + item.a + '</div></div><span class="svc-faq-arrow" id="svc-arrow-' + i + '" style="color:#ccc;font-size:12px;transition:transform .2s;">▼</span>';
       div.onclick = function() { toggleSvcFaq(i); };
       list.appendChild(div);
     });
+
+    // Build action buttons
+    const actions = (_svcActions[topic] || {})[lang] || (_svcActions[topic] || {}).zh || [];
+    let actionsHtml = '';
+    if (actions.length) {
+      actionsHtml = '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;">'
+        + actions.map(a =>
+            '<button onclick="' + a.fn + '" style="flex:1;min-width:120px;padding:10px 14px;border-radius:10px;border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;'
+            + (a.emergency ? 'background:#EF4444;color:#fff;' : 'background:linear-gradient(135deg,#FF6B35,#E8601C);color:#fff;')
+            + '">' + a.label + '</button>'
+          ).join('')
+        + '</div>';
+    }
+    let actionsEl = document.getElementById('svc-topic-actions');
+    if (!actionsEl) {
+      actionsEl = document.createElement('div');
+      actionsEl.id = 'svc-topic-actions';
+      list.parentNode.appendChild(actionsEl);
+    }
+    actionsEl.innerHTML = actionsHtml;
+
     detail.classList.add('show');
     _svcOpenFaq = null;
+    // Scroll detail into view
+    setTimeout(() => detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
   }
 
   function toggleSvcFaq(i) {
@@ -8465,9 +8584,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (_svcOpenFaq !== null && _svcOpenFaq !== i) {
       const prev = document.getElementById('svc-faq-a-' + _svcOpenFaq);
       if (prev) prev.classList.remove('show');
+      const prevArrow = document.getElementById('svc-arrow-' + _svcOpenFaq);
+      if (prevArrow) prevArrow.style.transform = '';
     }
     el.classList.toggle('show');
-    _svcOpenFaq = el.classList.contains('show') ? i : null;
+    const arrow = document.getElementById('svc-arrow-' + i);
+    const isOpen = el.classList.contains('show');
+    if (arrow) arrow.style.transform = isOpen ? 'rotate(180deg)' : '';
+    _svcOpenFaq = isOpen ? i : null;
   }
 
   /* ── 報名確認單 Modal ── */
