@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🌸 悠旅趣 — 走得慢，玩得深</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <script src="tours_data.js"></script>
   <style>
     /* ========================================
@@ -38,7 +38,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+      font-family: 'Noto Sans', 'Noto Sans TC', 'Noto Sans JP', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
       font-size: 20px; line-height: 1.8;
       color: var(--text); background: var(--bg);
       padding-bottom: 80px;
@@ -126,6 +126,8 @@
       display: flex; align-items: center; gap: 6px;
     }
     /* 英文模式 nav 緊湊排版 */
+    html[lang="en"] body, html[lang="en"] * { font-family: 'Noto Sans', 'Noto Sans TC', sans-serif !important; }
+    html[lang="ja"] body, html[lang="ja"] * { font-family: 'Noto Sans JP', 'Noto Sans TC', 'Noto Sans', sans-serif !important; }
     html[lang="en"] .nav-links { gap: 0px; }
     html[lang="en"] .nav-link  { font-size: 14px; padding: 8px 10px; font-weight: 600; }
     html[lang="en"] .nav-call-btn { font-size: 13px; padding: 8px 14px; margin-left: 4px; }
