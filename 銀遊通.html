@@ -4267,6 +4267,25 @@
 
 <script>
 // ══════════════════════════════════════════
+// 後端設定 — 貼上 Google Apps Script 部署 URL
+// ══════════════════════════════════════════
+const BACKEND_URL = ''; // 部署後貼在這裡，例如：'https://script.google.com/macros/s/XXXX/exec'
+
+async function _submitToBackend(type, payload) {
+  if (!BACKEND_URL) return; // 未設定則略過
+  try {
+    await fetch(BACKEND_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ type, ...payload, ts: new Date().toISOString() })
+    });
+  } catch (e) {
+    console.warn('Backend submit failed (non-blocking):', e);
+  }
+}
+
+// ══════════════════════════════════════════
 // BUILD TOURS — 動態生成目錄 + 篩選視圖
 // ══════════════════════════════════════════
 const REGION_META = {
@@ -4757,7 +4776,9 @@ function joinGroup(name) {
 }
 
 // ── 揪朋友：開啟申請加入 Modal ──
+let _joinGroupName = '';
 function openJoinModal(groupName, tourName, date, price) {
+  _joinGroupName = groupName;
   const badge = document.getElementById('join-tour-badge');
   badge.innerHTML = '📌 ' + groupName + '<br><span style="font-weight:500;font-size:14px;">' + tourName + '・' + date + '出發・' + price + '</span>';
   document.getElementById('join-modal-title').textContent = '申請加入：' + groupName;
@@ -4769,8 +4790,10 @@ function openJoinModal(groupName, tourName, date, price) {
 
 function submitJoinForm(e) {
   e.preventDefault();
-  const name = document.getElementById('join-name').value.trim();
+  const name  = document.getElementById('join-name').value.trim();
+  const phone = document.getElementById('join-phone').value.trim();
   if (!name) return;
+  _submitToBackend('join', { name, phone, groupName: _joinGroupName });
   // Replace form with success screen
   const body = document.getElementById('join-modal-body');
   const badge = body.querySelector('.gmodal-tour-badge').outerHTML;
@@ -4830,9 +4853,11 @@ function goCreateStep1() {
 }
 
 function submitCreateForm() {
-  const name = document.getElementById('create-name').value.trim();
+  const name  = document.getElementById('create-name').value.trim();
   const gname = document.getElementById('create-gname').value.trim();
+  const phone = document.getElementById('create-phone').value.trim();
   if (!name || !gname) { showToast('⚠️ 請填寫揪團名稱與您的稱呼', '#B45309'); return; }
+  _submitToBackend('create', { groupName: gname, leader: name, phone, tour: _selectedTourName });
   document.getElementById('create-step2').style.display = 'none';
   document.getElementById('create-step3').style.display = '';
   document.getElementById('cstep-2').classList.remove('active');
@@ -6621,6 +6646,7 @@ function submitCallModal() {
     : lang === 'ja' ? 'お名前と電話番号をご入力ください。'
     : '請填寫姓名與回電電話';
   if (!name || !phone) { alert(errMsg); return; }
+  _submitToBackend('callback', { name, phone, slot, tour });
   // Show success
   const slotText = slot || (lang === 'en' ? 'any time' : lang === 'ja' ? 'いつでも' : '任何時段');
   const descMap = {
@@ -6662,8 +6688,11 @@ function submitQuickBook() {
     : _ql === 'ja' ? 'お名前と電話番号をご入力ください。'
     : '請填寫姓名與聯絡電話';
   if (!name || !phone) { alert(_qMsg); return; }
+  const _now = new Date();
+  const orderNum = 'YT' + _now.getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000);
+  _submitToBackend('booking', { name, phone, tour: window._pendingTourName || '', orderNum });
   closeQuickBook();
-  showBookingConfirm({ name, phone, tour: window._pendingTourName || '' });
+  showBookingConfirm({ name, phone, tour: window._pendingTourName || '', orderNum });
 }
 
 function openModal(key) {
@@ -8600,7 +8629,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const now = new Date();
     const pad = n => String(n).padStart(2,'0');
     const timeStr = `${now.getFullYear()}/${pad(now.getMonth()+1)}/${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
-    const orderNum = 'YT' + now.getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000);
+    const orderNum = opts.orderNum || ('YT' + now.getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000));
 
     document.getElementById('bcon-order-num').textContent = '訂單編號：' + orderNum;
     document.getElementById('bcon-name').textContent  = opts.name  || '—';
@@ -8643,6 +8672,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const phone = document.getElementById('svc-cb-phone').value.trim();
     const slot  = document.getElementById('svc-cb-slot').value;
     if (!phone || !slot) { alert(L.cbFail); return; }
+    const activeTopic = document.querySelector('.svc-topic-chip.active');
+    const topic = activeTopic ? activeTopic.textContent.trim() : '';
+    _submitToBackend('svc_cb', { phone, slot, topic });
     showBookingConfirm({ name: '旅客', phone: phone, tour: '預約回電・' + slot });
     document.getElementById('svc-cb-phone').value = '';
     document.getElementById('svc-cb-slot').value = '';
