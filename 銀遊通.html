@@ -4486,15 +4486,39 @@ function confirmMatchTour(key, name) {
 }
 
 function goToHealth() {
-  const el = document.getElementById('health');
-  if (!el) return;
-  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  el.classList.remove('health-highlight');
-  void el.offsetWidth;
-  el.classList.add('health-highlight');
-  setTimeout(() => el.classList.remove('health-highlight'), 5600);
-  showToast(currentLang === 'en' ? '❤️ Scroll down to take the health quiz!' : '❤️ 請往下填寫健康問卷！', '#E8601C');
-  setTimeout(showGuideBar, 600);
+  const lang = window._lang || 'zh';
+  if (window._quizDone) {
+    // Already done — jump to results
+    const resultEl = document.getElementById('match-results');
+    if (resultEl) resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const msg = lang === 'en' ? '🎉 Your matched tours are below!'
+      : lang === 'ja' ? '🎉 配対結果をご確認ください！'
+      : '🎉 您的配對結果在下方，可直接確認報名！';
+    showToast(msg, '#059669');
+    setTimeout(showGuideBar, 600);
+    return;
+  }
+  // Not done — show banner, scroll to quiz panel, highlight Q1
+  const banner = document.getElementById('quiz-guide-banner');
+  if (banner) banner.classList.add('show');
+  const quizPanel = document.getElementById('quiz-panel');
+  if (quizPanel) {
+    quizPanel.style.display = 'block';
+    quizPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  // Pulse the first question to draw attention
+  setTimeout(() => {
+    const q1 = quizPanel && quizPanel.querySelector('.quiz-block');
+    if (q1) {
+      q1.style.transition = 'box-shadow .2s';
+      q1.style.boxShadow = '0 0 0 4px rgba(232,96,28,.45)';
+      setTimeout(() => { q1.style.boxShadow = ''; }, 1400);
+    }
+  }, 600);
+  const msg = lang === 'en' ? '❤️ Answer 6 quick questions to find your ideal tour!'
+    : lang === 'ja' ? '❤️ 6つの質問にお答えください！最適なツアーをご提案します。'
+    : '❤️ 請回答 6 題問卷，我們立刻為您推薦最適合的行程！';
+  showToast(msg, '#E8601C');
 }
 
 // ── Toast ──
