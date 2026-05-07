@@ -4288,6 +4288,39 @@ async function _submitToBackend(type, payload) {
 // ══════════════════════════════════════════
 // BUILD TOURS — 動態生成目錄 + 篩選視圖
 // ══════════════════════════════════════════
+
+// ── 行程總資料庫 ──
+const TOURS_DATA = [
+  // ─── 台灣 ───
+  { key:'taiwan',       name:'台灣環島文化遊 8天7夜',       region:'taiwan',    tags:'taiwan easy',            days:8,  price:29800,  emoji:'🏯', c1:'#34d399',c2:'#0891b2', b1:'🏥 醫療保障',b1c:'b-green',  b2:'🍚 銀髮特製餐',b2c:'b-orange', b3:'💰 超值首選',b3c:'b-blue',   tip:'最受歡迎', tipClass:'b-red',    meta:'全台・小團15人' },
+  { key:'tw_hualien4d', name:'花蓮太魯閣七星潭 4天3夜',     region:'taiwan',    tags:'taiwan easy accessible', days:4,  price:12800,  emoji:'🏔️', c1:'#67e8f9',c2:'#0ea5e9', b1:'♿ 無障礙',  b1c:'b-green',  b2:'🏔️ 峽谷奇景',b2c:'b-blue',   b3:'🚂 搭自強號',b3c:'b-orange',                              meta:'花蓮・小團12人' },
+  { key:'tw_tainan5d',  name:'台南古都墾丁陽光 5天4夜',     region:'taiwan',    tags:'taiwan easy',            days:5,  price:18800,  emoji:'🏯', c1:'#fcd34d',c2:'#f97316', b1:'🏛️ 歷史古城',b1c:'b-blue',  b2:'🍜 美食天堂',b2c:'b-orange',  b3:'🏥 醫療保障',b3c:'b-green',                               meta:'台南・小團12人' },
+  { key:'tw_alishan6d', name:'阿里山日出古森 6天5夜',        region:'taiwan',    tags:'taiwan easy',            days:6,  price:22800,  emoji:'🌲', c1:'#4ade80',c2:'#065f46', b1:'🌅 日出奇景',b1c:'b-orange', b2:'🌿 古木參天',b2c:'b-green',   b3:'🚂 阿里山小火車',b3c:'b-blue',                            meta:'阿里山・小團10人' },
+
+  // ─── 日本 ───
+  { key:'kyoto',        name:'日本京都賞櫻溫泉 5天4夜',     region:'japan',     tags:'japan easy accessible',  days:5,  price:48800,  emoji:'🌸', c1:'#fbbf24',c2:'#f97316', b1:'♿ 無障礙',  b1c:'b-green',  b2:'🚶 緩步行',   b2c:'b-blue',   b3:'♨️ 溫泉放鬆',b3c:'b-orange', tip:'精選',    tipClass:'b-red',    meta:'日本關西・小團10人' },
+  { key:'hokkaido',     name:'北海道養生溫泉療癒 6天5夜',   region:'japan',     tags:'japan easy accessible',  days:6,  price:56800,  emoji:'🌿', c1:'#a78bfa',c2:'#ec4899', b1:'♿ 無障礙',  b1c:'b-green',  b2:'♨️ 溫泉療癒',b2c:'b-purple', b3:'🍚 銀髮特製餐',b3c:'b-orange',                            meta:'日本北海道・小團12人' },
+  { key:'kyushu',       name:'九州溫泉文化探索 6天5夜',     region:'japan',     tags:'japan easy',             days:6,  price:52000,  emoji:'🏔️', c1:'#fb7185',c2:'#f472b6', b1:'♨️ 溫泉放鬆',b1c:'b-orange', b2:'🏛️ 文化深度',b2c:'b-blue',   b3:'🍚 銀髮特製餐',b3c:'b-green',                            meta:'日本九州・小團15人' },
+  { key:'jp_osaka4d',   name:'大阪奈良神戶輕鬆遊 4天3夜',   region:'japan',     tags:'japan easy',             days:4,  price:42000,  emoji:'🦌', c1:'#fb923c',c2:'#fbbf24', b1:'🦌 奈良鹿苑',b1c:'b-orange', b2:'🏯 大阪城',   b2c:'b-blue',   b3:'🍚 銀髮餐',   b3c:'b-green',                                meta:'日本關西・小團12人' },
+
+  // ─── 歐洲 ───
+  { key:'europe',       name:'歐洲三國慢遊 12天11夜',        region:'europe',    tags:'europe',                 days:12, price:128000, emoji:'🗼', c1:'#60a5fa',c2:'#7c3aed', b1:'🏛️ 世界遺產',b1c:'b-blue',  b2:'🍷 美食美酒',b2c:'b-red',    b3:'🚌 全程專車',b3c:'b-green',   tip:'三國精選', tipClass:'b-red',    meta:'歐洲・小團12人' },
+  { key:'eu_uk7d',      name:'英國悠閒文化遊 7天6夜',        region:'europe',    tags:'europe easy accessible', days:7,  price:88000,  emoji:'🎡', c1:'#1e40af',c2:'#dc2626', b1:'♿ 無障礙',  b1c:'b-green',  b2:'🏰 愛丁堡城堡',b2c:'b-blue',  b3:'🫖 英式下午茶',b3c:'b-orange',                            meta:'英國・小團12人' },
+  { key:'eu_swiss10d',  name:'瑞士奧地利阿爾卑斯 10天9夜',  region:'europe',    tags:'europe',                 days:10, price:108000, emoji:'🏔️', c1:'#38bdf8',c2:'#818cf8', b1:'🏔️ 阿爾卑斯',b1c:'b-blue',  b2:'♨️ 溫泉療癒',b2c:'b-purple', b3:'🍺 維也納音樂',b3c:'b-orange',                            meta:'瑞士奧地利・小團12人' },
+
+  // ─── 東南亞 ───
+  { key:'bali',         name:'峇里島悠閒海景療癒 5天4夜',   region:'sea',       tags:'sea easy accessible',    days:5,  price:38800,  emoji:'🌺', c1:'#4ade80',c2:'#facc15', b1:'♿ 無障礙',  b1c:'b-green',  b2:'🌊 海景療癒',b2c:'b-blue',   b3:'💆 SPA放鬆',  b3c:'b-purple', tip:'雙島天堂', tipClass:'b-orange', meta:'印尼・小團12人' },
+  { key:'sea_thai4d',   name:'泰國曼谷大城 4天3夜',         region:'sea',       tags:'sea easy accessible',    days:4,  price:22800,  emoji:'🐘', c1:'#f59e0b',c2:'#ef4444', b1:'♿ 無障礙',  b1c:'b-green',  b2:'🛕 文化探索',b2c:'b-orange', b3:'🥭 熱帶水果',b3c:'b-blue',   tip:'輕鬆初遊', tipClass:'b-blue',   meta:'泰國・小團15人' },
+  { key:'sea_sg7d',     name:'新加坡馬來西亞城市輕旅 7天6夜',region:'sea',      tags:'sea easy accessible',    days:7,  price:38800,  emoji:'🦁', c1:'#f97316',c2:'#0ea5e9', b1:'♿ 無障礙',  b1c:'b-green',  b2:'🌿 花園城市',b2c:'b-blue',   b3:'🍜 南洋美食',b3c:'b-orange',                              meta:'新加坡馬來西亞・小團15人' },
+  { key:'sea_viet8d',   name:'越南河內下龍灣胡志明 8天7夜', region:'sea',       tags:'sea easy',               days:8,  price:32800,  emoji:'⛵', c1:'#ef4444',c2:'#fbbf24', b1:'⛵ 下龍灣遊船',b1c:'b-blue',  b2:'🏯 古城文化',b2c:'b-orange', b3:'🌉 燈籠夜景',b3c:'b-purple',                              meta:'越南・小團15人' },
+
+  // ─── 東北亞 ───
+  { key:'ne_seoul4d',   name:'韓國首爾文化美食 4天3夜',     region:'northeast', tags:'northeast easy accessible',days:4, price:28800,  emoji:'🏯', c1:'#3b82f6',c2:'#ef4444', b1:'♿ 無障礙',  b1c:'b-green',  b2:'🏯 景福宮',   b2c:'b-blue',   b3:'🍜 韓式料理',b3c:'b-orange', tip:'韓國深度', tipClass:'b-red',    meta:'韓國首爾・小團15人' },
+  { key:'ne_jeju5d',    name:'韓國濟州島火山海島 5天4夜',   region:'northeast', tags:'northeast easy',         days:5,  price:32800,  emoji:'🌋', c1:'#4ade80',c2:'#0ea5e9', b1:'🌋 火山奇景',b1c:'b-orange', b2:'🌊 海女文化',b2c:'b-blue',   b3:'🍊 濟州柑橘',b3c:'b-green',                              meta:'韓國濟州島・小團12人' },
+  { key:'ne_korea7d',   name:'韓國全覽首爾釜山 7天6夜',     region:'northeast', tags:'northeast easy',         days:7,  price:38800,  emoji:'🎋', c1:'#f43f5e',c2:'#fbbf24', b1:'🎋 韓屋文化',b1c:'b-blue',  b2:'♨️ 釜山溫泉',b2c:'b-orange', b3:'🏥 醫療保障',b3c:'b-green',                              meta:'韓國全覽・小團15人' },
+  { key:'ne_beijing5d', name:'北京故宮長城文化深度遊 5天4夜',region:'northeast',tags:'northeast easy accessible',days:5,price:28800,  emoji:'🏯', c1:'#dc2626',c2:'#fbbf24', b1:'♿ 無障礙',  b1c:'b-green',  b2:'🏛️ 皇城文化',b2c:'b-orange', b3:'🍜 北京烤鴨',b3c:'b-red',    tip:'文化遺產', tipClass:'b-blue',   meta:'中國北京・小團12人' },
+];
+
 const REGION_META = {
   taiwan:    { key:'tw',  label:'🏡 台灣行程',   color:'linear-gradient(135deg,#34d399,#0891b2)', open:true  },
   japan:     { key:'jp',  label:'🇯🇵 日本行程',   color:'linear-gradient(135deg,#fbbf24,#f97316)', open:false },
